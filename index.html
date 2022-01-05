@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/JavaScript/localStore.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+    <div id="main">
+
+        <div id="header">
+            
+            <div id="pre-header">
+
+                <div class="police-logo">
+                    <img src="./assets/img/Logo.png" alt="">
+                </div>
+
+                <div id="sologan">
+                        <p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</p>
+                        <p id="sologan-tq">Công an thành phố Tuyên Quang</p>
+                </div>
+
+            </div>
+
+            <div id="nav">
+
+                <!-- begin menu navigation -->
+                <div class="col .col-double-third">
+                    <ul id="menu-nav">
+                        <li><a href="#" id="menu-trangchu">Trang chủ</a></li>
+                        <li><a id="menu-gioithieu">Văn bản QPPL</a></li>
+                        <li><a id="menu-lienhe" href="#content">Liên hệ</a></li>
+                        <li><a id="js-dangnhap" onclick="showModal(document.getElementById('js-modal-login'))">Đăng nhập</a></li>
+                        <li><a id="js-dangky" onclick="showModal(document.getElementById('js-modal-register'))">Đăng ký</a></li>
+                        <li>             
+                            <a href="#tab-TL">
+                                Khám phá
+                                <i class="fa-solid fa-caret-down"></i>
+    
+                            </a>
+                            <ul id="sub-menu-nav">
+                                <li><a href="#tab-VK">Vũ khí</a></li>
+                                <li><a href="#tab-VLN">Vật liệu nổ</a></li>
+                                <li><a href="#tab-CCHT">Công cụ hỗ trợ</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- end menu navigation -->
+                <div class="col-right .col-third">
+                    <div class="search-wrap">
+                        <!-- <div class="search-button"> -->
+                            <i id="searchIcon" class="fa-solid fa-magnifying-glass"></i>
+                        <!-- </div> -->
+                        <i id="search-icon" class="fas fa-search"></i>
+                        <input type="text" id="search">
+    
+                        <!-- <div class="search-button"> -->
+                            <i id="clear" class="search-icon fa-solid fa-xmark"></i>
+                        <!-- </div> -->
+                
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div id="slider">
+
+            <svg class="ellipse-slide" width="564" height="458" viewBox="0 0 564 458" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="145.486" cy="335.83" rx="145.486" ry="121.966" fill="#9A6AFF" fill-opacity="0.06"/>
+                <ellipse cx="418.514" cy="186.949" rx="145.486" ry="121.966" fill="#007FFA" fill-opacity="0.06"/>
+                <ellipse cx="288.547" cy="121.966" rx="145.486" ry="121.966" fill="#F1D975" fill-opacity="0.08"/>
+            </svg>
+
+            <div class="slide-wrapper">
+
+                <div class="slide-show js-slide-show" style="display: none;">
+
+                    <img src="./assets/img/slider/HinhanhnguoilinhtrongthocaCMVN_1.png" alt="Hình ảnh người lĩnh trong Cách mạng">
+                    <div id="sologan-HCM">
+                        <h4 class="QL-VK">Quản lý</h4>
+                        <h4 class="QL-VK">Vũ khí, Vật liệu nổ, Công cụ hỗ trợ</h4>
+                        <p class="content-sologan-HCM"> 
+            “Lương thực, vũ khí là mồ hôi nước mắt của đồng bào, là xương máu của bộ đội…,vì vậy, phải quý trọng nó, phải tiết kiệm, ngăn nắp, phải sử dụng hợp lý.”
+                        </p>
+                        <blockquote>Chủ tịch Hồ Chí Minh</blockquote>
+                    </div>
+
+                </div>
+
+                <div class="slide-show js-slide-show" style="display: none;">
+
+                    <img src="./assets/img/slider/mikhailKalashnikov_2.jpeg" alt="Hình ảnh người lĩnh trong Cách mạng">
+                    <div id="sologan-HCM">
+                        <h4 class="QL-VK">Quản lý</h4>
+                        <h4 class="QL-VK">Vũ khí, Vật liệu nổ, Công cụ hỗ trợ</h4>
+                        <p class="content-sologan-HCM"> 
+            “People often ask me how I feel about my invention being used to kill people every day and the AK being a common weapon of ethnic conflicts. I want to make it clear that I created my assault rifle to protect my country. You can blame politicians for its spreading out of control on a global scale.”
+                        </p>
+                        <blockquote>Mikhail Kalashnikov</blockquote>
+                    </div>
+
+                </div>
+
+                <div class="slide-show js-slide-show" style="display: none;">
+
+                    <img src="./assets/img/slider/bomb_3.jpeg" alt="Hình ảnh người lĩnh trong Cách mạng">
+                    <div id="sologan-HCM">
+                        <h4 class="QL-VK">Quản lý</h4>
+                        <h4 class="QL-VK">Vũ khí, Vật liệu nổ, Công cụ hỗ trợ</h4>
+                        <p class="content-sologan-HCM"> 
+                            "Ngày 01 tháng 6 năm 1968 được chọn là ngày khởi đầu tiến trình tham gia ký kết Hiệp ước Cấm phổ biến Vũ khí Hạt nhân (Nuclear Non-Proliferation Treaty – NPT hoặc NNPT). Hiệp ước này được thiết lập nhằm mục đích hạn chế việc sở hữu các loại vũ khí hạt nhân."
+                        </p>
+                        <blockquote>Bách khoa toàn thư mở Wikipedia</blockquote>
+                    </div>
+
+                </div>
+
+                <div class="slide-show js-slide-show" >
+
+                    <img src="./assets/img/slider/congAn_4.jpeg" alt="Hình ảnh người lĩnh trong Cách mạng">
+                    <div id="sologan-HCM">
+                        <h4 class="QL-VK">Quản lý</h4>
+                        <h4 class="QL-VK">Vũ khí, Vật liệu nổ, Công cụ hỗ trợ</h4>
+                        <p class="content-sologan-HCM"> 
+                            "Bộ Công an thực hiện chức năng quản lý nhà nước về vũ khí, vật liệu nổ, tiền chất thuốc nổ, công cụ hỗ trợ theo quy định của Luật này và quy định khác của pháp luật có liên quan. Bộ trưởng Bộ Công an ban hành danh mục vũ khí thể thao, danh mục công cụ hỗ trợ."
+                        </p>
+                        <blockquote>Khoản 3, Điều 73, Luật Quản lý, sử dụng Vũ khí, Vật liệu nổ, công cụ hỗ trợ</blockquote>
+                    </div>
+
+                </div>
+
+            </div>
+                              
+        </div>
+
+
+        <div id="content">
+            
+            <div id="contact-wap">
+                <div id="contact" class="row">
+
+                    <div class="row text-align">
+                        <h2>Liên Hệ</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col col-half">
+                            <p><i class="fa-solid fa-location-dot"></i>Địa chỉ: Phòng 204, Toà nhà 3A</p>
+
+                            <p><i class="fa-solid fa-phone"></i>Số điện thoại: 098.221.905</p>
+
+                            <p><i class="fa-solid fa-envelope"></i>Email: Tunguyen.work.private@gmail.com</p>
+                        </div>
+
+                        <div class="col col-half contact-form border-2">
+                            <form action="#" method="post">
+                                <div class="row">
+
+                                    <div class="col col-60">
+                                        <input type="text" name="" id="" placeholder="Họ và tên" class="form-control border-2" required>
+                                    </div>
+
+                                    <div class="col col-40">
+                                        <input type="text" name="" id="" placeholder="Số điện thoại" class="form-control border-2" pattern="[0-9]{10}" required>
+                                    </div>
+
+                                </div>
+
+                                <div class="row mt-16">
+
+                                    <div class="col col-full">
+                                        <textarea name="contact-massege" id="" cols="30" rows="6" placeholder="Nhập nội dung tin nhắn..." class="form-control border-2"></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="row mt-16">
+                                    <input class="contact-submit border-2" formmethod="post" type="submit" value="Gửi">
+                                </div>
+                                
+                               
+                            </form>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+            <!-- Tab Khám phá -->
+            <div id="content-khampha">
+
+                <div class="tabs">
+                    <div class="tab-item active" id="tab-TL">
+                        <i class="tab-icon fas fa-solid fa-swords"></i>
+                        Tổng lực
+                    </div>
+
+                    <div class="tab-item" id="tab-VK">
+                        <i class="tab-icon fas fa-solid fa-gun"></i>
+                        Vũ khí
+                    </div>
+
+                    <div class="tab-item" id="tab-VLN">
+                        <i class="tab-icon fas fa-solid fa-bomb"></i>
+                        Vật liệu nổ
+                    </div>
+
+                    <div class="tab-item" id="tab-CCHT">
+                        <i class="tab-icon fas fa-flashlight"></i>
+                        Công cụ hỗ trợ
+                    </div>
+
+                    <div class="line"></div>
+
+                </div>
+
+                <!-- Tab content -->
+                <div class="tab-content">
+
+                    <!-- tổng lực -->
+                    <div class="tab-pane active">
+                        <div class="row">
+                            <div class="tab-search-wap">
+                                <!-- <div class="search-button"> -->
+                                    <!-- <i id="searchIcon" class="fa-solid fa-magnifying-glass"></i> -->
+                                <!-- </div> -->
+                                <i id="tab-search-icon" class="fas fa-search"></i>
+                                <input type="text" id="tab-search">
+            
+                                <!-- <div class="search-button"> -->
+                                    <!-- <i id="clear" class="search-icon fa-solid fa-xmark"></i> -->
+                                <!-- </div> -->
+                        
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn" onclick="showModal(document.getElementById('js-modal-borrow'))">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                    <!-- vũ khí -->
+                    <div class="tab-pane">
+                        <div class="row">
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col col-third tab-item-field">
+                                <div class="tab-item-img-vk"></div>
+
+                                <div class="row tab-item-text">
+                                    <p class="tab-item-name">Súng AK-47</p>
+                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
+                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+
+                                    <div class="row">
+                                        <div class="col-right">
+                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- vật liệu nổ -->
+                    <div class="tab-pane">
+                        <h2>Vật liệu nổ</h2>
+                        <p>Phần hiển thị danh sách VK - VLN -CCHT..</p>
+                    </div>
+                    <!-- công cụ hỗ trợ -->
+                    <div class="tab-pane">
+                        <h2>Công cụ hỗ trợ</h2>
+                        <p>Phần hiển thị danh sách VK - VLN -CCHT.. </p>
+                    </div>
+
+                </div>
+
+            </div>
+       
+
+        </div>
+
+        <div id="footer">
+            <p>Bản quyền thuộc về Nhóm 8 Lớp LT04-T07-BCA</p>
+        </div>
+
+
+    </div>
+    </html>
+         
+    <!-- begin login form -->
+    <div class="modal-login" id="js-modal-login" onclick="hideModal(document.getElementById('js-modal-login'))">
+        <form action="/#">
+            <div class="modal-login-form js-modal-Bubble">
+                <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-login'))">
+                    <i class="modal-close-item fa-solid fa-xmark"></i>
+                </button>
+
+                <header class="modal-header">
+                    <i class="modal-login-icon fa-solid fa-dagger"></i>
+                    <h4 class="modal-QLVK">Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
+                </header>
+
+                <div class="modal-body clearfix">
+
+                    <div class="col-full">
+                        <div class="input-container">
+                            <input type="text" class="modal-input-register" id="username" name="username" placeholder="Tên đăng nhập" required>
+                            <label for="username" class="modal-register-label">
+                                <i class="modal-user-item fa-solid fa-user"></i>
+                                Tài Khoản
+                        </label>
+                        </div>
+                    </div>
+
+                    <div class="col-full">
+                        <div class="input-container">
+                            <input type="password" class="modal-input-register js-input-pass" id="password" name="password" placeholder="Mật khẩu" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_-])(?=\S+$).{8,}$" required>
+                            <label for="password" class="modal-register-label">
+                                <i class="modal-pwd-item fa-solid fa-lock"></i>
+                                 Mật khẩu
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row modal-btn">
+                        <label><input type="checkbox" name="checkbox-02" class="blue" onclick="showPass()" /><span>Hiển thị Mật khẩu</span></label>                              
+                    </div>
+                    
+
+                    <div class="modal-list-control">
+                        <ul class="modal-list-control-item">
+                            <li>
+                                <input id="modal-admin" type="radio" name="control-list">
+                                <label class="modal-list-control-label" for="modal-admin"><span></span>Admin</label>
+                            </li>
+
+                            <li>
+                                <input id="modal-lanhdao" type="radio" name="control-list">
+                                <label class="modal-list-control-label" for="modal-lanhdao"><span></span>Lãnh đạo</label>
+                            </li>
+
+                            <li>
+                                <input id="modal-cbql" type="radio" name="control-list">
+                                <label class="modal-list-control-label" for="modal-cbql"><span></span>CBQL</label>
+                            </li>
+
+                            <li>
+                                <input id="modal-cbcs"type="radio" name="control-list" checked>
+                            <label class="modal-list-control-label" for="modal-cbcs"><span></span>CBCS</label>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <input class="modal-login-button" formmethod="post" type="submit" value="Đăng nhập">
+        
+                    <p class="modal-register-link"><a href="#" onclick="showModal(document.getElementById('js-modal-register'))">Đăng ký </a>tài khoản</p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!-- end login form -->
+
+
+    <!-- begin register -->
+    <div class="modal-register clearfix" id="js-modal-register"  onclick="hideModal(document.getElementById('js-modal-register'))">
+        <form action="/#" id="modal-frm">
+            <div class="modal-register-form js-modal-Bubble">
+                <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-register'))">
+                    <i class="modal-close-item fa-solid fa-xmark"></i>
+                </button>
+
+                <header class="modal-header">
+                    <i class="modal-register-icon fa-solid fa-dagger"></i>
+                    <h4 class="modal-QLVK">Đăng ký tài khoản Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
+                </header>
+
+                <div class="modal-body clearfix">
+                    <div class="col col-60">
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="name1" placeholder="Họ" required>
+                                        <label for="name1" class="modal-register-label">Họ</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="name2" placeholder="Tên" required>
+                                        <label for="name2" class="modal-register-label">Tên</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-full">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" id="username" name="username" placeholder="Tên đăng nhập" required>
+                                        <label for="username" class="modal-register-label">Tên đăng nhập</label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="password" class="modal-input-register js-input-pass" id="js-password" name="password" placeholder="Mật khẩu" onkeyup='checkConfirm();' required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_-])(?=\S+$).{8,}$">
+                                        <label for="password" class="modal-register-label">Mật khẩu</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="password" class="modal-input-register js-input-pass" id="js-confirm-password" name="username" placeholder="Tên đăng nhập" onkeyup='checkConfirm();' required pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_-])(?=\S+$).{8,}$">
+                                        <label for="username" class="modal-register-label">Nhập lại Mật khẩu<span id='js-message-confirm'></span></label>
+                                    </div>
+                                </div>
+                                
+                                <div class="row modal-btn">
+                                    <label><input type="checkbox" name="checkbox-02" class="blue" onclick="showPass()" /><span>Hiển thị Mật khẩu</span></label>                              
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="sohieu" placeholder="Số hiệu" required>
+                                        <label for="sohieu" class="modal-register-label">Số hiệu</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="date" class="modal-input-register" name="birthday" placeholder="Ngày sinh" required min="1970-01-01" max="2002-12-31">
+                                        <label for="birthday" class="modal-register-label">Ngày sinh</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" list="list-chucvu" id="js-register-chucvu" class="modal-input-register" name="chucvu" placeholder="Chức vụ" required>
+                                        <label for="chucvu" class="modal-register-label">Chức vụ</label>
+                                        <datalist id="list-chucvu">
+                                            <option value="Trưởng CATP">
+                                            <option value="Phó Trưởng CATP">
+                                            <option value="Đội trưởng">
+                                            <option value="Phó Đội trưởng">
+                                            <option value="Cán bộ chiến sỹ">
+                                          </datalist>
+                                    </div>
+                                </div>
+
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" list="list-capbac" class="modal-input-register" name="capbac" placeholder="Cấp bậc" required>
+                                        <label for="capbac" class="modal-register-label">Cấp bậc</label>
+                                        <datalist id="list-capbac">
+                                            <option value="Thiếu tướng">
+                                            <option value="Đại tá">
+                                            <option value="Thượng tá">
+                                            <option value="Trung tá">
+                                            <option value="Thiếu tá">
+                                            <option value="Đại uý">
+                                            <option value="Thượng uý">
+                                            <option value="Trung uý">
+                                            <option value="Thiếu uý">
+                                            <option value="Thượng sỹ">
+                                            <option value="Trung sỹ">
+                                          </datalist>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="donvi" placeholder="Đơn vị" required>
+                                        <label for="donvi" class="modal-register-label">Đơn vị</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="tel" class="modal-input-register" name="sdt" placeholder="Số điện thoại" required>
+                                        <label for="sdt" class="modal-register-label">Số điện thoại</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                <input class="modal-login-button" formmethod="post" type="submit" value="Đăng ký">
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col col-40">
+                        <img class="register-decor" src="./image/nhung-vu-khi-mang-tinh-cach-mang-trong-chien-tranh-the-gioi-thu-nhat-hinh-2.jpeg" alt="">
+                    </div>
+
+                </div>
+                </div>
+        </form>
+    </div>
+    <!-- register form -->
+
+    <!-- begin borrow form -->
+    <div class="modal-borrow clearfix" id="js-modal-borrow"  onclick="hideModal(document.getElementById('js-modal-borrow'))">
+        <form action="/#" id="modal-frm-borrow">
+            <div class="modal-borrow-form js-modal-Bubble">
+                <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-borrow'))">
+                    <i class="modal-close-item fa-solid fa-xmark"></i>
+                </button>
+
+                <header class="modal-header">
+                    <i class="modal-register-icon fa-solid fa-dagger"></i>
+                    <h4 class="modal-QLVK">Đăng ký mượn Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
+                </header>
+
+                <div class="modal-body clearfix">
+                    <div class="col col-60">
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="name1" placeholder="Họ" required>
+                                        <label for="name1" class="modal-register-label">Họ</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="name2" placeholder="Tên" required>
+                                        <label for="name2" class="modal-register-label">Tên</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="sohieu" placeholder="Số hiệu" required>
+                                        <label for="sohieu" class="modal-register-label">Số hiệu</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="date" class="modal-input-register" name="birthday" placeholder="Ngày sinh" required min="1970-01-01" max="2002-12-31">
+                                        <label for="birthday" class="modal-register-label">Ngày sinh</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" list="list-chucvu" id="js-borrow-chucvu" class="modal-input-register" name="chucvu" placeholder="Chức vụ" required>
+                                        <label for="chucvu" class="modal-register-label">Chức vụ</label>
+                                        <datalist id="list-chucvu">
+                                            <option value="Trưởng CATP">
+                                            <option value="Phó Trưởng CATP">
+                                            <option value="Đội trưởng">
+                                            <option value="Phó Đội trưởng">
+                                            <option value="Cán bộ chiến sỹ">
+                                          </datalist>
+                                    </div>
+                                </div>
+
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" list="list-capbac" class="modal-input-register" name="capbac" placeholder="Cấp bậc" required>
+                                        <label for="capbac" class="modal-register-label">Cấp bậc</label>
+                                        <datalist id="list-capbac">
+                                            <option value="Thiếu tướng">
+                                            <option value="Đại tá">
+                                            <option value="Thượng tá">
+                                            <option value="Trung tá">
+                                            <option value="Thiếu tá">
+                                            <option value="Đại uý">
+                                            <option value="Thượng uý">
+                                            <option value="Trung uý">
+                                            <option value="Thiếu uý">
+                                            <option value="Thượng sỹ">
+                                            <option value="Trung sỹ">
+                                          </datalist>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="text" class="modal-input-register" name="donvi" placeholder="Đơn vị" required>
+                                        <label for="donvi" class="modal-register-label">Đơn vị</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col col-half">
+                                    <div class="input-container">
+                                        <input type="tel" class="modal-input-register" name="sdt" placeholder="Số điện thoại" required>
+                                        <label for="sdt" class="modal-register-label">Số điện thoại</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-full">
+                                    <div class="input-container" id="borrow-text">
+                        
+                                        <textarea id="borrow-text-input" class="modal-input-register" name="borrow-text" placeholder="Nhập lý do" required></textarea>
+                                        <label for="borrow-text" class="modal-register-label">Lý do</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                <input class="modal-login-button" id="modal-borrow-button" formmethod="post" type="submit" value="Đăng ký mượn">
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col col-40 borrow-item-show">
+                        <div class="col borrow-item-field">
+                            <div class="tab-item-img-vk"></div>
+
+                            <div class="row tab-item-text">
+                                <p class="tab-item-name">Súng AK-47</p>
+                                <p id="borrow-quantily-title">Số lượng:</p>
+                                <input type="number" name="" id="borrow-quantily">
+                                <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- begin borrow form -->
+</body>
+</html>
+
+
+<script>
+
+    //search
+document.getElementById('searchIcon').onclick = function() {
+    document.getElementById('search').classList.add("visible");
+    document.getElementById('clear').classList.add("visible");
+    document.getElementById('search-icon').classList.add("visible");
+    document.getElementById('search').focus();
+    document.getElementById('searchIcon').classList.add("hide");
+}
+document.getElementById('clear').onclick = function() {
+  document.getElementById('searchIcon').classList.remove("hide");
+  document.getElementById('search').classList.remove("visible");
+  document.getElementById('clear').classList.remove("visible");
+}
+
+    // tab item
+
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
+const tabs = $$(".tab-item");
+const panes = $$(".tab-pane");
+
+const tabActive = $(".tab-item.active");
+const line = $(".tabs .line");
+
+line.style.left = tabActive.offsetLeft + "px";
+line.style.width = tabActive.offsetWidth + "px";
+
+tabs.forEach((tab, index) => {
+  const pane = panes[index];
+
+  tab.onclick = function () {
+    $(".tab-item.active").classList.remove("active");
+    $(".tab-pane.active").classList.remove("active");
+
+    line.style.left = this.offsetLeft + "px";
+    line.style.width = this.offsetWidth + "px";
+
+    this.classList.add("active");
+    pane.classList.add("active");
+  };
+});
+
+
+    // Automatic Slideshow - change image every 4 seconds
+
+// var myIndex = 0;
+// carousel();
+
+// function carousel() {
+//     var i;
+//     var x = document.getElementsByClassName("js-slide-show");
+//     for (i = 0; i < x.length; i++) {
+//         x[i].style.display = "none";  
+//     }
+
+//     myIndex++;
+//     if (myIndex > x.length) {myIndex = 1}    
+//     x[myIndex-1].style.display = "block";  
+//     setTimeout(carousel, 4000); 
+// }
+
+// show modal button
+    function showModal(obj){
+        obj.classList.add('open');
+    };
+
+    function hideModal(obj){
+        obj.classList.remove('open');
+    };
+
+    function preventBubble(event){
+        event.stopPropagation();
+    };
+
+
+// stop bubble in modal
+    const modalBubbles = document.querySelectorAll('.js-modal-Bubble');
+
+    for (const modalBubble of modalBubbles) {
+        modalBubble.addEventListener('click', preventBubble,false);
+    };
+
+
+
+    //Show passwork
+    function showPass() {
+        var inputPasswords = document.getElementsByClassName("js-input-pass");
+        for (const inputPassword of inputPasswords) {
+            if (inputPassword.type === "password") {
+                inputPassword.type = "text";
+            } else {
+                inputPassword.type = "password";
+            }
+        }
+        
+    };
+
+//check confirm
+    var checkConfirm = function() {
+        if (document.getElementById('js-password').value === document.getElementById('js-confirm-password').value) {
+            document.getElementById('js-message-confirm').style.color = 'green';
+            document.getElementById('js-message-confirm').innerHTML = ' giống nhau';
+        } 
+        else {
+            document.getElementById('js-message-confirm').style.color = 'red';
+            document.getElementById('js-message-confirm').innerHTML = ' khác nhau';
+            // chỉ lập lại 1 lần
+            setTimeout(removeConfirm, 4000)
+            clearTimeout();
+        }
+    }
+
+    function removeConfirm(){
+        if (document.getElementById('js-password').value === document.getElementById('js-confirm-password').value) {
+        document.getElementById('js-message-confirm').innerHTML = '';
+        }
+    }
+
+    // Mặc định giá trị chức vụ trong form đăng ký
+    var defaultChucvu = document.getElementById('js-register-chucvu'); // give an id to your input and set it as variable
+    defaultChucvu.value ='Cán bộ chiến sỹ'; // set default value instead of html attribute
+    defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
+    // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
+
+</script>
