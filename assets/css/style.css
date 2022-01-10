@@ -160,10 +160,7 @@ html{
 }
 
 #nav > #menu-nav > li{
-    /* display: inline-block; */
 
-    /* top: -13px;
-    left: 0; */
 }
 
 #menu-nav li a{
@@ -173,20 +170,16 @@ html{
 }
 
 #menu-nav > li:hover > a,
-#sub-menu-nav li:hover a{
-    /* background-color:rgba(241, 217, 117, 0.4); */
-    box-shadow: 0 0 12px rgb(8, 90, 120);
-    /* color: rgb(220, 234, 252); */
+#sub-menu-nav > li:hover > a{
+    box-shadow: 2px 2px 12px rgb(8, 90, 120);  
     color: #fff;
     cursor: pointer;
-
 }
 
 #menu-nav >li > a{
     display: block;
-    /* color: #F6FBF5; */
-    color: rgb(220, 234, 252);
-    padding: 0 20px;
+    color: #dceafc;
+    padding: 0 12px;
     text-transform: uppercase;
     line-height: 36px;
 }
@@ -194,7 +187,7 @@ html{
 #nav #sub-menu-nav{
     display: none;
     position: absolute;
-    min-width: 152px;
+    max-width: 270px;
     top: 35px;
     left: 0px;
     box-shadow: 0 0 4px rgb(8, 92, 122, 0.4);
@@ -205,35 +198,24 @@ html{
 }
 
 #nav #sub-menu-nav li{ 
-    height: 40px;
-    display: block;    
+    height: 48px;
+    display: inline-block;    
     background-color: #006A91;
+ 
 }
 
 #sub-menu-nav li a{
-    display: block;
+    display: inline-block;
     /* color: #F6FBF5; */
     color: rgb(220, 234, 252);
     padding-left: 16px;
-    line-height: 40px;
+    padding-right: 6px;
+    line-height: 48px;
+    min-width: 204px;
+    /* font-size: 15px; */
 }
 
 /* begin search */
-
-/* #nav .search-button{
-    display: inline-block;
-    color: #F6FBF5;
-    line-height: 36px;
-    padding: 0 4px;
-} */
-
-/* #nav .search-button:hover{
-    color: #006A91;
-    background-color: rgba(241, 217, 117, 0.4);
-    box-shadow: 0 2px 50px rgba(241, 217, 117, 0.8);
-    font-weight: 600;
-    cursor: pointer;
-} */
 
 .search-wrap{
     position: relative;
@@ -273,6 +255,7 @@ html{
     right: 26px;
     color: #000;
     background-color: #dcebe9;
+    
     border: solid 2px #006A91;
     border-radius: 6px;
     width: 0%;
@@ -485,7 +468,8 @@ html{
     display: flex;
     position: relative;
     min-width: 600px;
-  }
+}
+
   .tabs .line {
     position: absolute;
     left: 0;
@@ -496,6 +480,7 @@ html{
     background-color: #006A91;
     transition: all 0.2s ease;
   }
+
   .tab-item {
     min-width: 80px;
     padding: 16px 20px 11px 20px;
@@ -530,15 +515,19 @@ html{
     overflow: scroll;
     padding: 28px 0;
     height: 640px;
+     background-color: #fff;
   }
+
   .tab-pane {
     color: #333;
     display: none;
   }
+
   .tab-pane.active {
     display: block;
     height: 596px;
   }
+
   .tab-pane h2 {
     font-size: 24px;
     margin-bottom: 8px;
@@ -572,9 +561,6 @@ html{
   }
 
   .tab-item-text{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     height: 152px;
     padding: 20px 12px 20px 12px;
 
@@ -598,12 +584,10 @@ html{
 }
   
 
-
-
 .tab-search-wap{
     position: relative;
     height: 38px;
-    margin-bottom: 36px;
+    /* margin-bottom: 36px; */
     background-color: #006A91;
     border-radius: 4px;
 }
@@ -628,7 +612,6 @@ html{
 
 
 #tab-search-icon{
-    /* z-index: 5; */
     position: absolute;
     top: 0;
     right: 0px;
@@ -768,7 +751,7 @@ html{
 
 
 .modal-user-item{
-
+    
 }
 
 
@@ -1124,12 +1107,6 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
 
 
 
-/* .modal-register.open{
-    display: flex;
-} */
-
-
-
 
 .modal-input-borrow{
     position: absolute;
@@ -1156,45 +1133,6 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
     height: 135px;
     padding-top: 12px;
 }
-
-/* .modal-input-borrow::placeholder {
-    color: transparent;
-} */
-
-/* .modal-borrow-label{
-    position: absolute;
-    top: 12px;
-    left: 16px;
-    padding: 0 4px 0 0;
-    background-color:#dcebe9;
-    color: #006A91;
-    font-size: 18px;
-    transition: 0.5s;
-    z-index: 0;
-
-} */
-
-/* .modal-input-borrow:focus + .modal-borrow-label{
-    top: -7px;
-    left: 4px;
-    z-index: 10;
-    font-size: 14px;
-    font-weight: 600;
-    color: #000;
-  } */
-
-/* .modal-input-borrow:focus {
-    border: 2px solid #000;
-} */
-/* 
-.modal-input-borrow:not(:placeholder-shown)+ .modal-borrow-label{
-    top: -7px;
-    left: 4px;
-    z-index: 10;
-    font-size: 14px;
-    font-weight: 600;
-} */
-
 
 .modal-borrow-icon{
     padding: 0 12px 0 0;

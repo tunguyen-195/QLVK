@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./assets/JavaScript/localStore.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css" rel="stylesheet">
 
     <title>Document</title>
 </head>
+<body>
     <div id="main">
 
+        <!-- begin header -->
         <div id="header">
             
             <div id="pre-header">
@@ -32,46 +33,68 @@
                 <!-- begin menu navigation -->
                 <div class="col .col-double-third">
                     <ul id="menu-nav">
-                        <li><a href="#" id="menu-trangchu">Trang chủ</a></li>
-                        <li><a id="menu-gioithieu">Văn bản QPPL</a></li>
-                        <li><a id="menu-lienhe" href="#content">Liên hệ</a></li>
-                        <li><a id="js-dangnhap" onclick="showModal(document.getElementById('js-modal-login'))">Đăng nhập</a></li>
-                        <li><a id="js-dangky" onclick="showModal(document.getElementById('js-modal-register'))">Đăng ký</a></li>
+                        <li><a href="#" id="menu-trangchu">
+                            <i class="fa-solid fa-house"></i>
+                            Trang chủ
+                        </a></li>
+
+                        <li><a id="menu-gioithieu">
+                            <i class="fa-solid fa-book-section"></i>
+                            Văn bản QPPL
+                        </a></li>
+
+                        <li><a id="menu-lienhe" href="#content">
+                            <i class="fa-solid fa-address-book"></i>
+                            Liên hệ
+                        </a></li>
+
+                        <li><a id="js-dangnhap" onclick="showModal(document.getElementById('js-modal-login'))">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Đăng nhập
+                        </a></li>
+                        <li><a id="js-dangky" onclick="showModal(document.getElementById('js-modal-register'))">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Đăng ký
+                        </a></li>
+
                         <li>             
                             <a href="#tab-TL">
+                                <i class="fa-solid fa-swords"></i>
                                 Khám phá
                                 <i class="fa-solid fa-caret-down"></i>
-    
                             </a>
                             <ul id="sub-menu-nav">
                                 <li><a href="#tab-VK">Vũ khí</a></li>
                                 <li><a href="#tab-VLN">Vật liệu nổ</a></li>
                                 <li><a href="#tab-CCHT">Công cụ hỗ trợ</a></li>
                             </ul>
+
                         </li>
+
                     </ul>
                 </div>
                 
                 <!-- end menu navigation -->
                 <div class="col-right .col-third">
                     <div class="search-wrap">
-                        <!-- <div class="search-button"> -->
-                            <i id="searchIcon" class="fa-solid fa-magnifying-glass"></i>
-                        <!-- </div> -->
+                           
+                        <i id="searchIcon" class="fa-solid fa-magnifying-glass" ></i>
+                       
                         <i id="search-icon" class="fas fa-search"></i>
                         <input type="text" id="search">
     
-                        <!-- <div class="search-button"> -->
-                            <i id="clear" class="search-icon fa-solid fa-xmark"></i>
-                        <!-- </div> -->
-                
+                      
+                        <i id="clear" class="search-icon fa-solid fa-xmark"></i>
+                       
                     </div>
                 </div>
                 
             </div>
 
         </div>
+        <!-- end header -->
 
+        <!-- begin slider -->
         <div id="slider">
 
             <svg class="ellipse-slide" width="564" height="458" viewBox="0 0 564 458" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,10 +164,11 @@
             </div>
                               
         </div>
-
+        <!-- begin slider -->
 
         <div id="content">
-            
+
+            <!-- begin contact form -->
             <div id="contact-wap">
                 <div id="contact" class="row">
 
@@ -166,11 +190,11 @@
                                 <div class="row">
 
                                     <div class="col col-60">
-                                        <input type="text" name="" id="" placeholder="Họ và tên" class="form-control border-2" required>
+                                        <input type="text" name="contact-cbcs-name" id="contact-cbcs-name" placeholder="Họ và tên" class="form-control border-2" required>
                                     </div>
 
                                     <div class="col col-40">
-                                        <input type="text" name="" id="" placeholder="Số điện thoại" class="form-control border-2" pattern="[0-9]{10}" required>
+                                        <input type="text" name="contact-cbcs-sdt" id="contact-cbcs-sdt" placeholder="Số điện thoại" class="form-control border-2" pattern="[0-9]{10}" required>
                                     </div>
 
                                 </div>
@@ -178,7 +202,7 @@
                                 <div class="row mt-16">
 
                                     <div class="col col-full">
-                                        <textarea name="contact-massege" id="" cols="30" rows="6" placeholder="Nhập nội dung tin nhắn..." class="form-control border-2"></textarea>
+                                        <textarea name="contact-massege" id="contact-massege" cols="30" rows="6" placeholder="Nhập nội dung tin nhắn..." class="form-control border-2"></textarea>
                                     </div>
 
                                 </div>
@@ -194,6 +218,7 @@
 
                 </div>
             </div>
+            <!-- end contact form -->
 
             <!-- Tab Khám phá -->
             <div id="content-khampha">
@@ -230,16 +255,8 @@
                     <div class="tab-pane active">
                         <div class="row">
                             <div class="tab-search-wap">
-                                <!-- <div class="search-button"> -->
-                                    <!-- <i id="searchIcon" class="fa-solid fa-magnifying-glass"></i> -->
-                                <!-- </div> -->
                                 <i id="tab-search-icon" class="fas fa-search"></i>
-                                <input type="text" id="tab-search">
-            
-                                <!-- <div class="search-button"> -->
-                                    <!-- <i id="clear" class="search-icon fa-solid fa-xmark"></i> -->
-                                <!-- </div> -->
-                        
+                                <input type="text" id="tab-search">        
                             </div>
                         </div>
                         <div class="row">
@@ -465,8 +482,8 @@
                 </div>
 
             </div>
+            <!-- end tab khám phá -->
        
-
         </div>
 
         <div id="footer">
@@ -475,20 +492,21 @@
 
 
     </div>
-    </html>
+</body>
+</html>
          
     <!-- begin login form -->
     <div class="modal-login" id="js-modal-login" onclick="hideModal(document.getElementById('js-modal-login'))">
         <form action="/#">
-            <div class="modal-login-form js-modal-Bubble">
+            <div class="modal-login-form js-modal-Bubble" onclick="preventBubble">
                 <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-login'))">
                     <i class="modal-close-item fa-solid fa-xmark"></i>
                 </button>
 
-                <header class="modal-header">
+                <div class="modal-header">
                     <i class="modal-login-icon fa-solid fa-dagger"></i>
                     <h4 class="modal-QLVK">Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
-                </header>
+                </div>
 
                 <div class="modal-body clearfix">
 
@@ -578,7 +596,7 @@
                                 
                                 <div class="col col-half">
                                     <div class="input-container">
-                                        <input type="text" class="modal-input-register" name="name2" placeholder="Tên" required>
+                                        <input type="text" class="modal-input-register" name="name2" id="name2" placeholder="Tên" required>
                                         <label for="name2" class="modal-register-label">Tên</label>
                                     </div>
                                 </div>
@@ -587,7 +605,7 @@
                             <div class="row">
                                 <div class="col-full">
                                     <div class="input-container">
-                                        <input type="text" class="modal-input-register" id="username" name="username" placeholder="Tên đăng nhập" required>
+                                        <input type="text" class="modal-input-register" id="reg-username" name="username" placeholder="Tên đăng nhập" required>
                                         <label for="username" class="modal-register-label">Tên đăng nhập</label>
                                     </div>
                                 </div>
@@ -690,7 +708,7 @@
                     </div>
 
                     <div class="col col-40">
-                        <img class="register-decor" src="./image/nhung-vu-khi-mang-tinh-cach-mang-trong-chien-tranh-the-gioi-thu-nhat-hinh-2.jpeg" alt="">
+                        <img class="register-decor" src="./assets/img/slider/HinhanhnguoilinhtrongthocaCMVN_1.png" alt="">
                     </div>
 
                 </div>
@@ -836,135 +854,5 @@
         </form>
     </div>
     <!-- begin borrow form -->
-</body>
-</html>
 
-
-<script>
-
-    //search
-document.getElementById('searchIcon').onclick = function() {
-    document.getElementById('search').classList.add("visible");
-    document.getElementById('clear').classList.add("visible");
-    document.getElementById('search-icon').classList.add("visible");
-    document.getElementById('search').focus();
-    document.getElementById('searchIcon').classList.add("hide");
-}
-document.getElementById('clear').onclick = function() {
-  document.getElementById('searchIcon').classList.remove("hide");
-  document.getElementById('search').classList.remove("visible");
-  document.getElementById('clear').classList.remove("visible");
-}
-
-    // tab item
-
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-
-const tabs = $$(".tab-item");
-const panes = $$(".tab-pane");
-
-const tabActive = $(".tab-item.active");
-const line = $(".tabs .line");
-
-line.style.left = tabActive.offsetLeft + "px";
-line.style.width = tabActive.offsetWidth + "px";
-
-tabs.forEach((tab, index) => {
-  const pane = panes[index];
-
-  tab.onclick = function () {
-    $(".tab-item.active").classList.remove("active");
-    $(".tab-pane.active").classList.remove("active");
-
-    line.style.left = this.offsetLeft + "px";
-    line.style.width = this.offsetWidth + "px";
-
-    this.classList.add("active");
-    pane.classList.add("active");
-  };
-});
-
-
-    // Automatic Slideshow - change image every 4 seconds
-
-// var myIndex = 0;
-// carousel();
-
-// function carousel() {
-//     var i;
-//     var x = document.getElementsByClassName("js-slide-show");
-//     for (i = 0; i < x.length; i++) {
-//         x[i].style.display = "none";  
-//     }
-
-//     myIndex++;
-//     if (myIndex > x.length) {myIndex = 1}    
-//     x[myIndex-1].style.display = "block";  
-//     setTimeout(carousel, 4000); 
-// }
-
-// show modal button
-    function showModal(obj){
-        obj.classList.add('open');
-    };
-
-    function hideModal(obj){
-        obj.classList.remove('open');
-    };
-
-    function preventBubble(event){
-        event.stopPropagation();
-    };
-
-
-// stop bubble in modal
-    const modalBubbles = document.querySelectorAll('.js-modal-Bubble');
-
-    for (const modalBubble of modalBubbles) {
-        modalBubble.addEventListener('click', preventBubble,false);
-    };
-
-
-
-    //Show passwork
-    function showPass() {
-        var inputPasswords = document.getElementsByClassName("js-input-pass");
-        for (const inputPassword of inputPasswords) {
-            if (inputPassword.type === "password") {
-                inputPassword.type = "text";
-            } else {
-                inputPassword.type = "password";
-            }
-        }
-        
-    };
-
-//check confirm
-    var checkConfirm = function() {
-        if (document.getElementById('js-password').value === document.getElementById('js-confirm-password').value) {
-            document.getElementById('js-message-confirm').style.color = 'green';
-            document.getElementById('js-message-confirm').innerHTML = ' giống nhau';
-        } 
-        else {
-            document.getElementById('js-message-confirm').style.color = 'red';
-            document.getElementById('js-message-confirm').innerHTML = ' khác nhau';
-            // chỉ lập lại 1 lần
-            setTimeout(removeConfirm, 4000)
-            clearTimeout();
-        }
-    }
-
-    function removeConfirm(){
-        if (document.getElementById('js-password').value === document.getElementById('js-confirm-password').value) {
-        document.getElementById('js-message-confirm').innerHTML = '';
-        }
-    }
-
-    // Mặc định giá trị chức vụ trong form đăng ký
-    var defaultChucvu = document.getElementById('js-register-chucvu'); // give an id to your input and set it as variable
-    defaultChucvu.value ='Cán bộ chiến sỹ'; // set default value instead of html attribute
-    defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
-    // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
-
-</script>
+<script src="./assets/JavaScript/localStore.js"></script>

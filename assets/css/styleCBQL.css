@@ -1,0 +1,132 @@
+.content-header{
+    background-color: #F6FBF4;
+}
+
+
+.user-link{
+    height: 42px;
+    padding-top: 12px;
+    padding-bottom: 24px;
+}
+
+.user-link span{
+    font-size: 14px;
+}
+
+.user-link a{
+    text-decoration: none;
+    color: #006A91;
+}
+
+.user-link i{
+   font-size: 16px;
+}
+
+.content-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    margin-top: 24px;
+    color: #dceafc;
+    background-color: #006A91;
+    border-radius: 4px;
+    
+}
+
+.content-title p{
+    text-transform: uppercase;
+}
+
+.note-area{
+    height: 360px;
+    overflow: scroll;
+}
+
+.note-title{
+    position: relative;
+    height: 36px;
+    background-color: #006A91;
+    border-radius: 4px;
+}
+
+.note-title-text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #dceafc;
+}
+
+.note-title p{
+    text-transform: uppercase;
+    
+} 
+
+.note-add{
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+    color: #dceafc;
+    padding-right: 12px;
+    padding-left: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.note-add:hover{
+    box-shadow: 0 5px 25px rgb(8, 90, 120);
+    color: #fff;
+}
+
+.note-item-field{
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    height: 264px;
+    width: 333px;
+    margin: 6px;
+    background-color: rgb(241, 217, 117,0.4);;
+    box-shadow: 0 24px 24px rgba(0, 62, 116, 0.8)
+}
+
+.note-item-field:hover{
+    box-shadow: 0px 12px 24px rgb(0, 35, 66)
+}
+
+.delete-note-button{
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: block;
+    width: 25%;
+    padding: 12px 8px;
+    /* margin-bottom: 16px; */
+    background-color: #006A91;
+    color: #F6FBF5;
+    border-width: 0.9px;
+    border-color: #006A91;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #006A91;
+}
+
+
+
+.note-item-text {
+    padding-top: 24px;
+}
+
+.note-item-text p{
+    text-indent: 24px;
+    text-align: justify;
+}
+
+.delete-note-button:hover{
+    background-color: rgb(0, 106, 145,0.9);
+    color: #F6FBF5;
+    border: 1px solid #006A91;
+    box-shadow: 0 10px 25px rgba(0, 62, 116, 0.8);
+}
