@@ -12,7 +12,7 @@ document.getElementById('clear').onclick = function() {
   document.getElementById('clear').classList.remove("visible");
 }
 
-    // tab item
+// tab item
 
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);

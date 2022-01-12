@@ -38,6 +38,8 @@
     text-transform: uppercase;
 }
 
+/* start note  */
+
 .note-area{
     height: 360px;
     overflow: scroll;
@@ -102,7 +104,6 @@
     display: block;
     width: 25%;
     padding: 12px 8px;
-    /* margin-bottom: 16px; */
     background-color: #006A91;
     color: #F6FBF5;
     border-width: 0.9px;
@@ -129,4 +130,57 @@
     color: #F6FBF5;
     border: 1px solid #006A91;
     box-shadow: 0 10px 25px rgba(0, 62, 116, 0.8);
+}
+
+/* start tab */
+
+/* tab search + add  */
+
+#tab-search-cbql {
+    position: absolute;
+    top: 0;
+    right: 38px;
+    color: #000;
+    background-color: #dcebe9;
+    border: solid 2px #006A91;
+    border-radius: 6px;
+    width: 99px;
+    font-size: 16px;
+    height: 38px;
+    display: inline-block;
+    padding-left: 24px;
+    outline: none;
+    cursor: text;
+}
+
+#tab-search-icon{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    display: inline-block;
+    color: #dcebe9;
+    line-height: 38px;
+    padding: 0 11px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tab-add{
+    float: left;
+    width: 784px;
+    height: 38px;
+}
+
+.icon-add{
+    display: inline-block;
+    color: #F6FBF5;
+    line-height: 38px;
+    padding: 0 11px;
+    cursor: pointer;
+}
+
+.icon-add:hover {
+    box-shadow: 0 3px 12px rgb(8, 90, 120);
+    color: #fff;
+    border-radius: 4px;
 }

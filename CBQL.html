@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/styleCBQL.css">
     <link rel="stylesheet" href="./assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css" rel="stylesheet">
-
     <title>CBQL</title>
 </head>
 <body>
@@ -136,6 +135,7 @@
                                         <p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
                                     </div>
                                     <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
+                                    
                                 </div>
     
                                 <div class="col col-third note-item-field">
@@ -220,17 +220,30 @@
 
                 </div>
 
+                <!-- begin search -->
+                <div class="row">
+                    <div class="tab-search-wap">
+
+                        <div class="tab-add">
+                        <i class="icon-add fa-duotone fa-layer-plus"></i> 
+                        </div>
+
+                        <div class="search-wrap">
+                            <i id="searchIcon" class="fa-solid fa-magnifying-glass" ></i>
+                            <i id="search-icon" class="fas fa-search"></i> 
+                            <input type="text" id="search">
+                            <i id="clear" class="search-icon fa-solid fa-xmark"></i>
+                        </div>
+
+                    </div>
+                </div>
+                <!--  -->
+
                 <!-- Tab content -->
                 <div class="tab-content">
 
                     <!-- tổng lực -->
                     <div class="tab-pane active">
-                        <div class="row">
-                            <div class="tab-search-wap">
-                                <i id="tab-search-icon" class="fas fa-search"></i>
-                                <input type="text" id="tab-search">        
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col col-third tab-item-field">
                                 <div class="tab-item-img"></div>
@@ -466,9 +479,6 @@
 </body>
 </html>
 
-<script src="./assets/JavaScript/localStore.js"></script>
+<script src="./assets/JavaScript/CBQL.js"></script>
 
-<script>
-
-</script>
 
