@@ -213,7 +213,7 @@
 }
 
 .ivu-table table {
-    width: 100%!important;
+    width: 99%!important;
 }
 
 .ivu-table table {
@@ -256,6 +256,7 @@
 
 .ivu-btn, .ivu-btn:active, .ivu-btn:focus {
     outline: 0;
+    cursor: pointer;
 }
 
 .ivu-btn:hover {
