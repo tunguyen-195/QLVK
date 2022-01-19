@@ -984,7 +984,7 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
 .modal-register-form{
     position: relative;
     background-color: #dcebe9;
-    max-width: 1100px;
+    width: 1100px;
     color: #F6FBF5;
     font: 16px;
     border-radius: 4px;
@@ -1176,3 +1176,5 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
     width: 344px;
     margin: 6px;
 }
+
+

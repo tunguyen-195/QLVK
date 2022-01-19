@@ -44,21 +44,21 @@ tabs.forEach((tab, index) => {
 
     // Automatic Slideshow - change image every 4 seconds
 
-var myIndex = 0;
-carousel();
+// var myIndex = 0;
+// carousel();
 
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("js-slide-show");
-    for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";  
-    }
+// function carousel() {
+//     var i;
+//     var x = document.getElementsByClassName("js-slide-show");
+//     for (i = 0; i < x.length; i++) {
+//         x[i].style.display = "none";  
+//     }
 
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 4000); 
-}
+//     myIndex++;
+//     if (myIndex > x.length) {myIndex = 1}    
+//     x[myIndex-1].style.display = "block";  
+//     setTimeout(carousel, 4000); 
+// }
 
 // show modal button
     function showModal(obj){
@@ -100,11 +100,11 @@ function carousel() {
     var checkConfirm = function() {
         if (document.getElementById('js-password').value === document.getElementById('js-confirm-password').value) {
             document.getElementById('js-message-confirm').style.color = 'green';
-            document.getElementById('js-message-confirm').innerHTML = ' giống nhau';
+            document.getElementById('js-message-confirm').innerText = ' giống nhau';
         } 
         else {
             document.getElementById('js-message-confirm').style.color = 'red';
-            document.getElementById('js-message-confirm').innerHTML = ' khác nhau';
+            document.getElementById('js-message-confirm').innerText = ' khác nhau';
             // chỉ lập lại 1 lần
             setTimeout(removeConfirm, 4000)
             clearTimeout();

@@ -670,7 +670,7 @@
 
 <!-- modal xem thông tin chi tiết VK --> 
 <div class="modal-info clearfix" id="js-modal-info"  onclick="hideModal(document.getElementById('js-modal-info'))">
-    <form action="#" id="modal-frm-info">
+    
         <div class="modal-info-form js-modal-Bubble">
             <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-info'))">
                 <i class="modal-close-item fa-solid fa-xmark"></i>
@@ -742,7 +742,9 @@
 
                         <div class="row area-btn">
                             <div class="col col-half">
-                            <input class="modal-login-button" id="modal-info-edit" formmethod="post" type="submit" value="SỬA THÔNG TIN">
+                            <input class="modal-login-button" formmethod="post" type="submit" value="SỬA THÔNG TIN" onclick="showModal(document.getElementById('js-modal-editVK'))">
+                            <!-- <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))"> -->
+
                             </div>
 
                             <div class="col col-half">
@@ -758,9 +760,120 @@
                 </div>
             </div>
         </div>
-    </form>
 </div>
 <!-- modal xem thông tin chi tiết VK --> 
+
+<!-- modal edit VK -->
+<div class="modal-editVK clearfix" id="js-modal-editVK"  onclick="hideModal(document.getElementById('js-modal-editVK'))">
+    <form action="#" id="modal-frm-addVK">
+        <div class="modal-addVK-form js-modal-Bubble">
+            <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-editVK'))">
+                <i class="modal-close-item fa-solid fa-xmark"></i>
+            </button>
+
+            <header class="modal-header">
+                <i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
+                <h4 class="modal-QLVK">Sửa thông tin Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
+            </header>
+
+            <div class="modal-body clearfix">
+                <!-- <div class="col col-60"> -->
+                    <div class="row">
+                        <div class="col col-half">
+                            <div class="input-container">
+                                <input type="text" list="list-danhmuc" id="js-addVK-danhmuc" class="modal-input-register" name="danhmuc" placeholder="Danh mục" required>
+                                <label for="danhmuc" class="modal-register-label">Danh mục</label>
+                                <datalist id="list-danhmuc">
+                                    <option value="Vũ khí">
+                                    <option value="Vật liệu nổ">
+                                    <option value="Công cụ hỗ trợ">
+                                  </datalist>
+                            </div>
+                        </div>
+                        
+                        <div class="col col-half">
+                            <div class="input-container">
+                                <input type="text" class="modal-input-register" name="chungloai" placeholder="Chủng loại" required>
+                                <label for="chungloai" class="modal-register-label">Chủng loại</label>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="text" class="modal-input-register" name="nhanhieu" placeholder="Nhãn hiệu" required>
+                                    <label for="name1" class="modal-register-label">Nhãn hiệu</label>
+                                </div>
+                            </div>
+                            
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="text" class="modal-input-register" name="sohieu" placeholder="Số hiệu" required>
+                                    <label for="sohieu" class="modal-register-label">Số hiệu</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="text" class="modal-input-register" name="nuocsanxuat" placeholder="Nước sản xuất" required>
+                                    <label for="nuocsanxuat" class="modal-register-label">Nước sản xuất</label>
+                                </div>
+                            </div>
+
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="text" class="modal-input-register" name="sogiayphep" placeholder="Số Giấy phép">
+                                    <label for="sogiayphep" class="modal-register-label">Số Giấy phép</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="date" class="modal-input-register" name="ngaycapphep" placeholder="Ngày cấp phép" min="1970-01-01" max="2002-12-31">
+                                    <label for="ngaycapphep" class="modal-register-label">Ngày cấp phép</label>
+                                </div>
+                            </div>
+
+                            <div class="col col-half">
+                                <div class="input-container">
+                                    <input type="date" class="modal-input-register" name="cogiatriden" placeholder="Có giá trị đến"  min="1970-01-01" max="2002-12-31">
+                                    <label for="cogiatriden" class="modal-register-label">Có giá trị đến</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                            <input class="modal-login-button" id="modal-addVK-button" formmethod="post" type="submit" value="Sửa">
+                            </div>
+                        </div>
+                <!-- </div> -->
+
+                <!-- <div class="col col-40 borrow-item-show">
+                    <div class="col borrow-item-field">
+                        <div class="tab-item-img-vk"></div>
+
+                        <div class="row tab-item-text">
+                            <p class="tab-item-name">Súng AK-47</p>
+                            <p id="borrow-quantily-title">Số lượng:</p>
+                            <input type="number" name="" id="borrow-quantily">
+                            <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+                        </div>
+                    </div>
+                </div> -->
+
+
+            </div>
+        </div>
+    </form>
+</div>
+<!--Hết modal edit VK -->
+
 
 <script src="./assets/JavaScript/CBQL.js"></script>
 
