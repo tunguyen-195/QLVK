@@ -44,21 +44,21 @@ tabs.forEach((tab, index) => {
 
     // Automatic Slideshow - change image every 4 seconds
 
-// var myIndex = 0;
-// carousel();
+var myIndex = 0;
+carousel();
 
-// function carousel() {
-//     var i;
-//     var x = document.getElementsByClassName("js-slide-show");
-//     for (i = 0; i < x.length; i++) {
-//         x[i].style.display = "none";  
-//     }
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("js-slide-show");
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+    }
 
-//     myIndex++;
-//     if (myIndex > x.length) {myIndex = 1}    
-//     x[myIndex-1].style.display = "block";  
-//     setTimeout(carousel, 4000); 
-// }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 4000); 
+}
 
 // show modal button
     function showModal(obj){
@@ -119,6 +119,12 @@ tabs.forEach((tab, index) => {
 
     // Mặc định giá trị chức vụ trong form đăng ký
     var defaultChucvu = document.getElementById('js-register-chucvu'); // give an id to your input and set it as variable
+    defaultChucvu.value ='Cán bộ chiến sỹ'; // set default value instead of html attribute
+    defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
+    // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
+
+
+    var defaultChucvu = document.getElementById('js-borrow-chucvu'); // give an id to your input and set it as variable
     defaultChucvu.value ='Cán bộ chiến sỹ'; // set default value instead of html attribute
     defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
     // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.

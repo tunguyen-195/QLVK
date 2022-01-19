@@ -72,6 +72,14 @@ html{
     width: 75%;
 }
 
+.col-70{
+    width: 70%;
+}
+
+.col-30{
+    width: 30%;
+}
+
 .col-half{
     width: 50%;
 }
@@ -513,7 +521,6 @@ html{
     display: flex;
     flex-wrap: wrap;
     overflow: scroll;
-    padding: 28px 0;
     height: 640px;
      background-color: #fff;
   }
@@ -1082,11 +1089,6 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
     display: flex;
 }
 
-#modal-frm-borrow{
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0, 62, 116, 0.8);
-}
-
 
 .modal-borrow-form{
     position: relative;
@@ -1098,15 +1100,11 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
     animation: loginFormArrive ease 0.4s;
 }
 
-
 .input-container{
     position: relative;
     height: 44px;
     margin-bottom: 17px;
 }
-
-
-
 
 .modal-input-borrow{
     position: absolute;
