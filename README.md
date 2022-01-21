@@ -1,2 +1,2 @@
 # QLVK
-1 Ngày trước khi lên thớt.
+Lời nhắn: Chúc nhóm mình báo cáo thành công!
