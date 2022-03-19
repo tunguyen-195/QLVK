@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="ModalDetailFooter">
+		<button class="btn btn-info" style="margin-right: 50px; width: 150px" id="btn-create-submit" th:text="${@baseTag.message('common.button.create')}"></button>
+		<button class="btn btn-info" style="margin-right: 50px; width: 150px" id="btn-edit-submit" th:text="${@baseTag.message('common.button.update')}"></button>
+		<button class="btn btn-dark" style="width: 100px" id="btn-edit-cancel" th:text="${@baseTag.message('common.button.close')}"></button>
+	</th:block>
+</body>
+</html>

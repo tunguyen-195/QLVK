@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{commons/main}">
+<head>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/app/tw001/tw001.css}" />
+<script type="text/javascript" th:inline="javascript" th:src="@{/resources/js/app/tw001/tw001.js}"></script>
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+	<p>Date: <input type="text" id="datepicker"></p>
+	
+	</div>
+</body>
+</html>

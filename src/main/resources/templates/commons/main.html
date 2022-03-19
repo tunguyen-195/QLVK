@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!-- Import CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/datatables/1.10.16/css/dataTables.bootstrap4.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap4-toggle/3.6.0/css/bootstrap4-toggle.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+
+<!-- custom -->
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/main.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/darkmode.css}" />
+
+<link rel="icon" th:href="@{/resources/images/common/shd-logo.gif}" type="image/icon type">
+<!-- Import JavaScript -->
+
+<!-- Generate Base URL -->
+<script>
+var baseUrl = '[[@{/}]]';
+var flagAccepRemind = true;
+var numberOfRemind = 0;
+</script>
+
+<!-- webjars -->
+<script type="text/javascript" th:src="@{/webjars/momentjs/2.20.1/min/moment.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/popper.js/1.14.1/umd/popper.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.5.2/js/bootstrap.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap4-toggle/3.6.0/js/bootstrap4-toggle.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/datatables/1.10.16/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/webjars/datatables/1.10.16/js/dataTables.bootstrap4.min.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/common/common.js}"></script>
+<script type="text/javascript" th:src="@{/resources/js/common/validateCommon.js}"></script>
+<th:block th:if="${user != null}">
+<script type="text/javascript" th:src="@{/resources/js/common/remind.js}"></script>
+</th:block>
+<script th:inline="javascript">
+
+     /*<![CDATA[*/
+        const ERROR_COUNT_DOWNLOAD  = [[${@baseTag.message('common.messsage.errorCountDownload')}]];
+        const ERROR_CHANGED  = [[${@baseTag.message('common.messsage.errorChanged')}]];
+      /*]]>*/
+   </script> 
+</head>
+<body style = "background-color: #F4EEFF">
+	<!-- CONTENT_2. Your APP Content -->
+	<div class="container center-wrapper">
+		<th:block layout:fragment="content" />
+	</div>
+	<!-- POPUP COMMON -->
+	<th:block th:replace="commons/popupCommon :: popup-common" />
+<th:block th:if="${user != null}">
+	<th:block th:if="${modSub == null}">
+		<th:block th:replace="commons/remind :: remind" />
+	</th:block>
+</th:block>
+</th:block>
+<div id="message-toast"></div>
+</body>
+</html>

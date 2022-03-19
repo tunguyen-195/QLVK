@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="popup-common">
+        <div class="modal fade" id="modal-common" role="dialog"
+            data-backdrop="static" style="margin-top: 10%">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content" style="min-width: 600px">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="title-popup-common"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex">
+                            <h5 id="content-popup-common"></h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success d-none" id="btn-common-ok"
+                        th:text="${@baseTag.message('common.button.ok')}"></button>
+                        <button class="btn btn-dark" data-dismiss="modal" id="btn-common-cancel"
+                        th:text="${@baseTag.message('common.button.cancel')}"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</th:block>
+</body>
+</html>

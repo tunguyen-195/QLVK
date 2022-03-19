@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{commons/main}">
+<head>
+<script th:inline="javascript">
+	parent.handleMessageResponse([[${data}]]);
+	[# th:if="${data.statusCode == 500}"]
+	parent.executeDownloadFile([[${data.idFileDownload}]]);
+	[/]
+	[# th:if="${data.statusCode == 200}"]
+		parent.executeAfterUploadSuccess();
+	[/]
+</script>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="Selectbox">
+		<div th:class="col-md- + ${btsize}">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<th:block th:if="${tooltip != null and tooltip != ''}">
+						<span class="input-group-text" th:text="${@baseTag.message(text)}" data-toggle="tooltip" data-placement="top" th:title="${@baseTag.message(tooltip)}"></span>
+					</th:block>
+					<th:block th:if="${tooltip == null or tooltip == ''}">
+						<span class="input-group-text" th:text="${@baseTag.message(text)}"></span>
+					</th:block>
+				</div>
+				<select class="form-control radius" th:id="${id}" th:name="${id}">
+					<th:block th:if="${emptyOption == true}">
+					<option></option>
+					</th:block>
+					<option th:each="db : ${listCategory}" th:value="${db.key}" th:utext="|${db.value}|"></option>
+				</select>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

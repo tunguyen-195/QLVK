@@ -1,0 +1,176 @@
+/**
+ * Cai gi dung chung cho ca he thong thi dua vao day
+ * 
+ */
+.lbl{
+	
+}
+.text-align-center{
+	text-align:center;
+}
+.table-sorting-disabled {
+	pointer-events: none;
+}
+
+
+.footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+}
+
+
+/**for all datatable*/
+.dataTables_wrapper {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+
+.error
+{
+	border-color:red !important;
+}
+
+.error:focus
+{
+	border-color:red !important;
+}
+
+.container-header{
+	margin-left:15%;
+	margin-right:15%;
+}
+.nav-header {
+	margin-left:15%;
+	margin-right:15%;
+}
+.social-part .fa{
+    padding-right:20px;
+}
+ul li a{
+    margin-right: 20px;
+}
+
+/** remind */
+#remind_position_left {
+	position: fixed;
+	top: 100px;
+	left: 10px;
+	width: 300px;
+	z-index: 9999;
+}
+#remind_position_right {
+	position: fixed;
+	top: 100px;
+	width: 300px;
+	right: 10px;
+	z-index: 9999;
+}
+#message-toast {
+	position: fixed;
+	top: 0px;
+	width: 400px;
+	left: 10px;
+	z-index: 9999;
+}
+.selected{
+	background-color: gold !important;
+}
+/* customize display datatable */
+.dataTables_scrollBody{
+	height:600px;
+}
+.dataTables_scrollBody table{
+	width:100% !important;
+}
+.dataTables_scroll{
+	border: 0.5px solid whitesmoke;
+}
+.dataTables_empty{
+	display:none;
+}
+
+table.dataTable {
+    border-spacing: 0 !important;
+}
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: 1px !important;
+}
+table.table-bordered.dataTable th{
+    border-left-width: 0px !important;
+}
+body{
+	font-size:14px !important;
+	font-family: 'Varela Round', sans-serif;
+}
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 100%;
+}
+
+.dataTables_scrollHeadInner table{
+	margin-top: 0px !important;
+}
+.dataTable .odd{
+    background-color: #f9f9f9 !important;
+}
+.dataTable .even{
+    background-color: #fff !important;
+}
+.dataTable tr:hover td {
+	background:rgba(0, 0, 0, 0.05) !important;
+}
+.area-input{
+	width:100%;
+	margin-bottom:10px;
+}
+
+.area-input .form-section{
+	border-radius: 5px;
+	padding: 10px;
+}
+.div-input-infor{
+    color:#fff;
+}
+
+table.table td a {
+	font-weight: bold;
+	color: #566787;
+	display: inline-block;
+	text-decoration: none;
+	outline: none !important;
+}
+table.table td a:hover {
+	color: #2196F3;
+}
+table.table td a.edit {
+	color: #FFC107;
+	margin-right: 20px;
+}
+table.table td a.delete {
+	color: #F44336;
+}
+table.table td i {
+	font-size: 19px;
+}
+.toast-message-success{
+	background-color: lawngreen;
+	color: black;
+}
+.toast-message-warning{
+	background-color: gold;
+	color: black;
+}
+.toast-message-error{
+	background-color: red;
+	color: white;
+}
+.tooltip-inner {
+  white-space:nowrap;
+  max-width:none;
+}
+.upload-file{
+	color: aliceblue;
+}

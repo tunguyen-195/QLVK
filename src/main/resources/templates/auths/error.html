@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.css}" />
+<script>
+	function getCurrentime(){
+		var today = new Date();
+		var m = (today.getMonth()+1) <10? '0'+(today.getMonth()+1):(today.getMonth()+1);
+		var d = today.getDate() <10? '0'+today.getDate():today.getDate();
+		var h = today.getHours() <10? '0'+today.getHours():today.getHours();
+		var m = today.getMinutes() <10? '0'+today.getMinutes():today.getMinutes();
+		var s = today.getSeconds() <10? '0'+today.getSeconds():today.getSeconds();
+		document.getElementById("time").innerHTML = today.getFullYear()+'/'+m+'/'+d +' ' + h + ":" + m + ":" + s;
+	}
+</script>
+</head>
+<body onload="getCurrentime()">
+	<div class="base" style="text-align: center">
+		<!--  TODO: NOT IMPLEMENT-->
+		<div style="text-align: center; text-vertical: middle;">
+			<span class="text-danger" style="font-size:50px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
+			<h2 id = "time"></h2>
+			<h3>[[${@baseTag.message('common.message.errorPage')}]]</h3>
+		</div>
+	</div>
+</body>
+</html>

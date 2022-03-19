@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Đăng nhập</title>
+	<link rel="icon" type="image/png" th:href="@{resources/login/images/bg-02.jpg}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{resources/login/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{resources/login/css/main.css}">
+	<script th:src="@{resources/login/js/main.js}"></script>
+<style th:inline="text">
+    .login100-form-title {
+        background-image: url("[[@{resources/login/images/bg-02.jpg}]]");
+    }
+    .login100-form {
+        background-image: url("[[@{resources/login/images/bg-03.jpg}]]");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+</style>
+<head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title">
+					<span class="login100-form-title-1">
+						<th:block th:utext="#{login.header}"></th:block>
+					</span>
+				</div>
+
+				<form class="login100-form validate-form" name='f' th:action="@{/j_spring_security_check}" method="POST" target="_top">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+						<span class="label-input100">[[#{login.username}]]</span>
+						<input class="input100" type="text" name="username" placeholder="Nhập tài khoản">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+						<span class="label-input100">[[#{login.password}]]</span>
+						<input class="input100" type="password" name="password" placeholder="Nhập mật khẩu">
+						<span class="focus-input100"></span>
+					</div>
+
+					<!-- <div class="flex-sb-m w-full p-b-30">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								[[#{login.rememberMe}]]
+							</label>
+						</div>
+						<div>
+							<a href="#" class="txt1">
+								[[#{login.forgotPassword}]]
+							</a>
+						</div>
+					</div> -->
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							[[#{login.login}]]
+						</button>
+						<!-- <div>
+							<a href="#" class="txt1" style = "margin-left:120px">
+								[[#{login.register}]]
+							</a>
+						</div> -->
+					</div>
+					<div th:if="${#request.getParameter('error') == 'true'}">
+						<span style = "color:red">[[#{login.loginError}]]</span>
+						<!-- <span style = "color:red" th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+							[[#{login.loginError}]]
+						</span> -->
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

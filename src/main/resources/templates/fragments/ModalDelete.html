@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="ModalDelete">
+		<div id="modal-delete" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form>
+						<div class="modal-header">
+							<h4 class="modal-title"><i class="fa fa-trash-o" aria-hidden="true"></i> [[${@baseTag.message('common.messsage.headerConfirmDelete')}]]</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">
+							<p>[[${@baseTag.message('common.messsage.confirmDelete')}]]</p>
+							<p class="text-warning"><small>[[${@baseTag.message('common.messsage.confirmDeleteMark')}]]</small></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+							<input type="button" class="btn btn-danger" value="Delete" onclick="executeDelete();">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

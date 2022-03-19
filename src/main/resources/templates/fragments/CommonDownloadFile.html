@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<th:block th:fragment="CommonDownloadFile">
+		<form th:attr="action=@{/api/common/download}" target="download" method="POST" name="CommonDownloadModel">
+			<input type="hidden" id="idFileDownload" name="idFileDownload">
+		</form>
+		<iframe name="download" width="100%" height="0px" style="border:0px"></iframe>
+	</th:block>
+</body>
+</html>

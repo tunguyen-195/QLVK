@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="Button">
+		<div th:class="col-md- + ${btsize}">
+			<th:block th:if="${tooltip != null and tooltip != ''}">
+				<button th:id="${id}" type = "button" th:class="'btn ' + ${class}" data-toggle="tooltip" data-placement="top" th:title="${@baseTag.message(tooltip)}"><th:bock th:utext="${@baseTag.message(text)}"></button>
+			</th:block>
+			<th:block th:if="${tooltip == null or tooltip == ''}">
+				<button th:id="${id}" type = "button" th:class="'btn ' + ${class}"><th:bock th:utext="${@baseTag.message(text)}"></button>
+			</th:block>
+		</div>
+	</th:block>
+</body>
+</html>

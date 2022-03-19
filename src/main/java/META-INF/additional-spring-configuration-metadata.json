@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "--server.port",
+    "type": "java.lang.String",
+    "description": "A description for '--server.port'"
+  },
+  {
+    "name": "spring.second-datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second-datasource.url'"
+  },
+  {
+    "name": "spring.second-datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second-datasource.username'"
+  },
+  {
+    "name": "spring.second-datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.second-datasource.password'"
+  }
+]}

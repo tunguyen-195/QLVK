@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="LayoutDetailCommon">
+		<div class="row mt-3" id = "LayoutDetailCommon">
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="div-input-infor"><th:bock th:utext="${@baseTag.message('common.literal.cmnCreateUser')}"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<div class="div-input-infor"><span id="cmnCreateUserLabel"></span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="div-input-infor"><th:bock th:utext="${@baseTag.message('common.literal.cmnCreateDate')}"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<div class="div-input-infor"><span id="cmnCreateDateLabel"></span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="div-input-infor"><th:bock th:utext="${@baseTag.message('common.literal.cmnUpdateUser')}"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<div class="div-input-infor"><span id="cmnUpdateUserLabel"></span></div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<div class="div-input-infor"><th:bock th:utext="${@baseTag.message('common.literal.cmnUpdateDate')}"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="form-group">
+					<div class="div-input-infor"><span id="cmnUpdateDateLabel"></span></div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>

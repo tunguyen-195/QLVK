@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	<th:block th:fragment="Textarea">
+		<div th:class="col-md- + ${btsize}">
+			<div class="input-group">
+				<div class="input-group-prepend">
+					<th:block th:if="${tooltip != null and tooltip != ''}">
+						<span class="input-group-text" th:text="${@baseTag.message(text)}" data-toggle="tooltip" data-placement="top" th:title="${@baseTag.message(tooltip)}"></span>
+					</th:block>
+					<th:block th:if="${tooltip == null or tooltip == ''}">
+						<span class="input-group-text" th:text="${@baseTag.message(text)}"></span>
+					</th:block>
+				</div>
+				<textarea th:class="form-control +' ' + ${class}" th:id="${id}" th:name="${id}" th:rows="${rows}"  th:value=${value}></textarea>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>
