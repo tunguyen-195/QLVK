@@ -1,5 +1,4 @@
-    // tab item
-
+$(document).ready(function() {
     const $ = document.querySelector.bind(document);
     const $$ = document.querySelectorAll.bind(document);
     
@@ -26,21 +25,35 @@
         pane.classList.add("active");
       };
     });
-    
 
-  //search
-  document.getElementById('searchIcon').onclick = function() {
-    document.getElementById('search').classList.add("visible");
-    document.getElementById('clear').classList.add("visible");
-    document.getElementById('search-icon').classList.add("visible");
-    document.getElementById('search').focus();
-    document.getElementById('searchIcon').classList.add("hide");
-}
-document.getElementById('clear').onclick = function() {
-  document.getElementById('searchIcon').classList.remove("hide");
-  document.getElementById('search').classList.remove("visible");
-  document.getElementById('clear').classList.remove("visible");
-}
+ // stop bubble in modal
+    const modalBubbles = document.querySelectorAll('.js-modal-Bubble');
+
+    for (const modalBubble of modalBubbles) {
+      modalBubble.addEventListener('click', preventBubble,false);
+    };
+
+    var defaultChucvu = document.getElementById('js-addVK-danhmuc'); // give an id to your input and set it as variable
+        defaultChucvu.value ='Vũ khí'; // set default value instead of html attribute
+        defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
+        // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
+
+        //search
+        document.getElementById('searchIcon').onclick = function() {
+          document.getElementById('search').classList.add("visible");
+          document.getElementById('clear').classList.add("visible");
+          document.getElementById('search-icon').classList.add("visible");
+          document.getElementById('search').focus();
+          document.getElementById('searchIcon').classList.add("hide");
+      }
+      document.getElementById('clear').onclick = function() {
+        document.getElementById('searchIcon').classList.remove("hide");
+        document.getElementById('search').classList.remove("visible");
+        document.getElementById('clear').classList.remove("visible");
+      }
+});
+
+
 
 // show modal button
 function showModal(obj){
@@ -54,17 +67,3 @@ function hideModal(obj){
 function preventBubble(event){
   event.stopPropagation();
 };
-
-// stop bubble in modal
-const modalBubbles = document.querySelectorAll('.js-modal-Bubble');
-
-for (const modalBubble of modalBubbles) {
-  modalBubble.addEventListener('click', preventBubble,false);
-};
-
-var defaultChucvu = document.getElementById('js-addVK-danhmuc'); // give an id to your input and set it as variable
-    defaultChucvu.value ='Vũ khí'; // set default value instead of html attribute
-    defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
-    // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
-
-  

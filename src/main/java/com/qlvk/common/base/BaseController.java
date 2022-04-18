@@ -33,20 +33,23 @@ public abstract class BaseController {
 	public void initial(Model model) {
 
 		AppUser entity = appUserRepo.findUserAccount(auditorAwareImpl.getCurrentAuditor().get());
+		if (entity == null) {
+			return;
+		}
 		User user = new User();
 		user.setUserId(entity.getUserName());
 		user.setLocale(new Locale(entity.getLocale()));
 		user.setName(entity.getName());
 
 		user.setRole(entity.getUserRoles().get(0).getAppRole().getRoleName());
-		if (StringUtils.equals(user.getRole(), "ROLE_THU_KHO")) {
-			user.setRoleName("Thủ kho");
-		}
 		if (StringUtils.equals(user.getRole(), "ROLE_ADMIN")) {
-			user.setRoleName("Admin (Người quản lý hệ thống)");
-		}
-		if (StringUtils.equals(user.getRole(), "ROLE_CBPN")) {
-			user.setRoleName("Cán bộ phòng nhập");
+			user.setRoleName("Admin");
+		} else if (StringUtils.equals(user.getRole(), "ROLE_CBQL")) {
+			user.setRoleName("CBQL");
+		} else if (StringUtils.equals(user.getRole(), "ROLE_LANH_DAO")) {
+			user.setRoleName("Lãnh Đạo");
+		} else if (StringUtils.equals(user.getRole(), "ROLE_CBCS")) {
+			user.setRoleName("CBCS");
 		}
 		user.setRoleId(String.valueOf(appRole.getOneByRoleName(WebUtils.getUserRole()).getRoleId()));
 		model.addAttribute(CommonConstant.USER_INFO, user);

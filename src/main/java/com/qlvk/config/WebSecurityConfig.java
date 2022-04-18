@@ -35,8 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-		// Sét đặt dịch vụ đ�? tìm kiếm User trong Database.
-		// V�? sét đặt PasswordEncoder.
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 
 	}
@@ -51,14 +49,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll();
 
 		http.authorizeRequests().antMatchers("/*")
-				.access("hasAnyRole('ROLE_THU_KHO', 'ROLE_ADMIN','ROLE_CBPN')");
+				.access("hasAnyRole('ROLE_ADMIN', 'ROLE_CBQL','ROLE_LANH_DAO','ROLE_CBCS')");
 
 		http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
 		http.authorizeRequests().and().formLogin()//
-				.loginProcessingUrl("/j_spring_security_check").loginPage("/index")//
+				.loginProcessingUrl("/j_spring_security_check").loginPage("/login")//
 				.defaultSuccessUrl("/index")//
 				.failureUrl("/index?error=true")//
 				.usernameParameter("username")//

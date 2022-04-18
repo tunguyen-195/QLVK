@@ -1,880 +1,1022 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{commons/main}">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/styleCBQL.css">
-    <link rel="stylesheet" href="./assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css" rel="stylesheet">
-    <title>CBQL</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/css/style.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/css/styleCBQL.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css}" />
+<!-- begin borrow form -->
+<script type="text/javascript" th:inline="javascript" charset="UTF-8"
+	th:src="@{/resources/assets/JavaScript/CBQL.js}"></script>
+<title>CBQL</title>
 </head>
 <body>
+	<div layout:fragment="content" th:remove="tag">
+		<div id="main">
 
-    <div id="main">
+			<div id="header">
 
-        <div id="header">
-            
-            <div id="pre-header">
+				<div id="pre-header">
 
-                <div class="police-logo">
-                    <img src="./assets/img/Logo.png" alt="">
-                </div>
+					<div class="police-logo">
+						<img th:src="@{/resources/assets/img/Logo.png}" alt="">
+					</div>
 
-                <div id="sologan">
-                        <p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</p>
-                        <p id="sologan-tq">Công an thành phố Tuyên Quang</p>
-                </div>
+					<div id="sologan">
+						<p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ -
+							Công cụ hỗ trợ</p>
+						<p id="sologan-tq">Công an thành phố Tuyên Quang</p>
+					</div>
 
-            </div>
+				</div>
 
-            <div id="nav">
+				<div id="nav">
 
-                <!-- begin menu navigation -->
-                    <ul id="menu-nav">
+					<!-- begin menu navigation -->
+					<ul id="menu-nav">
 
-                        <li><a href="#" id="menu-trangchu2">
-                            <i class="fa-solid fa-dagger"></i>
-                            Quản lý VK-VLN-CCHT</a>
-                        </li>
+						<li><a href="#" id="menu-trangchu2"> <i
+								class="fa-solid fa-dagger"></i> Quản lý VK-VLN-CCHT
+						</a></li>
 
-                        <li><a href="#" id="menu-trangchu3">
-                            <i class="fa-solid fa-file-certificate"></i>
-                            Quản lý Giấy phép</a>
-                        </li>
+						<li><a href="#" id="menu-trangchu3"> <i
+								class="fa-solid fa-file-certificate"></i> Quản lý Giấy phép
+						</a></li>
 
-                        <li><a href="#" id="menu-trangchu4">
-                                <i class="fa-solid fa-folder-open"></i>
-                                Quản lý Hồ sơ</a>
-                        </li>
+						<li><a href="#" id="menu-trangchu4"> <i
+								class="fa-solid fa-folder-open"></i> Quản lý Hồ sơ
+						</a></li>
 
-                        <li><a href="#tab-TL">
-                                <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                                Quản lý Mượn/Trả
-                                <i class="fa-solid fa-caret-down"></i>
-                            </a>
-                            <ul id="sub-menu-nav">
-                                <li><a href="#">Xử lý yêu cầu mượn</a></li>
-                                <li><a href="#">Xử lý yêu cầu trả</a></li>
-                            </ul>
-                        </li>
+						<li><a href="#tab-TL"> <i
+								class="fa-solid fa-arrow-right-arrow-left"></i> Quản lý Mượn/Trả
+								<i class="fa-solid fa-caret-down"></i>
+						</a>
+							<ul id="sub-menu-nav">
+								<li><a href="#">Xử lý yêu cầu mượn</a></li>
+								<li><a href="#">Xử lý yêu cầu trả</a></li>
+							</ul></li>
 
 
 
-                        <li><a href="#tab-TL">
-                                <i class="fa-solid fa-file-chart-column"></i>
-                                Báo cáo - Thống kê
-                                <i class="fa-solid fa-caret-down"></i>
-                            </a>
-                            <ul id="sub-menu-nav">
-                                <li><a href="#">VK-VLN-CCHT</a></li>
-                                <li><a href="#">Giấy phép</a></li>
-                                <li><a href="#">Lượt Mượn/Trả</a></li>
-                                <li><a href="#">Hồ sơ</a></li>
-                            </ul>
-                        </li>
+						<li><a href="#tab-TL"> <i
+								class="fa-solid fa-file-chart-column"></i> Báo cáo - Thống kê <i
+								class="fa-solid fa-caret-down"></i>
+						</a>
+							<ul id="sub-menu-nav">
+								<li><a href="#">VK-VLN-CCHT</a></li>
+								<li><a href="#">Giấy phép</a></li>
+								<li><a href="#">Lượt Mượn/Trả</a></li>
+								<li><a href="#">Hồ sơ</a></li>
+							</ul></li>
+
+						<li><a th:href="@{/logout}" id="menu-trangchu3"> <i
+									class="fa-solid fa-address-book"></i> Đăng xuất
+						</a></li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div id="content">
+
+				<div class="content-header">
+					<div class="row user-area clearfix">
+
+						<div class="row user-link">
+							<div class="col col-right">
+								<a href=""> <i class="fa-duotone fa-user-police-tie"></i> <span>
+										Nguyễn Minh Tú</span>
+								</a>
+							</div>
+						</div>
 
 
-                        <li><a href="./index.html" id="dangxuat">
-                            <i class="fa-solid fa-right-from-bracket"></i>
-                            Đăng xuất
-                        </a></li>
+						<div class="row">
 
-                    </ul>      
-            </div>
+							<div class="row note-title">
+								<div class="note-title-text">
+									<p>
+										<i class="fa-solid fa-notes"></i> Danh sách ghi chú
+									</p>
+								</div>
 
-        </div>
+								<div class="note-add">
+									<i class="fa-solid fa-note-medical"></i>
+								</div>
 
-        <div id="content">
-            
-        <div class="content-header">
-                <div class="row user-area clearfix">
+							</div>
 
-                    <div class="row user-link">
-                        <div class="col col-right">
-                            <a href="">
-                                <i class="fa-duotone fa-user-police-tie"></i>
-                                <span> Nguyễn Minh Tú</span>
-                            </a>
+							<div class="note-area">
+
+								<div class="row">
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Nộp báo cáo cuối năm</p>
+											<p class="tab-item-content">Hoàn thành báo cáo của Công
+												văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh
+												Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ,
+												Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
+											<p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+									</div>
+
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Hoàn thiện báo cáo 6 tháng</p>
+											<p class="tab-item-content">Hoàn thành báo cáo của Công
+												văn số 112/PV01 ngày 01/2/2022 của Phòng PV01, Công an tỉnh
+												Tuyên Quang Về việc Báo cáo công tác quản lý Vũ khí, Vật
+												liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương</p>
+											<p class="tab-item-content">Hạn hoàn thành: 02/7/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+
+									</div>
+
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Kiểm tra công tác QLVK của CAP</p>
+											<p class="tab-item-content">Kiểm tra công tác quản lý VK
+												của CA các phường</p>
+											<p class="tab-item-content">Hạn hoàn thành: 01/6/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Nộp báo cáo cuối năm</p>
+											<p class="tab-item-content">Hoàn thành báo cáo của Công
+												văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh
+												Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ,
+												Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
+											<p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+									</div>
+
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Nộp báo cáo cuối năm</p>
+											<p class="tab-item-content">Hoàn thành báo cáo của Công
+												văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh
+												Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ,
+												Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
+											<p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+									</div>
+
+									<div class="col col-third note-item-field">
+										<div class="row note-item-text">
+											<p class="tab-item-name">Nộp báo cáo cuối năm</p>
+											<p class="tab-item-content">Hoàn thành báo cáo của Công
+												văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh
+												Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ,
+												Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
+											<p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
+										</div>
+										<input class="delete-note-button" formmethod="post"
+											type="submit" value="Xoá"
+											onclick="showModal(document.getElementById('js-modal-borrow'))">
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row content-title">
+						<p>
+							<i class="modal-login-icon fa-solid fa-dagger"></i> Quản lý Vũ
+							khí - Vật liệu nổ - Công cụ hỗ trợ
+						</p>
+					</div>
+				</div>
+
+				<!-- Tab Khám phá -->
+				<div id="content-khampha">
+
+					<div class="tabs">
+						<div class="tab-item active" id="tab-TL">
+							<i class="tab-icon fas fa-solid fa-swords"></i> Tổng lực
+						</div>
+
+						<div class="tab-item" id="tab-VK">
+							<i class="tab-icon fas fa-solid fa-gun"></i> Vũ khí
+						</div>
+
+						<div class="tab-item" id="tab-VLN">
+							<i class="tab-icon fas fa-solid fa-bomb"></i> Vật liệu nổ
+						</div>
+
+						<div class="tab-item" id="tab-CCHT">
+							<i class="tab-icon fas fa-flashlight"></i> Công cụ hỗ trợ
+						</div>
+
+						<div class="line"></div>
+
+					</div>
+
+					<!-- begin search -->
+					<div class="row">
+						<div class="tab-search-wap">
+
+							<div class="tab-add">
+								<i class="icon-add fa-duotone fa-layer-plus"
+									onclick="showModal(document.getElementById('js-modal-addVK'))"></i>
+							</div>
+
+							<div class="search-wrap">
+								<i id="searchIcon" class="fa-solid fa-magnifying-glass"></i> <i
+									id="search-icon" class="fas fa-search"></i> <input type="text"
+									id="search"> <i id="clear"
+									class="search-icon fa-solid fa-xmark"></i>
+							</div>
+
+						</div>
+					</div>
+					<!--  -->
+
+					<!-- Tab content -->
+					<div class="tab-content">
+
+						<!-- tổng lực -->
+						<div class="tab-pane active">
+							<!-- phần nội dung bản -->
+							<div class="ivu-table">
+								<div class="ivu-table-header">
+									<table cellspacing="0" cellpadding="0" border="0"
+										style="width: 1080;">
+										<colgroup>
+											<col width="24px">
+											<col width="48px">
+											<col width="180px">
+											<col width="160px">
+											<col width="120px">
+											<col width="140px">
+											<col width="140px">
+											<col width="120">
+											<col width="120">
+											<!---->
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class=""></span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">STT</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Chủng loại</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Nhãn hiệu</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Nước sản xuất</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Số hiệu</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Số giấy phép</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Ngày cấp phép</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+
+												<th class="">
+													<div class="ivu-table-cell">
+														<span class="">Có giá trị đến</span>
+														<!---->
+														<!---->
+													</div>
+												</th>
+												<!---->
+
+											</tr>
+										</thead>
+									</table>
+								</div>
+
+								<div class="ivu-table-body" style="">
+									<table cellspacing="0" cellpadding="0" border="0"
+										style="width: 1080px;">
+										<colgroup>
+											<col width="24px">
+											<col width="48px">
+											<col width="180px">
+											<col width="160px">
+											<col width="120px">
+											<col width="140px">
+											<col width="140px">
+											<col width="120px">
+											<col width="120px">
+										</colgroup>
+
+										<tbody class="ivu-table-tbody">
+											<tr class="ivu-table-row">
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<span class="ivu-tag-text ivu-tag-color-white"></span>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<span class="ivu-tag-text">100</span>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<button type="button"
+															class="ivu-btn ivu-btn-text ivu-btn-large"
+															style="padding: 2px 0px;">
+															<!---->
+															<!---->
+															<span
+																onclick="showModal(document.getElementById('js-modal-info'))">Súng
+																tiểu liên AK</span>
+														</button>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<button type="button"
+															class="ivu-btn ivu-btn-text ivu-btn-large"
+															style="padding: 2px 0px; overflow-x: auto; text-align: left; width: 100%;">
+															<!---->
+															<!---->
+															<span
+																onclick="showModal(document.getElementById('js-modal-info'))">AK
+																47</span>
+														</button>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<span class="ivu-tag-text">Trung Quốc</span>
+														<!---->
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<span>1238ERB847</span>
+														<!---->
+														<!---->
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<span>1238ERB847/GP</span>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<span>19/5/1997</span>
+													</div>
+												</td>
+
+												<td class="">
+													<div class="ivu-table-cell">
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<!---->
+														<span>19/5/1997</span>
+													</div>
+												</td>
+
+											</tr>
+											<!---->
+											<!---->
+										</tbody>
+									</table>
+								</div>
+
+							</div>
+							<!-- hết nội dung bảng -->
+						</div>
+
+						<!-- vũ khí -->
+						<div class="tab-pane">
+							<div class="row">
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col col-third tab-item-field">
+									<div class="tab-item-img-vk"></div>
+
+									<div class="row tab-item-text">
+										<p class="tab-item-name">Súng AK-47</p>
+										<p class="tab-item-content">
+											Số lượng:<span class="item-quantily">4</span>
+										</p>
+										<p class="tab-item-content">
+											Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span>
+										</p>
+
+										<div class="row">
+											<div class="col-right">
+												<input class="modal-login-button" formmethod="post"
+													type="submit" value="Mượn">
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- vật liệu nổ -->
+						<div class="tab-pane">
+							<h2>Vật liệu nổ</h2>
+							<p>Phần hiển thị danh sách VK - VLN -CCHT..</p>
+						</div>
+						<!-- công cụ hỗ trợ -->
+						<div class="tab-pane">
+							<h2>Công cụ hỗ trợ</h2>
+							<p>Phần hiển thị danh sách VK - VLN -CCHT..</p>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- end tab khám phá -->
+
+			</div>
+
+			<div id="footer">
+				<p>Bản quyền thuộc về Nhóm 8 Lớp LT04-T07-BCA</p>
+			</div>
+
+		</div>
+		<!-- modal nhập thêm VK -->
+		<div class="modal-addVK clearfix" id="js-modal-addVK"
+			onclick="hideModal(document.getElementById('js-modal-addVK'))">
+			<form action="#" id="modal-frm-addVK">
+				<div class="modal-addVK-form js-modal-Bubble">
+					<button class="modal-close-button js-modal-close-button"
+						onclick="hideModal(document.getElementById('js-modal-addVK'))">
+						<i class="modal-close-item fa-solid fa-xmark"></i>
+					</button>
+
+					<header class="modal-header">
+						<i class="modal-register-icon fa-duotone fa-layer-plus"></i>
+						<h4 class="modal-QLVK">Thêm Vũ khí - Vật liệu nổ - Công cụ hỗ
+							trợ</h4>
+					</header>
+
+					<div class="modal-body clearfix">
+						<!-- <div class="col col-60"> -->
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" list="list-danhmuc" id="js-addVK-danhmuc"
+										class="modal-input-register" name="danhmuc"
+										placeholder="Danh mục" required> <label for="danhmuc"
+										class="modal-register-label">Danh mục</label>
+									<datalist id="list-danhmuc">
+										<option value="Vũ khí">
+										<option value="Vật liệu nổ">
+										<option value="Công cụ hỗ trợ">
+									</datalist>
+								</div>
+							</div>
+
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="chungloai" placeholder="Chủng loại" required> <label
+										for="chungloai" class="modal-register-label">Chủng
+										loại</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register" name="nhanhieu"
+										placeholder="Nhãn hiệu" required> <label for="name1"
+										class="modal-register-label">Nhãn hiệu</label>
+								</div>
+							</div>
+
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register" name="sohieu"
+										placeholder="Số hiệu" required> <label for="sohieu"
+										class="modal-register-label">Số hiệu</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="nuocsanxuat" placeholder="Nước sản xuất" required>
+									<label for="nuocsanxuat" class="modal-register-label">Nước
+										sản xuất</label>
+								</div>
+							</div>
+
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="sogiayphep" placeholder="Số Giấy phép"> <label
+										for="sogiayphep" class="modal-register-label">Số Giấy
+										phép</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="date" class="modal-input-register"
+										name="ngaycapphep" placeholder="Ngày cấp phép"
+										min="1970-01-01" max="2002-12-31"> <label
+										for="ngaycapphep" class="modal-register-label">Ngày
+										cấp phép</label>
+								</div>
+							</div>
+
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="date" class="modal-input-register"
+										name="cogiatriden" placeholder="Có giá trị đến"
+										min="1970-01-01" max="2002-12-31"> <label
+										for="cogiatriden" class="modal-register-label">Có giá
+										trị đến</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<input class="modal-login-button" id="modal-addVK-button"
+									formmethod="post" type="submit" value="Thêm">
+							</div>
+						</div>
+						<!-- </div> -->
+
+						<!-- <div class="col col-40 borrow-item-show">
+                    <div class="col borrow-item-field">
+                        <div class="tab-item-img-vk"></div>
+
+                        <div class="row tab-item-text">
+                            <p class="tab-item-name">Súng AK-47</p>
+                            <p id="borrow-quantily-title">Số lượng:</p>
+                            <input type="number" name="" id="borrow-quantily">
+                            <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
                         </div>
                     </div>
-                    
+                </div> -->
 
-                    <div class="row">
 
-                        <div class="row note-title">
-                            <div class="note-title-text">
-                                <p>
-                                    <i class="fa-solid fa-notes"></i>
-                                    Danh sách ghi chú
-                                </p>
-                            </div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- Hết form thêm -->
 
-                            <div class="note-add">
-                                <i class="fa-solid fa-note-medical"></i>
-                            </div>
-                            
-                        </div>
+		<!-- modal xem thông tin chi tiết VK -->
+		<div class="modal-info clearfix" id="js-modal-info"
+			onclick="hideModal(document.getElementById('js-modal-info'))">
 
-                        <div class="note-area">
+			<div class="modal-info-form js-modal-Bubble">
+				<button class="modal-close-button js-modal-close-button"
+					onclick="hideModal(document.getElementById('js-modal-info'))">
+					<i class="modal-close-item fa-solid fa-xmark"></i>
+				</button>
 
-                            <div class="row">
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Nộp báo cáo cuối năm</p>
-                                        <p class="tab-item-content">Hoàn thành báo cáo của Công văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                </div>
-    
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Hoàn thiện báo cáo 6 tháng</p>
-                                        <p class="tab-item-content">Hoàn thành báo cáo của Công văn số 112/PV01 ngày 01/2/2022 của Phòng PV01, Công an tỉnh Tuyên Quang Về việc Báo cáo công tác quản lý Vũ khí, Vật liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 02/7/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                    
-                                </div>
-    
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Kiểm tra công tác QLVK của CAP</p>
-                                        <p class="tab-item-content">Kiểm tra công tác quản lý VK của CA các phường</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 01/6/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                </div>
-    
-                            </div>
-    
-                            <div class="row">
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Nộp báo cáo cuối năm</p>
-                                        <p class="tab-item-content">Hoàn thành báo cáo của Công văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                </div>
-    
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Nộp báo cáo cuối năm</p>
-                                        <p class="tab-item-content">Hoàn thành báo cáo của Công văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                </div>
-    
-                                <div class="col col-third note-item-field">
-                                    <div class="row note-item-text">
-                                        <p class="tab-item-name">Nộp báo cáo cuối năm</p>
-                                        <p class="tab-item-content">Hoàn thành báo cáo của Công văn số 1142/PC06 ngày 01/2/2022 của Phòng PC06, Công an tỉnh Tuyên Quang Về việc Báo cáo thực lực Vũ khí, Vật liệu nổ, Công cụ hỗ trợ của Công an các đơn vị địa phương năm 2022</p>
-                                        <p class="tab-item-content">Hạn hoàn thành: 12/12/2022</p>
-                                    </div>
-                                    <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))">
-                                </div>
-    
-                            </div>
+				<header class="modal-header">
+					<i class="modal-register-icon  fa-solid fa-square-info"></i>
+					<h4 class="modal-QLVK">Thông tin chi tiết Vũ khí - Vật liệu nổ
+						- Công cụ hỗ trợ</h4>
+				</header>
 
-                        </div>
-                    </div>
+				<div class="modal-body clearfix">
+					<div class="col col-60">
+						<div class="row">
+							<div class="col col-full">
+								<div class="input-container info-container">
+									<div class="info-label">Chủng loại</div>
+									<span class="info-content">Súng tiểu liên AK</span>
+								</div>
+							</div>
+						</div>
 
-                </div>
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Nhãn hiệu</div>
+									<span class="info-content">AK 47</span>
+								</div>
+							</div>
 
-                <div class="row content-title">
-                    <p>
-                        <i class="modal-login-icon fa-solid fa-dagger"></i>
-                        Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ
-                    </p>
-                </div>
-        </div>
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Số hiệu</div>
+									<span class="info-content">1238ERB847</span>
+								</div>
+							</div>
+						</div>
 
-            <!-- Tab Khám phá -->
-            <div id="content-khampha">
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Nước sản xuất</div>
+									<span class="info-content">Trung Quốc</span>
+								</div>
+							</div>
 
-                <div class="tabs">
-                    <div class="tab-item active" id="tab-TL">
-                        <i class="tab-icon fas fa-solid fa-swords"></i>
-                        Tổng lực
-                    </div>
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Số giấy phép</div>
+									<span class="info-content">1238ERB847/GP</span>
+								</div>
+							</div>
+						</div>
 
-                    <div class="tab-item" id="tab-VK">
-                        <i class="tab-icon fas fa-solid fa-gun"></i>
-                        Vũ khí
-                    </div>
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Ngày cấp phép</div>
+									<span class="info-content">19/5/1997</span>
+								</div>
+							</div>
 
-                    <div class="tab-item" id="tab-VLN">
-                        <i class="tab-icon fas fa-solid fa-bomb"></i>
-                        Vật liệu nổ
-                    </div>
+							<div class="col col-half">
+								<div class="input-container info-container">
+									<div class="info-label">Có giá trị đến</div>
+									<span class="info-content">19/5/1997</span>
+								</div>
+							</div>
+						</div>
 
-                    <div class="tab-item" id="tab-CCHT">
-                        <i class="tab-icon fas fa-flashlight"></i>
-                        Công cụ hỗ trợ
-                    </div>
+						<div class="row area-btn">
+							<div class="col col-half">
+								<input class="modal-login-button" formmethod="post"
+									type="submit" value="SỬA THÔNG TIN"
+									onclick="showModal(document.getElementById('js-modal-editVK'))">
+								<!-- <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))"> -->
 
-                    <div class="line"></div>
+							</div>
 
-                </div>
+							<div class="col col-half">
+								<input class="modal-login-button" id="modal-info-delete"
+									formmethod="post" type="submit" value="XOÁ BỎ">
+							</div>
+						</div>
+					</div>
 
-                <!-- begin search -->
-                <div class="row">
-                    <div class="tab-search-wap">
+					<div class="col .col-40 info-item-show">
 
-                        <div class="tab-add">
-                        <i class="icon-add fa-duotone fa-layer-plus" onclick="showModal(document.getElementById('js-modal-addVK'))"></i> 
-                        </div>
+						<div class="tab-item-img-vk"></div>
 
-                        <div class="search-wrap">
-                            <i id="searchIcon" class="fa-solid fa-magnifying-glass" ></i>
-                            <i id="search-icon" class="fas fa-search"></i> 
-                            <input type="text" id="search">
-                            <i id="clear" class="search-icon fa-solid fa-xmark"></i>
-                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- modal xem thông tin chi tiết VK -->
 
-                    </div>
-                </div>
-                <!--  -->
+		<!-- modal edit VK -->
+		<div class="modal-editVK clearfix" id="js-modal-editVK"
+			onclick="hideModal(document.getElementById('js-modal-editVK'))">
+			<form action="#" id="modal-frm-addVK">
+				<div class="modal-addVK-form js-modal-Bubble">
+					<button class="modal-close-button js-modal-close-button"
+						onclick="hideModal(document.getElementById('js-modal-editVK'))">
+						<i class="modal-close-item fa-solid fa-xmark"></i>
+					</button>
 
-                <!-- Tab content -->
-                <div class="tab-content">
+					<header class="modal-header">
+						<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
+						<h4 class="modal-QLVK">Sửa thông tin Vũ khí - Vật liệu nổ -
+							Công cụ hỗ trợ</h4>
+					</header>
 
-                    <!-- tổng lực -->
-                    <div class="tab-pane active">
-                        <!-- phần nội dung bản -->
-                        <div class="ivu-table">
-                            <div class="ivu-table-header">
-                                <table cellspacing="0" cellpadding="0" border="0" style="width: 1080;">
-                                    <colgroup>
-                                        <col width="24px">
-                                        <col width="48px">
-                                        <col width="180px">
-                                        <col width="160px">
-                                        <col width="120px">
-                                        <col width="140px">
-                                        <col width="140px">
-                                        <col width="120">
-                                        <col width="120"> 
-                                        <!---->
-                                    </colgroup> 
-                                    <thead>
-                                        <tr>
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class=""></span> 
-                                                    <!----> <!---->
-                                                </div>
-                                            </th>
-                        
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">STT</span> 
-                                                    <!----> <!---->
-                                                </div>
-                                            </th>
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">Chủng loại</span> 
-                                                    <!----> <!---->
-                                                </div>
-                                            </th>
-                            
-                                            <th class="">
-                                                    <div class="ivu-table-cell">
-                                                        <span class="">Nhãn hiệu</span> 
-                                                        <!----> <!---->
-                                                    </div>
-                                                </th>
-                                                
-                                            <th class="">
-                                                    <div class="ivu-table-cell">
-                                                        <span class="">Nước sản xuất</span> 
-                                                        <!----> <!---->
-                                                    </div>
-                                            </th>
-                                            
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">Số hiệu</span>
-                                                     <!----> <!---->
-                                                </div>
-                                            </th>
-                                            
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">Số giấy phép</span> 
-                                                    <!----> <!---->
-                                                </div>
-                                            </th>
-                            
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">Ngày cấp phép</span> 
-                                                    <!----> <!----></div>
-                                            </th>
-                            
-                                            <th class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="">Có giá trị đến</span> 
-                                                    <!----> <!---->
-                                                </div>
-                                            </th> <!---->
-                            
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>            
-                        
-                            <div class="ivu-table-body" style="">
-                                <table cellspacing="0" cellpadding="0" border="0" style="width: 1080px;">
-                                    <colgroup>
-                                        <col width="24px">
-                                        <col width="48px">
-                                        <col width="180px">
-                                        <col width="160px">
-                                        <col width="120px">
-                                        <col width="140px">
-                                        <col width="140px">
-                                        <col width="120px">
-                                        <col width="120px">
-                                    </colgroup>
-                                    
-                                    <tbody class="ivu-table-tbody">
-                                        <tr class="ivu-table-row">
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="ivu-tag-text ivu-tag-color-white"></span> 
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <span class="ivu-tag-text">100</span> 
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> <!----> <!----> 
-                                                    <button type="button" class="ivu-btn ivu-btn-text ivu-btn-large" style="padding: 2px 0px;">
-                                                        <!----> <!----> 
-                                                        <span onclick="showModal(document.getElementById('js-modal-info'))">Súng tiểu liên AK</span>
-                                                    </button>
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> <!----> <!----> 
-                                                    <button type="button" class="ivu-btn ivu-btn-text ivu-btn-large" style="padding: 2px 0px; overflow-x: auto; text-align: left; width: 100%;">
-                                                        <!----> <!----> 
-                                                        <span onclick="showModal(document.getElementById('js-modal-info'))">AK 47</span>
-                                                    </button>
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> <!----> <!----> 
-                                                        <!----> 
-                                                        <span class="ivu-tag-text">Trung Quốc</span> 
-                                                        <!---->
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> 
-                                                    <span>1238ERB847</span>
-                                                     <!----> <!---->
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> <!----> <!----> 
-                                                    <span>1238ERB847/GP</span>
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                    <!----> <!----> <!----> <!----> <!----> 
-                                                    <span>19/5/1997</span>
-                                                </div>
-                                            </td>
-                        
-                                            <td class="">
-                                                <div class="ivu-table-cell">
-                                                <!----> <!----> <!----> <!----> <!----> 
-                                                <span>19/5/1997</span>
-                                                </div>
-                                            </td>
-                        
-                                        </tr> 
-                                        <!---->
-                            <!---->
-                                    </tbody>
-                                </table>
-                            </div>
-                        
-                        </div>
-                        <!-- hết nội dung bảng -->
-                    </div>
+					<div class="modal-body clearfix">
+						<!-- <div class="col col-60"> -->
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" list="list-danhmuc" id="js-addVK-danhmuc"
+										class="modal-input-register" name="danhmuc"
+										placeholder="Danh mục" required> <label for="danhmuc"
+										class="modal-register-label">Danh mục</label>
+									<datalist id="list-danhmuc">
+										<option value="Vũ khí">
+										<option value="Vật liệu nổ">
+										<option value="Công cụ hỗ trợ">
+									</datalist>
+								</div>
+							</div>
 
-                    <!-- vũ khí -->
-                    <div class="tab-pane">
-                        <div class="row">
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="chungloai" placeholder="Chủng loại" required> <label
+										for="chungloai" class="modal-register-label">Chủng
+										loại</label>
+								</div>
+							</div>
+						</div>
 
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register" name="nhanhieu"
+										placeholder="Nhãn hiệu" required> <label for="name1"
+										class="modal-register-label">Nhãn hiệu</label>
+								</div>
+							</div>
 
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register" name="sohieu"
+										placeholder="Số hiệu" required> <label for="sohieu"
+										class="modal-register-label">Số hiệu</label>
+								</div>
+							</div>
+						</div>
 
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
+						<div class="row">
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="nuocsanxuat" placeholder="Nước sản xuất" required>
+									<label for="nuocsanxuat" class="modal-register-label">Nước
+										sản xuất</label>
+								</div>
+							</div>
 
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="text" class="modal-input-register"
+										name="sogiayphep" placeholder="Số Giấy phép"> <label
+										for="sogiayphep" class="modal-register-label">Số Giấy
+										phép</label>
+								</div>
+							</div>
+						</div>
 
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+						<div class="row">
 
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="date" class="modal-input-register"
+										name="ngaycapphep" placeholder="Ngày cấp phép"
+										min="1970-01-01" max="2002-12-31"> <label
+										for="ngaycapphep" class="modal-register-label">Ngày
+										cấp phép</label>
+								</div>
+							</div>
 
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
+							<div class="col col-half">
+								<div class="input-container">
+									<input type="date" class="modal-input-register"
+										name="cogiatriden" placeholder="Có giá trị đến"
+										min="1970-01-01" max="2002-12-31"> <label
+										for="cogiatriden" class="modal-register-label">Có giá
+										trị đến</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<input class="modal-login-button" id="modal-addVK-button"
+									formmethod="post" type="submit" value="Sửa">
+							</div>
+						</div>
+						<!-- </div> -->
 
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+						<!-- <div class="col col-40 borrow-item-show">
+                    <div class="col borrow-item-field">
+                        <div class="tab-item-img-vk"></div>
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
-
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
-
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
-
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
-
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col col-third tab-item-field">
-                                <div class="tab-item-img-vk"></div>
-
-                                <div class="row tab-item-text">
-                                    <p class="tab-item-name">Súng AK-47</p>
-                                    <p class="tab-item-content">Số lượng:<span class="item-quantily">4</span></p>
-                                    <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
-
-                                    <div class="row">
-                                        <div class="col-right">
-                                        <input class="modal-login-button" formmethod="post" type="submit" value="Mượn">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                        <div class="row tab-item-text">
+                            <p class="tab-item-name">Súng AK-47</p>
+                            <p id="borrow-quantily-title">Số lượng:</p>
+                            <input type="number" name="" id="borrow-quantily">
+                            <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
                         </div>
                     </div>
+                </div> -->
 
-                    <!-- vật liệu nổ -->
-                    <div class="tab-pane">
-                        <h2>Vật liệu nổ</h2>
-                        <p>Phần hiển thị danh sách VK - VLN -CCHT..</p>
-                    </div>
-                    <!-- công cụ hỗ trợ -->
-                    <div class="tab-pane">
-                        <h2>Công cụ hỗ trợ</h2>
-                        <p>Phần hiển thị danh sách VK - VLN -CCHT.. </p>
-                    </div>
 
-                </div>
-
-            </div>
-            <!-- end tab khám phá -->
-       
-        </div>
-
-        <div id="footer">
-            <p>Bản quyền thuộc về Nhóm 8 Lớp LT04-T07-BCA</p>
-        </div>
-
-    </div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!--Hết modal edit VK -->
+	</div>
 </body>
 </html>
-
-<!-- modal nhập thêm VK -->
-<div class="modal-addVK clearfix" id="js-modal-addVK"  onclick="hideModal(document.getElementById('js-modal-addVK'))">
-    <form action="#" id="modal-frm-addVK">
-        <div class="modal-addVK-form js-modal-Bubble">
-            <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-addVK'))">
-                <i class="modal-close-item fa-solid fa-xmark"></i>
-            </button>
-
-            <header class="modal-header">
-                <i class="modal-register-icon fa-duotone fa-layer-plus"></i>
-                <h4 class="modal-QLVK">Thêm Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
-            </header>
-
-            <div class="modal-body clearfix">
-                <!-- <div class="col col-60"> -->
-                    <div class="row">
-                        <div class="col col-half">
-                            <div class="input-container">
-                                <input type="text" list="list-danhmuc" id="js-addVK-danhmuc" class="modal-input-register" name="danhmuc" placeholder="Danh mục" required>
-                                <label for="danhmuc" class="modal-register-label">Danh mục</label>
-                                <datalist id="list-danhmuc">
-                                    <option value="Vũ khí">
-                                    <option value="Vật liệu nổ">
-                                    <option value="Công cụ hỗ trợ">
-                                  </datalist>
-                            </div>
-                        </div>
-                        
-                        <div class="col col-half">
-                            <div class="input-container">
-                                <input type="text" class="modal-input-register" name="chungloai" placeholder="Chủng loại" required>
-                                <label for="chungloai" class="modal-register-label">Chủng loại</label>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="nhanhieu" placeholder="Nhãn hiệu" required>
-                                    <label for="name1" class="modal-register-label">Nhãn hiệu</label>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="sohieu" placeholder="Số hiệu" required>
-                                    <label for="sohieu" class="modal-register-label">Số hiệu</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="nuocsanxuat" placeholder="Nước sản xuất" required>
-                                    <label for="nuocsanxuat" class="modal-register-label">Nước sản xuất</label>
-                                </div>
-                            </div>
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="sogiayphep" placeholder="Số Giấy phép">
-                                    <label for="sogiayphep" class="modal-register-label">Số Giấy phép</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="date" class="modal-input-register" name="ngaycapphep" placeholder="Ngày cấp phép" min="1970-01-01" max="2002-12-31">
-                                    <label for="ngaycapphep" class="modal-register-label">Ngày cấp phép</label>
-                                </div>
-                            </div>
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="date" class="modal-input-register" name="cogiatriden" placeholder="Có giá trị đến"  min="1970-01-01" max="2002-12-31">
-                                    <label for="cogiatriden" class="modal-register-label">Có giá trị đến</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                            <input class="modal-login-button" id="modal-addVK-button" formmethod="post" type="submit" value="Thêm">
-                            </div>
-                        </div>
-                <!-- </div> -->
-
-                <!-- <div class="col col-40 borrow-item-show">
-                    <div class="col borrow-item-field">
-                        <div class="tab-item-img-vk"></div>
-
-                        <div class="row tab-item-text">
-                            <p class="tab-item-name">Súng AK-47</p>
-                            <p id="borrow-quantily-title">Số lượng:</p>
-                            <input type="number" name="" id="borrow-quantily">
-                            <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
-                        </div>
-                    </div>
-                </div> -->
-
-
-            </div>
-        </div>
-    </form>
-</div>
-<!-- Hết form thêm -->
-
-<!-- modal xem thông tin chi tiết VK --> 
-<div class="modal-info clearfix" id="js-modal-info"  onclick="hideModal(document.getElementById('js-modal-info'))">
-    
-        <div class="modal-info-form js-modal-Bubble">
-            <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-info'))">
-                <i class="modal-close-item fa-solid fa-xmark"></i>
-            </button>
-
-            <header class="modal-header">
-                <i class="modal-register-icon  fa-solid fa-square-info"></i>
-                <h4 class="modal-QLVK">Thông tin chi tiết Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
-            </header>
-
-            <div class="modal-body clearfix">
-                <div class="col col-60">
-                    <div class="row">
-                        <div class="col col-full">
-                            <div class="input-container info-container">
-                                <div class="info-label">Chủng loại</div>
-                                <span class="info-content">Súng tiểu liên AK</span>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Nhãn hiệu</div>
-                                    <span class="info-content">AK 47</span>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Số hiệu</div>
-                                    <span class="info-content">1238ERB847</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Nước sản xuất</div>
-                                    <span class="info-content">Trung Quốc</span>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Số giấy phép</div>
-                                    <span class="info-content">1238ERB847/GP</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Ngày cấp phép</div>
-                                    <span class="info-content">19/5/1997</span>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-half">
-                                <div class="input-container info-container">
-                                    <div class="info-label">Có giá trị đến</div>
-                                    <span class="info-content">19/5/1997</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row area-btn">
-                            <div class="col col-half">
-                            <input class="modal-login-button" formmethod="post" type="submit" value="SỬA THÔNG TIN" onclick="showModal(document.getElementById('js-modal-editVK'))">
-                            <!-- <input class="delete-note-button" formmethod="post" type="submit" value="Xoá" onclick="showModal(document.getElementById('js-modal-borrow'))"> -->
-
-                            </div>
-
-                            <div class="col col-half">
-                                <input class="modal-login-button" id="modal-info-delete" formmethod="post" type="submit" value="XOÁ BỎ">
-                            </div>
-                        </div>
-                </div>
-
-                <div class="col .col-40 info-item-show">
-                   
-                        <div class="tab-item-img-vk"></div>
-                    
-                </div>
-            </div>
-        </div>
-</div>
-<!-- modal xem thông tin chi tiết VK --> 
-
-<!-- modal edit VK -->
-<div class="modal-editVK clearfix" id="js-modal-editVK"  onclick="hideModal(document.getElementById('js-modal-editVK'))">
-    <form action="#" id="modal-frm-addVK">
-        <div class="modal-addVK-form js-modal-Bubble">
-            <button class="modal-close-button js-modal-close-button" onclick="hideModal(document.getElementById('js-modal-editVK'))">
-                <i class="modal-close-item fa-solid fa-xmark"></i>
-            </button>
-
-            <header class="modal-header">
-                <i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
-                <h4 class="modal-QLVK">Sửa thông tin Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
-            </header>
-
-            <div class="modal-body clearfix">
-                <!-- <div class="col col-60"> -->
-                    <div class="row">
-                        <div class="col col-half">
-                            <div class="input-container">
-                                <input type="text" list="list-danhmuc" id="js-addVK-danhmuc" class="modal-input-register" name="danhmuc" placeholder="Danh mục" required>
-                                <label for="danhmuc" class="modal-register-label">Danh mục</label>
-                                <datalist id="list-danhmuc">
-                                    <option value="Vũ khí">
-                                    <option value="Vật liệu nổ">
-                                    <option value="Công cụ hỗ trợ">
-                                  </datalist>
-                            </div>
-                        </div>
-                        
-                        <div class="col col-half">
-                            <div class="input-container">
-                                <input type="text" class="modal-input-register" name="chungloai" placeholder="Chủng loại" required>
-                                <label for="chungloai" class="modal-register-label">Chủng loại</label>
-                            </div>
-                        </div>
-                    </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="nhanhieu" placeholder="Nhãn hiệu" required>
-                                    <label for="name1" class="modal-register-label">Nhãn hiệu</label>
-                                </div>
-                            </div>
-                            
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="sohieu" placeholder="Số hiệu" required>
-                                    <label for="sohieu" class="modal-register-label">Số hiệu</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="nuocsanxuat" placeholder="Nước sản xuất" required>
-                                    <label for="nuocsanxuat" class="modal-register-label">Nước sản xuất</label>
-                                </div>
-                            </div>
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="text" class="modal-input-register" name="sogiayphep" placeholder="Số Giấy phép">
-                                    <label for="sogiayphep" class="modal-register-label">Số Giấy phép</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="date" class="modal-input-register" name="ngaycapphep" placeholder="Ngày cấp phép" min="1970-01-01" max="2002-12-31">
-                                    <label for="ngaycapphep" class="modal-register-label">Ngày cấp phép</label>
-                                </div>
-                            </div>
-
-                            <div class="col col-half">
-                                <div class="input-container">
-                                    <input type="date" class="modal-input-register" name="cogiatriden" placeholder="Có giá trị đến"  min="1970-01-01" max="2002-12-31">
-                                    <label for="cogiatriden" class="modal-register-label">Có giá trị đến</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                            <input class="modal-login-button" id="modal-addVK-button" formmethod="post" type="submit" value="Sửa">
-                            </div>
-                        </div>
-                <!-- </div> -->
-
-                <!-- <div class="col col-40 borrow-item-show">
-                    <div class="col borrow-item-field">
-                        <div class="tab-item-img-vk"></div>
-
-                        <div class="row tab-item-text">
-                            <p class="tab-item-name">Súng AK-47</p>
-                            <p id="borrow-quantily-title">Số lượng:</p>
-                            <input type="number" name="" id="borrow-quantily">
-                            <p class="tab-item-content">Giấy phép sử dụng:<span class="item-quantily">Kèm theo</span></p>
-                        </div>
-                    </div>
-                </div> -->
-
-
-            </div>
-        </div>
-    </form>
-</div>
-<!--Hết modal edit VK -->
-
-
-<script src="./assets/JavaScript/CBQL.js"></script>
-
-
