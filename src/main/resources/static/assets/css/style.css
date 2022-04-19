@@ -98,7 +98,7 @@ html{
 
 #main{
     position: relative;
-    width: 1100px;
+    width: 1200px;
     top: 0px;
     left: 50%;
     transform: translateX(-50%);
@@ -544,7 +544,7 @@ html{
     display: inline-block;
     background-color: #fff;
     height: 444px;
-    width: 344px;
+    width: 32%;
     margin: 6px;
     box-shadow: 0 24px 24px rgba(0, 62, 116, 0.8)
   }
@@ -556,14 +556,12 @@ html{
   .tab-item-img{
     height: 292px;
     width: 336px;
-    background: url(../img/weapon_item/VK/AK-47.png) center center / contain no-repeat;
     box-shadow: 0 1px 50px rgba(0, 62, 116, 0.2)
   }
 
   .tab-item-img-vk{
     height: 292px;
     width: 336px;
-    background: url(../img/weapon_item/VK/đn.png) center center / contain no-repeat;
     box-shadow: 0 1px 50px rgba(0, 62, 116, 0.2)
   }
 

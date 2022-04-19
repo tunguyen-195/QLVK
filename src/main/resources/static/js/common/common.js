@@ -274,7 +274,7 @@ function createDataTableCommon() {
 	$.extend( $.fn.dataTable.defaults, {
 		'sAjaxDataProp' : 'data',
 		'language' : getLanguageForDataTable(),
-		'scrollY' : '1000px',
+		'scrollY' : '640px',
 		'scrollCollapse' : true,
 		'scrollX' : true,
 		'paging' : true,
@@ -411,4 +411,10 @@ function renderButtonDel(id){
 function resetListItemCommon(){
 	$('#primaryKey').val('');
 	$('#cmnUpdateDate').val('');
+}
+function showModalById(id) {
+	$('#'+id).modal('show');
+}
+function hideModalById(id) {
+	$('#'+id).modal('hide');
 }

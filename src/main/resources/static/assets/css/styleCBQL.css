@@ -1,5 +1,7 @@
 .content-header{
     background-color: #F6FBF4;
+    padding-left: 14px;
+    padding-right: 14px;
 }
 
 
@@ -42,7 +44,8 @@
 
 .note-area{
     height: 360px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .note-title{
@@ -87,7 +90,7 @@
     display: inline-block;
     background-color: #fff;
     height: 264px;
-    width: 333px;
+    width: 32%;
     margin: 6px;
     background-color: rgb(241, 217, 117,0.4);;
     box-shadow: 0 24px 24px rgba(0, 62, 116, 0.8)
@@ -221,7 +224,7 @@
 }
 
 .ivu-table th {
-    height: 40px;
+    height: 20px;
     white-space: nowrap;
     overflow: hidden;
     background-color: #dcebe9;
@@ -229,7 +232,7 @@
 
 .ivu-table td, .ivu-table th {
     min-width: 0;
-    height: 48px;
+    height: 20px;
     box-sizing: border-box;
     text-align: left;
     text-overflow: ellipsis;
@@ -245,7 +248,7 @@
 
 .ivu-table td, .ivu-table th {
     min-width: 0;
-    height: 48px;
+    height: 30px;
     box-sizing: border-box;
     text-align: left;
     text-overflow: ellipsis;
@@ -425,4 +428,9 @@
 
 .modal-editVK.open{
     display: flex;
+}
+
+#response-vu-khi{
+	overflow: scroll;
+	height: 600px;
 }

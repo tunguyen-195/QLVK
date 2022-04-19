@@ -81,7 +81,7 @@ ul li a{
 }
 /* customize display datatable */
 .dataTables_scrollBody{
-	height:600px;
+	height:650px;
 }
 .dataTables_scrollBody table{
 	width:100% !important;

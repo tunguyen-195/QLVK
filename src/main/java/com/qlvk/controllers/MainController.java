@@ -41,21 +41,7 @@ public class MainController extends BaseController {
 
 		return "app/index";
 	}
-	@RequestMapping(value = { "/index" }, method = RequestMethod.GET)
-	public String initIndex(HttpServletRequest request, Model model) {
-		initial(model);
-		com.qlvk.model.User user = (com.qlvk.model.User) request.getSession().getAttribute(CommonConstant.USER_INFO);
-		if (user != null && user.getRole().equals("ROLE_CBQL")) {
-			return initCBQL(request, model);
-		}
-		return "app/index";
-	}
 
-	@RequestMapping(value = { "/CBQL" }, method = RequestMethod.GET)
-	public String initCBQL(HttpServletRequest request,Model model) {
-		initial(model);
-		return "app/CBQL";
-	}
 	@RequestMapping(value = { "/main" }, method = RequestMethod.GET)
 	public String main(HttpServletRequest request) {
 
