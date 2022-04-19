@@ -2,7 +2,7 @@ package com.qlvk.model;
 
 import java.io.Serializable;
 
-public class TongLucModel extends BaseModel implements Serializable {
+public class TongLucModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String stt;

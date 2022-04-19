@@ -2,7 +2,7 @@ package com.qlvk.model;
 
 import java.io.Serializable;
 
-public class VuKhiModel extends BaseModel implements Serializable {
+public class VuKhiModel implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String imgPath;
