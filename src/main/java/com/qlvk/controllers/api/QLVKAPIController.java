@@ -25,16 +25,12 @@ public class QLVKAPIController {
 	@RequestMapping(value = "/api/QLVK/searchTongLuc", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> searchTongLuc(HttpServletRequest request,
-			@RequestParam(value = "start", defaultValue = "1") int start,
-			@RequestParam(value = "allSearch", defaultValue = "") String allSearch,
-			@RequestParam(value = "maDvNl", defaultValue = "") String maDvNl,
-			@RequestParam(value = "maLoai", defaultValue = "") String maLoai,
-			@RequestParam(value = "orderColumn", defaultValue = "") String orderColumn,
-			@RequestParam(value = "orderDirection", defaultValue = "asc") String orderDirection) throws Exception {
+			@RequestParam(value = "type", defaultValue = "1") int type,
+			@RequestParam(value = "allSearch", defaultValue = "") String allSearch) throws Exception {
 		try {
 			logger.info("Start search");
 			// Get List Food
-			Map<String, Object> data = qlvkService.getListTongLuc(allSearch, start, orderColumn, orderDirection);
+			Map<String, Object> data = qlvkService.getListTongLuc(allSearch, type);
 			data.put("statusCode", "200");
 
 			// Return data
