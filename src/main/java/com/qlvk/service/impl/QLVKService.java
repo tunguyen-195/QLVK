@@ -22,7 +22,7 @@ public class QLVKService extends BaseService {
 	IQLVKRepository qlvkRepo;
 
 	public Map<String, Object> getListTongLuc(String allSearch, int type) {
-		List<Object[]> listSearch = qlvkRepo.findListTongLuc();
+		List<Object[]> listSearch = qlvkRepo.findListTongLuc(type, allSearch);
 		Map<String, Object> data = new HashMap<>();
 		List<TongLucModel> listData = new ArrayList<>();
 		TongLucModel tongLuc = null;

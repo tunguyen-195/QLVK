@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.qlvk.entity.Category;
 
@@ -18,6 +19,9 @@ import com.qlvk.entity.Category;
  */
 public interface IQLVKRepository extends JpaRepository<Category, Integer> {
 
-	@Query(value = "SELECT a.chungLoai,a.nhanHieuVK_VLN_CCHT, a.nuocSanXuat, a.soHieuVK_VLN_CCHT, b.soGPSD,b.ngayCap, b.ngayHetHan FROM vk_vln_ccht a left join gpsd b on a.soHieuVK_VLN_CCHT = b.soHieuVK_VLN_CCHT ", nativeQuery = true)
-	public List<Object[]> findListTongLuc();
+	@Query(value = "SELECT a.chungLoai,a.nhanHieuVK_VLN_CCHT, a.nuocSanXuat, a.soHieuVK_VLN_CCHT, b.soGPSD,b.ngayCap, b.ngayHetHan "
+			+ "FROM vk_vln_ccht a " + "LEFT JOIN gpsd b on a.soHieuVK_VLN_CCHT = b.soHieuVK_VLN_CCHT "
+			+ "WHERE a.chungLoai =:type "
+			+ "AND (a.nhanHieuVK_VLN_CCHT like %:allSearch% OR a.nuocSanXuat like %:allSearch% OR a.soHieuVK_VLN_CCHT like %:allSearch% OR b.soGPSD like %:allSearch%)", nativeQuery = true)
+	public List<Object[]> findListTongLuc(@Param("type") int type, @Param("allSearch") String allSearch);
 }
