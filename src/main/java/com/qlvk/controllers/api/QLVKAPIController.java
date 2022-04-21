@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qlvk.model.TongLucModel;
 import com.qlvk.service.impl.QLVKService;
 
 @RestController
@@ -54,6 +56,16 @@ public class QLVKAPIController {
 			// Return data
 			logger.info("END search");
 			return data;
+		} finally {
+			qlvkService.remove();
+		}
+	}
+	
+	@RequestMapping(value = "/api/QLVK/maintenance", method = { RequestMethod.GET, RequestMethod.POST,
+			RequestMethod.PUT, RequestMethod.DELETE }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> maintenance(HttpServletRequest request, @RequestBody TongLucModel model) throws Exception {
+		try {
+			return qlvkService.maintenance(model, request.getMethod());
 		} finally {
 			qlvkService.remove();
 		}

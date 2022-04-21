@@ -1,7 +1,3 @@
-/**
- * (c)Copyright Since 2018, KISOJI. All rights reserved.
- *
- */
 package com.qlvk.repository;
 
 import java.util.List;
@@ -12,11 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.qlvk.entity.Category;
 
-/**
- * Booking Basic Repository.<BR>
- * <BR>
- * Access data Booking Basic from database.<BR>
- */
 public interface IQLVKRepository extends JpaRepository<Category, Integer> {
 
 	@Query(value = "SELECT a.chung_loai,a.nhan_hieu_vk_vln_ccht, a.nuoc_san_xuat, a.so_hieu_vk_vln_ccht, b.so_gpsd,b.ngay_cap, b.ngay_het_han "

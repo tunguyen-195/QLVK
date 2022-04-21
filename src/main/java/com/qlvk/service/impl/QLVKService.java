@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.multiplechoice.entity.CauHoi;
 import com.qlvk.common.base.BaseService;
+import com.qlvk.common.component.Messages;
 import com.qlvk.common.constant.CommonConstant;
 import com.qlvk.model.TongLucModel;
 import com.qlvk.model.VuKhiModel;
@@ -44,6 +47,66 @@ public class QLVKService extends BaseService {
 		// Push data
 		data.put(CommonConstant.DATA, listData);
 		return data;
+	}
+
+	public Map<String, Object> maintenance(TongLucModel model, String method){
+		Map<String, Object> data = new HashMap<>();
+		switch (method) {
+		case CommonConstant.METHOD_POST:
+			if (!create(model)) {
+				getValidate().addError(data, Messages.getMessage("common.message.creatdFail"));
+			} else {
+				getValidate().addInfor(data, Messages.getMessage("common.message.creatdDone"));
+			}
+			break;
+		case CommonConstant.METHOD_PUT:
+			if (!update(model)) {
+				getValidate().addError(data, Messages.getMessage("common.message.updateFail"));
+			} else {
+				getValidate().addInfor(data, Messages.getMessage("common.message.updateDone"));
+			}
+			break;
+
+		case CommonConstant.METHOD_DELETE:
+			if (!delete(model)) {
+				getValidate().addError(data, Messages.getMessage("common.message.deleteFail"));
+			} else {
+				getValidate().addInfor(data, Messages.getMessage("common.message.deleteDone"));
+			}
+			break;
+		default:
+			break;
+		}
+		return data;
+	}
+	private boolean delete(TongLucModel model) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean update(TongLucModel model) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private boolean create(TongLucModel model) {
+//		Optional<CauHoi> optional = cauHoiRepo.findById(model.getMaCauHoi());
+//		CauHoi entity = null;
+//		if (optional.isPresent()) {
+//			entity = optional.get();
+//		} else {
+//			entity = new CauHoi();
+//		}
+//		entity.setMaCauHoi(model.getMaCauHoi());
+//		entity.setNoiDung(model.getNoiDung());
+//		entity.setCauA(model.getCauA());
+//		entity.setCauB(model.getCauB());
+//		entity.setCauC(model.getCauC());
+//		entity.setCauD(model.getCauD());
+//		entity.setDapAn(model.getDapAn());
+//		entity.setHinhAnh(model.getHinhAnh());
+//		cauHoiRepo.save(entity);
+		return true;
 	}
 
 	public Map<String, Object> getListVuKhi(String allSearch) {
