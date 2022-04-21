@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.multiplechoice.entity.CauHoi;
 import com.qlvk.common.base.BaseService;
 import com.qlvk.common.component.Messages;
 import com.qlvk.common.constant.CommonConstant;
