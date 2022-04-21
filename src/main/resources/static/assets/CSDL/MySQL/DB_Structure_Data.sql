@@ -23,11 +23,12 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
-  `maAdmin` int(11) NOT NULL AUTO_INCREMENT,
-  `tenTKQL` varchar(100) NOT NULL,
-  PRIMARY KEY (`maAdmin`),
-  KEY `fk_Admin_tenTKQL` (`tenTKQL`),
-  CONSTRAINT `fk_Admin_tenTKQL` FOREIGN KEY (`tenTKQL`) REFERENCES `quanly` (`tenTKQL`)
+  `ma_admin` int(11) NOT NULL,
+  `ten_tkql` varchar(100) NOT NULL,
+  PRIMARY KEY (`ma_admin`),
+  KEY `fk_Admin_tenTKQL` (`ten_tkql`),
+  CONSTRAINT `FK2e19hw29o7fiut3cy8btpygy5` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`),
+  CONSTRAINT `fk_Admin_tenTKQL` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,32 +150,30 @@ LOCK TABLES `app_user_detail` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `bienban`
+-- Table structure for table `bien_ban`
 --
 
-DROP TABLE IF EXISTS `bienban`;
+DROP TABLE IF EXISTS `bien_ban`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bienban` (
-  `soBienBan` int(11) NOT NULL AUTO_INCREMENT,
-  `maDuyet` int(11) NOT NULL,
-  `ngayMuon` date NOT NULL,
-  `maCBQL` int(11) NOT NULL,
-  PRIMARY KEY (`soBienBan`),
-  KEY `fk_BienBan_maDuyet` (`maDuyet`),
-  KEY `fk_BienBan_maCBQL` (`maCBQL`),
-  CONSTRAINT `fk_BienBan_maCBQL` FOREIGN KEY (`maCBQL`) REFERENCES `cbql` (`maCBQL`),
-  CONSTRAINT `fk_BienBan_maDuyet` FOREIGN KEY (`maDuyet`) REFERENCES `duyetmuon` (`maDuyet`)
+CREATE TABLE `bien_ban` (
+  `so_bien_ban` int(11) NOT NULL AUTO_INCREMENT,
+  `ma_duyet` int(11) NOT NULL,
+  `ngay_muon` date NOT NULL,
+  `ma_cbql` int(11) NOT NULL,
+  PRIMARY KEY (`so_bien_ban`),
+  KEY `fk_BienBan_maDuyet` (`ma_duyet`),
+  KEY `FKdc08r32rrkf3ibn9j9meyvnck` (`ma_cbql`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bienban`
+-- Dumping data for table `bien_ban`
 --
 
-LOCK TABLES `bienban` WRITE;
-/*!40000 ALTER TABLE `bienban` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bienban` ENABLE KEYS */;
+LOCK TABLES `bien_ban` WRITE;
+/*!40000 ALTER TABLE `bien_ban` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bien_ban` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -185,15 +184,15 @@ DROP TABLE IF EXISTS `cbcs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cbcs` (
-  `maCBCS` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuCAND` varchar(10) NOT NULL,
-  `hoTen` varchar(50) DEFAULT NULL,
-  `ngaySinh` date DEFAULT NULL,
-  `donVi` varchar(50) DEFAULT NULL,
-  `capBac` varchar(50) DEFAULT NULL,
-  `chucVu` varchar(50) DEFAULT NULL,
-  `soDienThoai` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`maCBCS`)
+  `ma_cbcs` int(11) NOT NULL AUTO_INCREMENT,
+  `so_hieu_cand` varchar(10) NOT NULL,
+  `ho_ten` varchar(50) DEFAULT NULL,
+  `ngay_sinh` date DEFAULT NULL,
+  `don_vi` varchar(50) DEFAULT NULL,
+  `cap_bac` varchar(50) DEFAULT NULL,
+  `chuc_vu` varchar(50) DEFAULT NULL,
+  `so_dien_thoai` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ma_cbcs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,12 +213,13 @@ DROP TABLE IF EXISTS `cbcs_member`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cbcs_member` (
-  `tenTK` varchar(100) NOT NULL,
-  `matKhau` varchar(255) NOT NULL,
-  `maCBCS` int(11) NOT NULL,
-  PRIMARY KEY (`tenTK`),
-  KEY `fk_CBCSMember_maCBCS` (`maCBCS`),
-  CONSTRAINT `fk_CBCSMember_maCBCS` FOREIGN KEY (`maCBCS`) REFERENCES `cbcs` (`maCBCS`)
+  `ten_tk` varchar(100) NOT NULL,
+  `mat_khau` varchar(255) NOT NULL,
+  `ma_cbcs` int(11) NOT NULL,
+  PRIMARY KEY (`ten_tk`),
+  KEY `fk_CBCSMember_maCBCS` (`ma_cbcs`),
+  CONSTRAINT `FK7vpqrn3ga7w68m7apa5ymku40` FOREIGN KEY (`ma_cbcs`) REFERENCES `cbcs` (`ma_cbcs`),
+  CONSTRAINT `fk_CBCSMember_maCBCS` FOREIGN KEY (`ma_cbcs`) REFERENCES `cbcs` (`ma_cbcs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -240,12 +240,13 @@ DROP TABLE IF EXISTS `cbcs_not_mem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cbcs_not_mem` (
-  `maCBCS_Not_Mem` int(11) NOT NULL AUTO_INCREMENT,
-  `maCBCS` int(11) NOT NULL,
-  `soHieuCAND` varchar(10) NOT NULL,
-  PRIMARY KEY (`maCBCS_Not_Mem`),
-  KEY `fk_CBCSNotMem_maCBCS` (`maCBCS`),
-  CONSTRAINT `fk_CBCSNotMem_maCBCS` FOREIGN KEY (`maCBCS`) REFERENCES `cbcs` (`maCBCS`)
+  `ma_cbcs_not_mem` int(11) NOT NULL AUTO_INCREMENT,
+  `ma_cbcs` int(11) NOT NULL,
+  `so_hieu_cand` varchar(10) NOT NULL,
+  PRIMARY KEY (`ma_cbcs_not_mem`),
+  KEY `fk_CBCSNotMem_maCBCS` (`ma_cbcs`),
+  CONSTRAINT `FKohbh6ud8h7dt0om1ps4lxv8yc` FOREIGN KEY (`ma_cbcs`) REFERENCES `cbcs` (`ma_cbcs`),
+  CONSTRAINT `fk_CBCSNotMem_maCBCS` FOREIGN KEY (`ma_cbcs`) REFERENCES `cbcs` (`ma_cbcs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -266,11 +267,12 @@ DROP TABLE IF EXISTS `cbql`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cbql` (
-  `maCBQL` int(11) NOT NULL AUTO_INCREMENT,
-  `tenTKQL` varchar(100) NOT NULL,
-  PRIMARY KEY (`maCBQL`),
-  KEY `fk_CBQL_maCBQL` (`tenTKQL`),
-  CONSTRAINT `fk_CBQL_maCBQL` FOREIGN KEY (`tenTKQL`) REFERENCES `quanly` (`tenTKQL`)
+  `ma_cbql` int(11) NOT NULL AUTO_INCREMENT,
+  `ten_tkql` varchar(100) NOT NULL,
+  PRIMARY KEY (`ma_cbql`),
+  KEY `fk_CBQL_maCBQL` (`ten_tkql`),
+  CONSTRAINT `FKhk17lohowjnmu6t28bojle51f` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`),
+  CONSTRAINT `fk_CBQL_maCBQL` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -284,84 +286,55 @@ LOCK TABLES `cbql` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `ccht`
+-- Table structure for table `danh_sach_muon`
 --
 
-DROP TABLE IF EXISTS `ccht`;
+DROP TABLE IF EXISTS `danh_sach_muon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ccht` (
-  `maCCHT` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL,
-  PRIMARY KEY (`maCCHT`),
-  KEY `fk_CCHT_soHieuVKVLNCCHT` (`soHieuVK_VLN_CCHT`),
-  CONSTRAINT `fk_CCHT_soHieuVKVLNCCHT` FOREIGN KEY (`soHieuVK_VLN_CCHT`) REFERENCES `vk_vln_ccht` (`soHieuVK_VLN_CCHT`)
+CREATE TABLE `danh_sach_muon` (
+  `ma_muon` int(11) NOT NULL AUTO_INCREMENT,
+  `so_hieu_vk_vln_ccht` int(11) NOT NULL,
+  `ma_cbcs` int(11) NOT NULL,
+  PRIMARY KEY (`ma_muon`),
+  KEY `fk_DanhSachMuon_soHieuVKVLNCCHT` (`so_hieu_vk_vln_ccht`),
+  KEY `FKg2mx89oax337yxwcmnixf66w1` (`ma_cbcs`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ccht`
+-- Dumping data for table `danh_sach_muon`
 --
 
-LOCK TABLES `ccht` WRITE;
-/*!40000 ALTER TABLE `ccht` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ccht` ENABLE KEYS */;
+LOCK TABLES `danh_sach_muon` WRITE;
+/*!40000 ALTER TABLE `danh_sach_muon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `danh_sach_muon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `danhsachmuon`
+-- Table structure for table `duyet_muon`
 --
 
-DROP TABLE IF EXISTS `danhsachmuon`;
+DROP TABLE IF EXISTS `duyet_muon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `danhsachmuon` (
-  `maMuon` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL,
-  `maCBCS` int(11) NOT NULL,
-  PRIMARY KEY (`maMuon`),
-  KEY `fk_DanhSachMuon_soHieuVKVLNCCHT` (`soHieuVK_VLN_CCHT`),
-  KEY `fk_DanhSachMuon_maCBCS` (`maCBCS`),
-  CONSTRAINT `fk_DanhSachMuon_maCBCS` FOREIGN KEY (`maCBCS`) REFERENCES `cbcs` (`maCBCS`),
-  CONSTRAINT `fk_DanhSachMuon_soHieuVKVLNCCHT` FOREIGN KEY (`soHieuVK_VLN_CCHT`) REFERENCES `vk_vln_ccht` (`soHieuVK_VLN_CCHT`)
+CREATE TABLE `duyet_muon` (
+  `ma_duyet` int(11) NOT NULL AUTO_INCREMENT,
+  `ma_lanh_dao` int(11) NOT NULL,
+  `ma_muon` int(11) NOT NULL,
+  PRIMARY KEY (`ma_duyet`),
+  KEY `fk_DuyetMuon_maLanhDao` (`ma_lanh_dao`),
+  KEY `fk_DuyetMuon_maMuon` (`ma_muon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `danhsachmuon`
+-- Dumping data for table `duyet_muon`
 --
 
-LOCK TABLES `danhsachmuon` WRITE;
-/*!40000 ALTER TABLE `danhsachmuon` DISABLE KEYS */;
-/*!40000 ALTER TABLE `danhsachmuon` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `duyetmuon`
---
-
-DROP TABLE IF EXISTS `duyetmuon`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `duyetmuon` (
-  `maDuyet` int(11) NOT NULL AUTO_INCREMENT,
-  `maLanhDao` int(11) NOT NULL,
-  `maMuon` int(11) NOT NULL,
-  PRIMARY KEY (`maDuyet`),
-  KEY `fk_DuyetMuon_maLanhDao` (`maLanhDao`),
-  KEY `fk_DuyetMuon_maMuon` (`maMuon`),
-  CONSTRAINT `fk_DuyetMuon_maLanhDao` FOREIGN KEY (`maLanhDao`) REFERENCES `lanhdao` (`maLanhDao`),
-  CONSTRAINT `fk_DuyetMuon_maMuon` FOREIGN KEY (`maMuon`) REFERENCES `danhsachmuon` (`maMuon`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `duyetmuon`
---
-
-LOCK TABLES `duyetmuon` WRITE;
-/*!40000 ALTER TABLE `duyetmuon` DISABLE KEYS */;
-/*!40000 ALTER TABLE `duyetmuon` ENABLE KEYS */;
+LOCK TABLES `duyet_muon` WRITE;
+/*!40000 ALTER TABLE `duyet_muon` DISABLE KEYS */;
+/*!40000 ALTER TABLE `duyet_muon` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -372,16 +345,15 @@ DROP TABLE IF EXISTS `gpsd`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gpsd` (
-  `soGPSD` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL,
-  `chungLoaiGPSD` varchar(20) DEFAULT NULL,
-  `ngayCap` date DEFAULT NULL,
-  `ngayHetHan` date DEFAULT NULL,
-  `nguoiKy` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`soGPSD`),
-  KEY `fk_GPSD_soHieuVKVLNCCHT` (`soHieuVK_VLN_CCHT`),
-  CONSTRAINT `fk_GPSD_soHieuVKVLNCCHT` FOREIGN KEY (`soHieuVK_VLN_CCHT`) REFERENCES `vk_vln_ccht` (`soHieuVK_VLN_CCHT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `so_gpsd` int(11) NOT NULL AUTO_INCREMENT,
+  `so_hieu_vk_vln_ccht` int(11) NOT NULL,
+  `chung_loai_gpsd` varchar(20) DEFAULT NULL,
+  `ngay_cap` date DEFAULT NULL,
+  `ngay_het_han` date DEFAULT NULL,
+  `nguoi_ky` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`so_gpsd`),
+  KEY `fk_GPSD_soHieuVKVLNCCHT` (`so_hieu_vk_vln_ccht`)
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -390,91 +362,57 @@ CREATE TABLE `gpsd` (
 
 LOCK TABLES `gpsd` WRITE;
 /*!40000 ALTER TABLE `gpsd` DISABLE KEYS */;
+INSERT INTO `gpsd` VALUES (123,1,'1','1990-01-01','1990-01-01','Hoa');
 /*!40000 ALTER TABLE `gpsd` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `imgvk`
+-- Table structure for table `img_vk`
 --
 
-DROP TABLE IF EXISTS `imgvk`;
+DROP TABLE IF EXISTS `img_vk`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `imgvk` (
-  `nhanHieuVK_VLN_CCHT` varchar(20) NOT NULL,
-  `imgPath` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`nhanHieuVK_VLN_CCHT`)
+CREATE TABLE `img_vk` (
+  `nhan_hieu_vk_vln_ccht` varchar(20) NOT NULL,
+  `img_path` varchar(256) DEFAULT NULL,
+  PRIMARY KEY (`nhan_hieu_vk_vln_ccht`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `imgvk`
+-- Dumping data for table `img_vk`
 --
 
-LOCK TABLES `imgvk` WRITE;
-/*!40000 ALTER TABLE `imgvk` DISABLE KEYS */;
-/*!40000 ALTER TABLE `imgvk` ENABLE KEYS */;
+LOCK TABLES `img_vk` WRITE;
+/*!40000 ALTER TABLE `img_vk` DISABLE KEYS */;
+/*!40000 ALTER TABLE `img_vk` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `lanhdao`
+-- Table structure for table `lanh_dao`
 --
 
-DROP TABLE IF EXISTS `lanhdao`;
+DROP TABLE IF EXISTS `lanh_dao`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `lanhdao` (
-  `maLanhDao` int(11) NOT NULL AUTO_INCREMENT,
-  `tenTKQL` varchar(100) NOT NULL,
-  PRIMARY KEY (`maLanhDao`),
-  KEY `fk_LanhDao_maLanhDao` (`tenTKQL`),
-  CONSTRAINT `fk_LanhDao_maLanhDao` FOREIGN KEY (`tenTKQL`) REFERENCES `quanly` (`tenTKQL`)
+CREATE TABLE `lanh_dao` (
+  `ma_lanh_dao` int(11) NOT NULL AUTO_INCREMENT,
+  `ten_tkql` varchar(100) NOT NULL,
+  PRIMARY KEY (`ma_lanh_dao`),
+  KEY `fk_LanhDao_maLanhDao` (`ten_tkql`),
+  CONSTRAINT `FK68sxl4w4fxj40ieg4e8lysir5` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`),
+  CONSTRAINT `fk_LanhDao_maLanhDao` FOREIGN KEY (`ten_tkql`) REFERENCES `quan_ly` (`ten_tkql`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `lanhdao`
+-- Dumping data for table `lanh_dao`
 --
 
-LOCK TABLES `lanhdao` WRITE;
-/*!40000 ALTER TABLE `lanhdao` DISABLE KEYS */;
-/*!40000 ALTER TABLE `lanhdao` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `mst_screen`
---
-
-DROP TABLE IF EXISTS `mst_screen`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mst_screen` (
-  `id` varchar(255) NOT NULL,
-  `awesome_class` varchar(255) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `create_program` varchar(255) DEFAULT NULL,
-  `create_user` varchar(255) DEFAULT NULL,
-  `del_flag` varchar(255) DEFAULT NULL,
-  `level` varchar(255) DEFAULT NULL,
-  `locale` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `order_display` varchar(255) DEFAULT NULL,
-  `role_id` varchar(255) DEFAULT NULL,
-  `update_date` datetime DEFAULT NULL,
-  `update_program` varchar(255) DEFAULT NULL,
-  `update_user` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mst_screen`
---
-
-LOCK TABLES `mst_screen` WRITE;
-/*!40000 ALTER TABLE `mst_screen` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mst_screen` ENABLE KEYS */;
+LOCK TABLES `lanh_dao` WRITE;
+/*!40000 ALTER TABLE `lanh_dao` DISABLE KEYS */;
+/*!40000 ALTER TABLE `lanh_dao` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -503,58 +441,58 @@ LOCK TABLES `persistent_logins` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `phieutra`
+-- Table structure for table `phieu_tra`
 --
 
-DROP TABLE IF EXISTS `phieutra`;
+DROP TABLE IF EXISTS `phieu_tra`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `phieutra` (
-  `maTra` int(11) NOT NULL AUTO_INCREMENT,
-  `soBienBan` int(11) NOT NULL,
-  `ngayTra` date NOT NULL,
-  PRIMARY KEY (`maTra`),
-  KEY `fk_PhieuTra_soBienBan` (`soBienBan`),
-  CONSTRAINT `fk_PhieuTra_soBienBan` FOREIGN KEY (`soBienBan`) REFERENCES `bienban` (`soBienBan`)
+CREATE TABLE `phieu_tra` (
+  `ma_tra` int(11) NOT NULL AUTO_INCREMENT,
+  `so_bien_ban` int(11) NOT NULL,
+  `ngay_tra` date NOT NULL,
+  PRIMARY KEY (`ma_tra`),
+  KEY `fk_PhieuTra_soBienBan` (`so_bien_ban`),
+  CONSTRAINT `fk_PhieuTra_soBienBan` FOREIGN KEY (`so_bien_ban`) REFERENCES `bien_ban` (`so_bien_ban`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `phieutra`
+-- Dumping data for table `phieu_tra`
 --
 
-LOCK TABLES `phieutra` WRITE;
-/*!40000 ALTER TABLE `phieutra` DISABLE KEYS */;
-/*!40000 ALTER TABLE `phieutra` ENABLE KEYS */;
+LOCK TABLES `phieu_tra` WRITE;
+/*!40000 ALTER TABLE `phieu_tra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phieu_tra` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `quanly`
+-- Table structure for table `quan_ly`
 --
 
-DROP TABLE IF EXISTS `quanly`;
+DROP TABLE IF EXISTS `quan_ly`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `quanly` (
-  `tenTKQL` varchar(100) NOT NULL,
-  `matKhau` varchar(255) DEFAULT NULL,
-  `soHieuCAND` varchar(10) NOT NULL,
-  `hoTen` varchar(50) DEFAULT NULL,
-  `ngaySinh` date DEFAULT NULL,
-  `capBac` varchar(50) DEFAULT NULL,
-  `chucVu` varchar(50) DEFAULT NULL,
-  `soDienThoai` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`tenTKQL`)
+CREATE TABLE `quan_ly` (
+  `ten_tkql` varchar(100) NOT NULL,
+  `mat_khau` varchar(255) DEFAULT NULL,
+  `so_hieu_cand` varchar(10) NOT NULL,
+  `ho_ten` varchar(50) DEFAULT NULL,
+  `ngay_sinh` date DEFAULT NULL,
+  `cap_bac` varchar(50) DEFAULT NULL,
+  `chuc_vu` varchar(50) DEFAULT NULL,
+  `so_dien_thoai` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`ten_tkql`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `quanly`
+-- Dumping data for table `quan_ly`
 --
 
-LOCK TABLES `quanly` WRITE;
-/*!40000 ALTER TABLE `quanly` DISABLE KEYS */;
-/*!40000 ALTER TABLE `quanly` ENABLE KEYS */;
+LOCK TABLES `quan_ly` WRITE;
+/*!40000 ALTER TABLE `quan_ly` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quan_ly` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -596,31 +534,6 @@ INSERT INTO `user_role` VALUES ('1','1','1','0','ADMIN','ADMIN','2019-01-01 12:1
 UNLOCK TABLES;
 
 --
--- Table structure for table `vk`
---
-
-DROP TABLE IF EXISTS `vk`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vk` (
-  `maVK` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL,
-  PRIMARY KEY (`maVK`),
-  KEY `fk_VK_soHieuVKVLNCCHT` (`soHieuVK_VLN_CCHT`),
-  CONSTRAINT `fk_VK_soHieuVKVLNCCHT` FOREIGN KEY (`soHieuVK_VLN_CCHT`) REFERENCES `vk_vln_ccht` (`soHieuVK_VLN_CCHT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vk`
---
-
-LOCK TABLES `vk` WRITE;
-/*!40000 ALTER TABLE `vk` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vk` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `vk_vln_ccht`
 --
 
@@ -628,15 +541,15 @@ DROP TABLE IF EXISTS `vk_vln_ccht`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vk_vln_ccht` (
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL AUTO_INCREMENT,
-  `chungLoai` varchar(20) DEFAULT NULL,
-  `nhanHieuVK_VLN_CCHT` varchar(20) DEFAULT NULL,
-  `soLuong` int(11) DEFAULT '1',
-  `donViTinh` varchar(10) DEFAULT NULL,
-  `nuocSanXuat` varchar(20) DEFAULT NULL,
-  `tinhTrang` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`soHieuVK_VLN_CCHT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `so_hieu_vk_vln_ccht` int(11) NOT NULL AUTO_INCREMENT,
+  `chung_loai` varchar(20) DEFAULT NULL,
+  `nhan_hieu_vk_vln_ccht` varchar(20) DEFAULT NULL,
+  `so_luong` int(11) DEFAULT '1',
+  `don_vi_tinh` varchar(10) DEFAULT NULL,
+  `nuoc_san_xuat` varchar(20) DEFAULT NULL,
+  `tinh_trang` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`so_hieu_vk_vln_ccht`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -645,32 +558,8 @@ CREATE TABLE `vk_vln_ccht` (
 
 LOCK TABLES `vk_vln_ccht` WRITE;
 /*!40000 ALTER TABLE `vk_vln_ccht` DISABLE KEYS */;
+INSERT INTO `vk_vln_ccht` VALUES (1,'1','1',2,'2','Viet Nam','0');
 /*!40000 ALTER TABLE `vk_vln_ccht` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `vln`
---
-
-DROP TABLE IF EXISTS `vln`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vln` (
-  `maVLN` int(11) NOT NULL AUTO_INCREMENT,
-  `soHieuVK_VLN_CCHT` int(11) NOT NULL,
-  PRIMARY KEY (`maVLN`),
-  KEY `fk_VLN_soHieuVKVLNCCHT` (`soHieuVK_VLN_CCHT`),
-  CONSTRAINT `fk_VLN_soHieuVKVLNCCHT` FOREIGN KEY (`soHieuVK_VLN_CCHT`) REFERENCES `vk_vln_ccht` (`soHieuVK_VLN_CCHT`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vln`
---
-
-LOCK TABLES `vln` WRITE;
-/*!40000 ALTER TABLE `vln` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vln` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -682,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-18  9:36:11
+-- Dump completed on 2022-04-21  8:49:07
