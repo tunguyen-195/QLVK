@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,25 @@ import org.springframework.stereotype.Service;
 import com.qlvk.common.base.BaseService;
 import com.qlvk.common.component.Messages;
 import com.qlvk.common.constant.CommonConstant;
+import com.qlvk.entity.Gpsd;
+import com.qlvk.entity.VkVlnCcht;
 import com.qlvk.model.TongLucModel;
 import com.qlvk.model.VuKhiModel;
+import com.qlvk.repository.IGpsdRepository;
 import com.qlvk.repository.IQLVKRepository;
+import com.qlvk.repository.IVkVlnCchtRepository;
 
 @Service
 public class QLVKService extends BaseService {
 
 	@Autowired
-	IQLVKRepository qlvkRepo;
+	private IQLVKRepository qlvkRepo;
+
+	@Autowired
+	private IVkVlnCchtRepository vkVlnCChtRepo;
+
+	@Autowired
+	private IGpsdRepository gpsdRepo;
 
 	public Map<String, Object> getListTongLuc(String allSearch, int type) {
 		List<Object[]> listSearch = qlvkRepo.findListTongLuc(type, allSearch);
@@ -47,7 +58,7 @@ public class QLVKService extends BaseService {
 		return data;
 	}
 
-	public Map<String, Object> maintenance(TongLucModel model, String method){
+	public Map<String, Object> maintenance(TongLucModel model, String method) {
 		Map<String, Object> data = new HashMap<>();
 		switch (method) {
 		case CommonConstant.METHOD_POST:
@@ -77,34 +88,98 @@ public class QLVKService extends BaseService {
 		}
 		return data;
 	}
+
 	private boolean delete(TongLucModel model) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Optional<VkVlnCcht> optionalVk = vkVlnCChtRepo.findById(Integer.parseInt(model.getSoHieu()));
+			Optional<Gpsd> optionalGp = gpsdRepo.findById(Integer.parseInt(model.getSoGiayPhep()));
+			VkVlnCcht entityVk = null;
+			Gpsd entityGp = null;
+			if (!optionalVk.isPresent() || !optionalGp.isPresent()) {
+				return false;
+			} else {
+				entityVk = optionalVk.get();
+				entityGp = optionalGp.get();
+			}
+			// Delete vu khi - vat lieu no - cong cu ho tro
+			vkVlnCChtRepo.delete(entityVk);
+
+			// Delete giay phep su dung
+			gpsdRepo.delete(entityGp);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	private boolean update(TongLucModel model) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			Optional<VkVlnCcht> optionalVk = vkVlnCChtRepo.findById(Integer.parseInt(model.getSoHieu()));
+			Optional<Gpsd> optionalGp = gpsdRepo.findById(Integer.parseInt(model.getSoGiayPhep()));
+			VkVlnCcht entityVk = null;
+			Gpsd entityGp = null;
+			if (!optionalVk.isPresent() || !optionalGp.isPresent()) {
+				return false;
+			} else {
+				entityVk = optionalVk.get();
+				entityGp = optionalGp.get();
+			}
+			// Update vu khi - vat lieu no - cong cu ho tro
+			entityVk.setChungLoai(model.getChungLoai());
+			entityVk.setDonViTinh(null);
+			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
+			entityVk.setNuocSanXuat(model.getNuocSanXuat());
+			entityVk.setSoLuong(999);
+			entityVk.setTinhTrang(null);
+			vkVlnCChtRepo.save(entityVk);
+			// Update giay phep su dung
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			entityGp.setChungLoaiGpsd(model.getChungLoai());
+			entityGp.setNgayCap(format.parse(model.getNgayCapPhep()));
+			entityGp.setNgayHetHan(format.parse(model.getCoGiaTriDen()));
+			entityGp.setNguoiKy(null);
+			entityGp.setSoHieuVkVlnCcht(Integer.parseInt(model.getSoHieu()));
+			gpsdRepo.save(entityGp);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	private boolean create(TongLucModel model) {
-//		Optional<CauHoi> optional = cauHoiRepo.findById(model.getMaCauHoi());
-//		CauHoi entity = null;
-//		if (optional.isPresent()) {
-//			entity = optional.get();
-//		} else {
-//			entity = new CauHoi();
-//		}
-//		entity.setMaCauHoi(model.getMaCauHoi());
-//		entity.setNoiDung(model.getNoiDung());
-//		entity.setCauA(model.getCauA());
-//		entity.setCauB(model.getCauB());
-//		entity.setCauC(model.getCauC());
-//		entity.setCauD(model.getCauD());
-//		entity.setDapAn(model.getDapAn());
-//		entity.setHinhAnh(model.getHinhAnh());
-//		cauHoiRepo.save(entity);
-		return true;
+		try {
+			Optional<VkVlnCcht> optionalVk = vkVlnCChtRepo.findById(Integer.parseInt(model.getSoHieu()));
+			Optional<Gpsd> optionalGp = gpsdRepo.findById(Integer.parseInt(model.getSoGiayPhep()));
+			VkVlnCcht entityVk = null;
+			Gpsd entityGp = null;
+			if (optionalVk.isPresent() || optionalGp.isPresent()) {
+				return false;
+			} else {
+				entityVk = new VkVlnCcht();
+				entityGp = new Gpsd();
+			}
+			// Add vu khi - vat lieu no - cong cu ho tro
+			entityVk.setSoHieuVkVlnCcht(Integer.parseInt(model.getSoHieu()));
+			entityVk.setChungLoai(model.getChungLoai());
+			entityVk.setDonViTinh(null);
+			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
+			entityVk.setNuocSanXuat(model.getNuocSanXuat());
+			entityVk.setSoLuong(999);
+			entityVk.setTinhTrang(null);
+			vkVlnCChtRepo.save(entityVk);
+			// Add giay phep su dung
+			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			entityGp.setSoGpsd(Integer.parseInt(model.getSoGiayPhep()));
+			entityGp.setChungLoaiGpsd(model.getChungLoai());
+			entityGp.setNgayCap(format.parse(model.getNgayCapPhep()));
+			entityGp.setNgayHetHan(format.parse(model.getCoGiaTriDen()));
+			entityGp.setNguoiKy(null);
+			entityGp.setSoHieuVkVlnCcht(Integer.parseInt(model.getSoHieu()));
+			gpsdRepo.save(entityGp);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public Map<String, Object> getListVuKhi(String allSearch) {

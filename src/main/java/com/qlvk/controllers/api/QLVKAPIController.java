@@ -27,7 +27,7 @@ public class QLVKAPIController {
 	@RequestMapping(value = "/api/QLVK/searchTongLuc", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> searchTongLuc(HttpServletRequest request,
-			@RequestParam(value = "type", defaultValue = "1") int type,
+			@RequestParam(value = "type", defaultValue = "3") int type,
 			@RequestParam(value = "allSearch", defaultValue = "") String allSearch) throws Exception {
 		try {
 			logger.info("Start search");

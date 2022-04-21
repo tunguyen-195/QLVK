@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.qlvk.entity.VkVlnCcht;
 
-public interface IVkVlnCChtRepository extends JpaRepository<VkVlnCcht, Integer> {
+public interface IVkVlnCchtRepository extends JpaRepository<VkVlnCcht, Integer> {
 
 }
