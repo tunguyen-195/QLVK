@@ -13,7 +13,7 @@ public class TongLucModel implements Serializable {
 	private String soGiayPhep;
 	private String ngayCapPhep;
 	private String coGiaTriDen;
-
+	private String imgPath;
 	public String getStt() {
 		return stt;
 	}
@@ -76,5 +76,13 @@ public class TongLucModel implements Serializable {
 
 	public void setNhanHieu(String nhanHieu) {
 		this.nhanHieu = nhanHieu;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 }

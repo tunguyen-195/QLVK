@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.qlvk.common.base.BaseService;
 import com.qlvk.common.component.Messages;
 import com.qlvk.common.constant.CommonConstant;
+import com.qlvk.common.util.StringUtil;
 import com.qlvk.entity.Gpsd;
 import com.qlvk.entity.VkVlnCcht;
 import com.qlvk.model.TongLucModel;
@@ -44,13 +45,14 @@ public class QLVKService extends BaseService {
 			i++;
 			tongLuc = new TongLucModel();
 			tongLuc.setStt(String.valueOf(i));
-			tongLuc.setChungLoai(String.valueOf(object[0]));
-			tongLuc.setNhanHieu(String.valueOf(object[1]));
-			tongLuc.setNuocSanXuat(String.valueOf(object[2]));
-			tongLuc.setSoHieu(String.valueOf(object[3]));
-			tongLuc.setSoGiayPhep(String.valueOf(object[4]));
+			tongLuc.setChungLoai(StringUtil.toString(object[0]));
+			tongLuc.setNhanHieu(StringUtil.toString(object[1]));
+			tongLuc.setNuocSanXuat(StringUtil.toString(object[2]));
+			tongLuc.setSoHieu(StringUtil.toString(object[3]));
+			tongLuc.setSoGiayPhep(StringUtil.toString(object[4]));
 			tongLuc.setNgayCapPhep(format.format(object[5]));
 			tongLuc.setCoGiaTriDen(format.format(object[6]));
+			tongLuc.setImgPath(StringUtil.toString(object[7]));
 			listData.add(tongLuc);
 		}
 		// Push data
