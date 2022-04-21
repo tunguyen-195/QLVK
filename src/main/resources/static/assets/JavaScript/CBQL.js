@@ -37,7 +37,15 @@ $(document).ready(function() {
 		loadInfor();
 	});
 
+	var table = $('#tbl_datatables').DataTable();
+	$('#tbl_datatables tbody').on('click', 'tr', function () {
+		if ( $(this).children().hasClass('dataTables_empty') ) {
+			return;
+		}
+		showModal(document.getElementById('js-modal-info'));
+	});
 
+	//--------------------------------------------------------------------------
 	
     const jQUery = document.querySelector.bind(document);
     const jQUery2 = document.querySelectorAll.bind(document);
