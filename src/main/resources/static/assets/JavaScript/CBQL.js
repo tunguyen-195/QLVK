@@ -226,8 +226,8 @@ function initialTable() {
 function getListVuKhi() {
 	$.ajax({
 		contentType : "application/json",
-		url : baseUrl + 'api/QLVK/searchVuKhi',
-		data : {primaryKey:$('#search').val()},
+		url : baseUrl + 'api/QLVK/searchTongLuc',
+		data : {allSearch:$('#search').val(), type:'0'},
 		type : "GET",
 		dataType : 'json',
 		timeout : 30000, // ms
@@ -265,7 +265,7 @@ function createHTMLVuKhi(data){
 	str +='</p>';
 	str +='<div class="row">';
 	str +='<div class="col-right">';
-	str +='<input class="modal-login-button" formmethod="post" type="submit" value="Mượn">';
+	str +='<input class="modal-login-button" formmethod="post" type="button" value="Mượn">';
 	str +='</div>';
 	str +='</div>';
 	str +='</div>';

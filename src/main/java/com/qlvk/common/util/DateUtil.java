@@ -75,6 +75,12 @@ public class DateUtil {
 		return format(date, DDMMYYYY, DD_MM_YYYY);
 	}
 
+	public static final String formatQLVK(Object date) {
+		if (date == null || date.toString().isEmpty()) {
+			return null;
+		}
+		return format(date.toString(), "yyyy-MM-dd", DD_MM_YYYY);
+	}
 	public static final String formatDB(String date) {
 		if (StringUtils.isEmpty(date)) {
 			return null;

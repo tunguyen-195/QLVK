@@ -10,7 +10,7 @@ import com.qlvk.entity.Category;
 
 public interface IQLVKRepository extends JpaRepository<Category, Integer> {
 
-	@Query(value = "SELECT a.chung_loai,a.nhan_hieu_vk_vln_ccht, a.nuoc_san_xuat, a.so_hieu_vk_vln_ccht, b.so_gpsd,b.ngay_cap, b.ngay_het_han, c.img_path "
+	@Query(value = "SELECT a.chung_loai,a.nhan_hieu_vk_vln_ccht, a.nuoc_san_xuat, a.so_hieu_vk_vln_ccht, b.so_gpsd,b.ngay_cap, b.ngay_het_han, c.img_path, a.so_luong "
 			+ "FROM vk_vln_ccht a " + "LEFT JOIN gpsd b ON a.so_hieu_vk_vln_ccht = b.so_hieu_vk_vln_ccht "
 			+ " LEFT JOIN img_vk c ON a.nhan_hieu_vk_vln_ccht = c.nhan_hieu_vk_vln_ccht "
 			+ "WHERE (:type = 3 OR a.chung_loai =:type) "
