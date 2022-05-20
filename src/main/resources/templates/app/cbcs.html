@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{commons/main}">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/css/style.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/css/styleCBCS.css}" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css}" />
+<!-- begin borrow form -->
+<script type="text/javascript" th:inline="javascript" charset="UTF-8"
+	th:src="@{/resources/assets/JavaScript/cbcs.js}"></script>
+<title>CBCS</title>
+</head>
+<body>
+	<div layout:fragment="content" th:remove="tag">
+		<div id="main">
+
+			<div id="header">
+
+				<div id="pre-header">
+
+					<div class="police-logo">
+						<img th:src="@{/resources/assets/img/Logo.png}" alt="">
+					</div>
+
+					<div id="sologan">
+						<p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ -
+							Công cụ hỗ trợ</p>
+						<p id="sologan-tq">Công an thành phố Tuyên Quang</p>
+					</div>
+
+				</div>
+
+				<div id="nav">
+
+					<!-- begin menu navigation -->
+					<ul id="menu-nav">
+
+						<li><a href="#" id="menu-trangchu2"> <i
+								class="fa-solid fa-dagger"></i> Quản lý VK-VLN-CCHT
+						</a></li>
+
+						<li><a href="#" id="menu-trangchu3"> <i
+								class="fa-solid fa-file-certificate"></i> Quản lý Giấy phép
+						</a></li>
+
+						<li><a href="#" id="menu-trangchu4"> <i
+								class="fa-solid fa-folder-open"></i> Quản lý Hồ sơ
+						</a></li>
+
+						<li><a href="#tab-TL"> <i
+								class="fa-solid fa-arrow-right-arrow-left"></i> Quản lý Mượn/Trả
+								<i class="fa-solid fa-caret-down"></i>
+						</a>
+							<ul id="sub-menu-nav">
+								<li><a href="#">Xử lý yêu cầu mượn</a></li>
+								<li><a href="#">Xử lý yêu cầu trả</a></li>
+							</ul></li>
+
+
+
+						<li><a href="#tab-TL"> <i
+								class="fa-solid fa-file-chart-column"></i> Báo cáo - Thống kê <i
+								class="fa-solid fa-caret-down"></i>
+						</a>
+							<ul id="sub-menu-nav">
+								<li><a href="#">VK-VLN-CCHT</a></li>
+								<li><a href="#">Giấy phép</a></li>
+								<li><a href="#">Lượt Mượn/Trả</a></li>
+								<li><a href="#">Hồ sơ</a></li>
+							</ul></li>
+
+						<li><a th:href="@{/logout}" id="menu-trangchu3"> <i
+								class="fa-solid fa-address-book"></i> Đăng xuất
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row user-link">
+				<div class="col col-right">
+					<a href=""> <i class="fa-duotone fa-user-police-tie"></i> <span>
+							Nguyễn Minh Tú</span>
+					</a>
+				</div>
+			</div>
+			<div id="content">
+
+				<div class="content-header">
+					<div class="row content-title">
+						<p>
+							<i class="fa-solid fa-notes"></i> Vũ khí - Vật liệu nổ - Công cụ
+							hỗ trợ
+						</p>
+					</div>
+				</div>
+
+				<!-- Tab Khám phá -->
+				<div id="content-khampha">
+
+					<div class="tabs">
+						<div class="tab-item active" id="tab-TL">
+							<i class="tab-icon fas fa-solid fa-swords"></i> Trang chủ
+						</div>
+						<div class="line"></div>
+
+					</div>
+
+					<!-- begin search -->
+					<form>
+						<div class="content-search">
+							<div style="text-align: center;">
+								<label class="modal-detail-label">Chủng loại</label> <select
+									id="list-chungloai" class="select-box" onchange="loadNhanHieu()">
+									<option value="">--Lựa chọn--</option>
+									<th:block th:each="item, iState : ${listChungLoai}">
+										<option th:value="${item}">[[${item}]]</option>
+									</th:block>
+								</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
+									id="list-nhanHieu" class="select-box">
+									<option value="">--Lựa chọn--</option>
+									<th:block th:each="item, iState : ${listNhanHieu}">
+										<option th:value="${item}">[[${item}]]</option>
+									</th:block>
+								</select>
+							</div>
+						</div>
+						<div class="main-content">
+							<div class="tab-pane active">
+								<!-- phần nội dung bản -->
+								<div class="ivu-table">
+									<div class="pr-0">
+										<table class="table" id="table_image"></table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+			<!-- end tab khám phá -->
+
+		</div>
+
+		<div id="footer">
+			<p>Bản quyền thuộc về Nhóm 8 Lớp LT04-T07-BCA</p>
+		</div>
+		<!-- model detail -->
+		<div class="modal-detail clearfix" id="js-modal-detail" >
+			<form action="/CBCS/requestMuon" id="js-modal-detail">
+				<div class="modal-detail-form js-modal-Bubble">
+					<header class="modal-header">
+						<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
+						<h4>Thông tin vũ khí, vật liệu nổ, công cụ hỗ trợ</h4>
+					</header>
+
+					<div class="modal-body clearfix">
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Số hiệu</label> <span class="span-detail" id="soHieu">Số hiệu</span>
+							</div>
+						</div>
+
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Chủng loại</label> <span class="span-detail" id="chungLoai"></span>
+							</div>
+						</div>
+
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Nhãn hiệu</label> <span class="span-detail" id="nhanHieu"></span>
+							</div>
+						</div>
+
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Đơn vị tính</label> <span class="span-detail" id="donViTinh"></span>
+							</div>
+						</div>
+
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Nước sản xuất</label> <span class="span-detail" id="nuocSanXuat"></span>
+							</div>
+						</div>
+
+						<div class="col col-half">
+							<div class="input-container">
+								<label class="modal-detail-label">Tình trạng</label> <span class="span-detail" id="tinhTrang"></span>
+							</div>
+						</div>
+						<div class="col col-half">
+							<div class="input-container">
+								<label for="soLuong" class="modal-detail-label">Số lượng</label>
+								<input class="minus is-form" type="button" value="-"> 
+								<input aria-label="soLuong" class="input-qty" max="" min="1"
+									id="soLuong" name="soLuong" type="number" value="1"> 
+								<input class="plus is-form" type="button" value="+">
+							</div>
+						</div>
+						<div class="col row" style="justify-content: center;">
+							<input class="modal-button" id="modal-muon-button" onclick="requestMuon()"
+								formmethod="post" type="submit" value="Gửi yêu cầu">
+								<input class="modal-button modal-cancel-button " id="modal-cancel-button" value="Hủy bỏ"
+								onclick="hideModal(document.getElementById('js-modal-detail'))">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

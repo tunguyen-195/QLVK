@@ -532,7 +532,6 @@ html{
 
   .tab-pane.active {
     display: block;
-    height: 596px;
   }
 
   .tab-pane h2 {
