@@ -165,6 +165,7 @@ function requestMuon() {
 		success : function(data) {
 			if (data.statusCode == '200') {
 				alert('Đã gửi yêu cầu. Vui lòng đợi xác nhận từ lãnh đạo!');
+				handleMessageResponse(data);
 			}
 		},
 		error : function(xhr) {

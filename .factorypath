@@ -80,8 +80,8 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/hibernate/hibernate-envers/5.3.10.Final/hibernate-envers-5.3.10.Final.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-devtools/2.1.6.RELEASE/spring-boot-devtools-2.1.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/mysql/mysql-connector-java/8.0.16/mysql-connector-java-8.0.16.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="E:\Project\JAVA\GIT\QLVK\src\main\webapp\WEB-INF\lib\postgresql-42.2.11.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="E:\Project\JAVA\GIT\QLVK\src\main\webapp\WEB-INF\lib\db2jcc4.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\HP\git\QLVK\src\main\webapp\WEB-INF\lib\postgresql-42.2.11.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\HP\git\QLVK\src\main\webapp\WEB-INF\lib\db2jcc4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-configuration-processor/2.1.6.RELEASE/spring-boot-configuration-processor-2.1.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/boot/spring-boot-starter-tomcat/2.1.6.RELEASE/spring-boot-starter-tomcat-2.1.6.RELEASE.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/tomcat/embed/tomcat-embed-core/9.0.21/tomcat-embed-core-9.0.21.jar" enabled="true" runInBatchMode="false"/>
@@ -108,8 +108,8 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-lang3/3.8.1/commons-lang3-3.8.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/commons-io/commons-io/2.6/commons-io-2.6.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="E:\Project\JAVA\GIT\QLVK\src\main\webapp\WEB-INF\lib\jakaroma-1.0.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="E:\Project\JAVA\GIT\QLVK\src\main\webapp\WEB-INF\lib\kuromoji-core-0.9.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="EXTJAR" id="E:\Project\JAVA\GIT\QLVK\src\main\webapp\WEB-INF\lib\kuromoji-ipadic-0.9.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\HP\git\QLVK\src\main\webapp\WEB-INF\lib\jakaroma-1.0.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\HP\git\QLVK\src\main\webapp\WEB-INF\lib\kuromoji-core-0.9.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="C:\Users\HP\git\QLVK\src\main\webapp\WEB-INF\lib\kuromoji-ipadic-0.9.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

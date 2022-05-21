@@ -134,7 +134,6 @@ public class QLVKService extends BaseService {
 			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
 			entityVk.setNuocSanXuat(model.getNuocSanXuat());
 			entityVk.setSoLuong(999);
-			entityVk.setTinhTrang(null);
 			vkVlnCChtRepo.save(entityVk);
 			// Update giay phep su dung
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -169,7 +168,6 @@ public class QLVKService extends BaseService {
 			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
 			entityVk.setNuocSanXuat(model.getNuocSanXuat());
 			entityVk.setSoLuong(999);
-			entityVk.setTinhTrang(null);
 			vkVlnCChtRepo.save(entityVk);
 			// Add giay phep su dung
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");

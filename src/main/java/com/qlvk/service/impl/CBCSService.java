@@ -3,13 +3,11 @@ package com.qlvk.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.groovy.ast.tools.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qlvk.common.base.BaseService;
 import com.qlvk.common.util.StringUtil;
-import com.qlvk.entity.DanhSachMuon;
 import com.qlvk.model.CBCSModel;
 import com.qlvk.repository.ICBCSRepository;
 

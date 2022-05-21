@@ -34,8 +34,8 @@ public class VkVlnCcht implements Serializable {
 	@Column(name="so_luong")
 	private int soLuong;
 
-	@Column(name="tinh_trang")
-	private String tinhTrang;
+	@Column(name="so_luong_ton_kho")
+	private int soLuongTonKho;
 
 	public VkVlnCcht() {
 	}
@@ -88,12 +88,12 @@ public class VkVlnCcht implements Serializable {
 		this.soLuong = soLuong;
 	}
 
-	public String getTinhTrang() {
-		return this.tinhTrang;
+	public int getSoLuongTonKho() {
+		return this.soLuongTonKho;
 	}
 
-	public void setTinhTrang(String tinhTrang) {
-		this.tinhTrang = tinhTrang;
+	public void setSoLuongTonKho(int soLuongTonKho) {
+		this.soLuongTonKho = soLuongTonKho;
 	}
 
 }

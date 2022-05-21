@@ -25,6 +25,9 @@ public class DanhSachMuon implements Serializable {
 	@Column(name="so_hieu_vk_vln_ccht")
 	private int soHieuVkVlnCcht;
 
+	@Column(name="so_luong")
+	private int soLuong;
+
 	public DanhSachMuon() {
 	}
 
@@ -50,6 +53,14 @@ public class DanhSachMuon implements Serializable {
 
 	public void setSoHieuVkVlnCcht(int soHieuVkVlnCcht) {
 		this.soHieuVkVlnCcht = soHieuVkVlnCcht;
+	}
+
+	public int getSoLuong() {
+		return this.soLuong;
+	}
+
+	public void setSoLuong(int soLuong) {
+		this.soLuong = soLuong;
 	}
 
 }

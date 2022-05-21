@@ -17,23 +17,28 @@ public class Cbcs implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ma_cbcs")
-	private int maCbcs;
+	private String maCbcs;
 
 	@Column(name="cap_bac")
 	private String capBac;
 
+
 	@Column(name="chuc_vu")
 	private String chucVu;
+
 
 	@Column(name="don_vi")
 	private String donVi;
 
+
 	@Column(name="ho_ten")
 	private String hoTen;
+
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="ngay_sinh")
 	private Date ngaySinh;
+
 
 	@Column(name="so_dien_thoai")
 	private String soDienThoai;
@@ -41,16 +46,21 @@ public class Cbcs implements Serializable {
 	@Column(name="so_hieu_cand")
 	private String soHieuCand;
 
+
+	@Column(name="user_id")
+	private String userId;
+
 	public Cbcs() {
 	}
 
-	public int getMaCbcs() {
+	public String getMaCbcs() {
 		return this.maCbcs;
 	}
 
-	public void setMaCbcs(int maCbcs) {
+	public void setMaCbcs(String maCbcs) {
 		this.maCbcs = maCbcs;
 	}
+
 
 	public String getCapBac() {
 		return this.capBac;
@@ -60,36 +70,13 @@ public class Cbcs implements Serializable {
 		this.capBac = capBac;
 	}
 
-	public String getChucVu() {
-		return this.chucVu;
+
+	public String getSoHieuCand() {
+		return this.soHieuCand;
 	}
 
-	public void setChucVu(String chucVu) {
-		this.chucVu = chucVu;
-	}
-
-	public String getDonVi() {
-		return this.donVi;
-	}
-
-	public void setDonVi(String donVi) {
-		this.donVi = donVi;
-	}
-
-	public String getHoTen() {
-		return this.hoTen;
-	}
-
-	public void setHoTen(String hoTen) {
-		this.hoTen = hoTen;
-	}
-
-	public Date getNgaySinh() {
-		return this.ngaySinh;
-	}
-
-	public void setNgaySinh(Date ngaySinh) {
-		this.ngaySinh = ngaySinh;
+	public void setSoHieuCand(String soHieuCand) {
+		this.soHieuCand = soHieuCand;
 	}
 
 	public String getSoDienThoai() {
@@ -100,12 +87,12 @@ public class Cbcs implements Serializable {
 		this.soDienThoai = soDienThoai;
 	}
 
-	public String getSoHieuCand() {
-		return this.soHieuCand;
+	public String getUserId() {
+		return this.userId;
 	}
 
-	public void setSoHieuCand(String soHieuCand) {
-		this.soHieuCand = soHieuCand;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }
