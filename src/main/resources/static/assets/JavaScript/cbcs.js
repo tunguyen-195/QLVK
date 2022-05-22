@@ -10,7 +10,8 @@ function showModal(soHieuVk) {
 	getDetailVk(soHieuVk);
 };
 
-function hideModal(obj) {
+function hideModal() {
+	var obj = document.getElementById('js-modal-detail');
 	obj.classList.remove('open');
 	$("body").removeClass("modal-open");
 };
@@ -40,12 +41,13 @@ function getListImgVK() {
 	});
 }
 function displayImgVK(data) {
+	$("#table_image").empty();
 	var count = 0;
 	var str = '';
 	for (var i = 0; i < data.length; i++) {
 		dataIndex = data[i];
 		if (count == 0) {
-			str += '<tr>';
+			str += '<tr style="display: flex;">';
 		}
 		count++;
 		str += createImgVK(dataIndex);
@@ -58,7 +60,7 @@ function displayImgVK(data) {
 }
 
 function createImgVK(data) {
-	var str = '<td>';
+	var str = '<td style="display: grid">';
 	str += '<img src="/QLVK/resources/assets/img/' + data.srcImg + '" '
 	str += ' class="table_image" alt="' + data.srcImg + '"'
 	str += ' onclick="showModal(' + data.soHieuVK + ');"> '
@@ -88,11 +90,11 @@ function getDetailVk(soHieuVK) {
 }
 function setDataToModal(data) {
 	$('#soHieu').text(data.soHieuVK);
+	$('#soHieuHidden').val(data.soHieuVK);
 	$('#chungLoai').text(data.chungLoai);
 	$('#nhanHieu').text(data.nhanHieu);
 	$('#donViTinh').text(data.donViTinh);
 	$('#nuocSanXuat').text(data.nuocSx);
-	$('#tinhTrang').text(data.tinhTrang);
 	if (data.soLuongTonKho == '0') {
 		$('#modal-muon-button').prop('disabled', true);
 	}
@@ -140,6 +142,7 @@ function loadNhanHieu() {
 			showPopupCommon('error', 'Exception', null);
 		}
 	});
+	getListImgVK();
 }
 
 function createNhanHieuByChungLoai(data) {
@@ -150,9 +153,10 @@ function createNhanHieuByChungLoai(data) {
 	}
 	$('#list-nhanHieu').append(str);
 }
+
 function requestMuon() {
 	var soLuong = $('#soLuong').val();
-	var soHieuVK = $('#soHieu');
+	var soHieuVK = $('#soHieuHidden').val();
 	$.ajax({
 		url : baseUrl + 'api/CBCS/requestMuon',
 		contentType : "application/json",
@@ -163,10 +167,8 @@ function requestMuon() {
 			soHieuVK : soHieuVK
 		},
 		success : function(data) {
-			if (data.statusCode == '200') {
-				alert('Đã gửi yêu cầu. Vui lòng đợi xác nhận từ lãnh đạo!');
-				handleMessageResponse(data);
-			}
+			handleMessageResponse(data);
+			hideModal();
 		},
 		error : function(xhr) {
 			showPopupCommon('error', 'Exception', null);

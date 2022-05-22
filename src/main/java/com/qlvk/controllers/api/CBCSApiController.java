@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.qlvk.common.constant.CommonConstant;
 import com.qlvk.model.CBCSModel;
+import com.qlvk.model.User;
 import com.qlvk.service.impl.CBCSService;
 
 @RestController
@@ -76,15 +77,18 @@ public class CBCSApiController {
 		data.put(CommonConstant.DATA, listNhanHieu);
 		return data;
 	}
-	
+
 	@RequestMapping(value = "/api/CBCS/requestMuon", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> requestMuon(HttpServletRequest request,
 			@RequestParam(value = "soLuong", defaultValue = "") String soLuong,
 			@RequestParam(value = "soHieuVK", defaultValue = "") String soHieuVK) {
-		Map<String, Object> data = new HashMap<>();
-		
-		data.put("statusCode", "200");
+
+		User user = (User) request.getSession().getAttribute(CommonConstant.USER_INFO);
+
+		Map<String, Object> data = cbcsService.requestMuon(user.getUserId(), Integer.parseInt(soHieuVK),
+				Integer.parseInt(soLuong));
+
 		return data;
 	}
 }

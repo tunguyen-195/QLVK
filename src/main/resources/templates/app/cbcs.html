@@ -115,13 +115,14 @@
 						<div class="content-search">
 							<div style="text-align: center;">
 								<label class="modal-detail-label">Chủng loại</label> <select
-									id="list-chungloai" class="select-box" onchange="loadNhanHieu()">
+									id="list-chungloai" class="select-box"
+									onchange="loadNhanHieu()">
 									<option value="">--Lựa chọn--</option>
 									<th:block th:each="item, iState : ${listChungLoai}">
 										<option th:value="${item}">[[${item}]]</option>
 									</th:block>
 								</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
-									id="list-nhanHieu" class="select-box">
+									id="list-nhanHieu" class="select-box" onchange="getListImgVK();">
 									<option value="">--Lựa chọn--</option>
 									<th:block th:each="item, iState : ${listNhanHieu}">
 										<option th:value="${item}">[[${item}]]</option>
@@ -151,68 +152,68 @@
 			<p>Bản quyền thuộc về Nhóm 8 Lớp LT04-T07-BCA</p>
 		</div>
 		<!-- model detail -->
-		<div class="modal-detail clearfix" id="js-modal-detail" >
-			<form action="/CBCS/requestMuon" id="js-modal-detail">
-				<div class="modal-detail-form js-modal-Bubble">
-					<header class="modal-header">
-						<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
-						<h4>Thông tin vũ khí, vật liệu nổ, công cụ hỗ trợ</h4>
-					</header>
+		<div class="modal-detail clearfix" id="js-modal-detail">
+			<div class="modal-detail-form js-modal-Bubble">
+				<header class="modal-header">
+					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
+					<h4>Thông tin vũ khí, vật liệu nổ, công cụ hỗ trợ</h4>
+				</header>
 
-					<div class="modal-body clearfix">
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Số hiệu</label> <span class="span-detail" id="soHieu">Số hiệu</span>
-							</div>
-						</div>
-
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Chủng loại</label> <span class="span-detail" id="chungLoai"></span>
-							</div>
-						</div>
-
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Nhãn hiệu</label> <span class="span-detail" id="nhanHieu"></span>
-							</div>
-						</div>
-
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Đơn vị tính</label> <span class="span-detail" id="donViTinh"></span>
-							</div>
-						</div>
-
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Nước sản xuất</label> <span class="span-detail" id="nuocSanXuat"></span>
-							</div>
-						</div>
-
-						<div class="col col-half">
-							<div class="input-container">
-								<label class="modal-detail-label">Tình trạng</label> <span class="span-detail" id="tinhTrang"></span>
-							</div>
-						</div>
-						<div class="col col-half">
-							<div class="input-container">
-								<label for="soLuong" class="modal-detail-label">Số lượng</label>
-								<input class="minus is-form" type="button" value="-"> 
-								<input aria-label="soLuong" class="input-qty" max="" min="1"
-									id="soLuong" name="soLuong" type="number" value="1"> 
-								<input class="plus is-form" type="button" value="+">
-							</div>
-						</div>
-						<div class="col row" style="justify-content: center;">
-							<input class="modal-button" id="modal-muon-button" onclick="requestMuon()"
-								formmethod="post" type="submit" value="Gửi yêu cầu">
-								<input class="modal-button modal-cancel-button " id="modal-cancel-button" value="Hủy bỏ"
-								onclick="hideModal(document.getElementById('js-modal-detail'))">
+				<div class="modal-body clearfix">
+					<div class="col col-half">
+						<div class="input-container">
+							<label class="modal-detail-label">Số hiệu</label> <span
+								class="span-detail" id="soHieu">Số hiệu</span> <input
+								type="hidden" id="soHieuHidden">
 						</div>
 					</div>
+
+					<div class="col col-half">
+						<div class="input-container">
+							<label class="modal-detail-label">Chủng loại</label> <span
+								class="span-detail" id="chungLoai"></span>
+						</div>
+					</div>
+
+					<div class="col col-half">
+						<div class="input-container">
+							<label class="modal-detail-label">Nhãn hiệu</label> <span
+								class="span-detail" id="nhanHieu"></span>
+						</div>
+					</div>
+
+					<div class="col col-half">
+						<div class="input-container">
+							<label class="modal-detail-label">Đơn vị tính</label> <span
+								class="span-detail" id="donViTinh"></span>
+						</div>
+					</div>
+
+					<div class="col col-half">
+						<div class="input-container">
+							<label class="modal-detail-label">Nước sản xuất</label> <span
+								class="span-detail" id="nuocSanXuat"></span>
+						</div>
+					</div>
+					<div class="col col-half">
+						<div class="input-container">
+							<label for="soLuong" class="modal-detail-label">Số lượng</label>
+							<input class="minus is-form" type="button" value="-"> <input
+								aria-label="soLuong" class="input-qty" max="" min="1"
+								id="soLuong" name="soLuong" type="number" value="1"> <input
+								class="plus is-form" type="button" value="+">
+						</div>
+					</div>
+					<div class="col row" style="justify-content: center;">
+						<button class="modal-button" id="modal-muon-button"
+							onclick="requestMuon()">Gửi yêu cầu mượn</button>
+						<button class="modal-button modal-cancel-button "
+							id="modal-cancel-button"
+							onclick="hideModal(document.getElementById('js-modal-detail'))">Hủy
+							bỏ</button>
+					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </body>

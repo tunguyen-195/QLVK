@@ -2,7 +2,10 @@ package com.qlvk.repository;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -18,7 +21,7 @@ public interface ICBCSRepository extends JpaRepository<Category, Integer> {
 	public List<Object[]> getListImgVK(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu);
 	
 	@Query(value = "SELECT a.so_hieu_vk_vln_ccht, a.chung_loai, a.nhan_hieu_vk_vln_ccht, "
-			+ " a.so_luong_ton_kho, a.don_vi_tinh, a.nuoc_san_xuat, a.tinh_trang "
+			+ " a.so_luong_ton_kho, a.don_vi_tinh, a.nuoc_san_xuat "
 			+ "FROM vk_vln_ccht a "
 			+ "WHERE (a.so_hieu_vk_vln_ccht =:soHieuVK) ", nativeQuery = true)
 	public List<Object[]> getDetailVK(@Param("soHieuVK") String soHieuVK);
@@ -37,5 +40,17 @@ public interface ICBCSRepository extends JpaRepository<Category, Integer> {
 	@Query(value = "SELECT a.so_luong_ton_kho "
 			+ " FROM vk_vln_ccht a "
 			+ " WHERE (a.so_hieu_vk_vln_ccht =:soHieuVK) ", nativeQuery = true)
-	public int getSoLuongTonKho(@Param("soHieuVK") String soHieuVK);
+	public int getSoLuongTonKho(@Param("soHieuVK") int soHieuVK);
+	
+	@Query(value = "SELECT a.ma_cbcs "
+			+ " FROM cbcs a "
+			+ " WHERE (a.user_id =:userId) ", nativeQuery = true)
+	public int getMaCBCSByUserID(@Param("userId") String userId);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE vk_vln_ccht "
+			+ " SET so_luong_ton_kho = :soLuongTonKhoUpdate "
+			+ " WHERE so_hieu_vk_vln_ccht = :sohieu ", nativeQuery = true)
+	public void updateVkVlnCcht(@Param("sohieu") int so_hieu_vk_vln_ccht, @Param("soLuongTonKhoUpdate") int soLuongTonKhoUpdate);
 }
