@@ -39,6 +39,30 @@ $(document).ready(function() {
 		var data = tableMuon.row(this).data();
 		showModalMuon(data);
 	});
+	
+	$('#btn-download').click(function() {
+
+		$.ajax({
+			contentType : "application/json",
+			url : baseUrl + 'api/CBQL/download',
+			data : {
+				chungLoai:$('#list-chungloai').val(),nhanHieu:$('#list-nhanHieu').val(),tinhTrang:$('#list_tinhTrang').val()
+			},
+			type : "GET",
+			dataType : 'json',
+			timeout : 30000, // ms
+			success : function(data) {
+				if (data.statusCode == '200') {
+					executeDownloadFile(data.idFileDownload);
+				} else {
+					showToastMessage('error', 'TODO');
+				}
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	});
 })
 function loadInfor() {
 	if (!modeSearch || modeSearch == '0') {

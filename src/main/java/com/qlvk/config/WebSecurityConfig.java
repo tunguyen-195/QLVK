@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 
 		http.authorizeRequests()
-				.antMatchers("/login","/index", "/logout", "/js/**", "/img/**", "/css/**", "/webjars/**", "/resources/**")
+				.antMatchers("/login","/indexTODO", "/logout", "/js/**", "/img/**", "/css/**", "/webjars/**", "/resources/**")
 				.permitAll();
 
 		http.authorizeRequests().antMatchers("/*")
@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/index")//
 				.failureUrl("/index?error=true")//
 				.usernameParameter("username")//
-				.passwordParameter("password").and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
+				.passwordParameter("password").and().logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 
 		http.authorizeRequests().and() //
 				.rememberMe().tokenRepository(this.persistentTokenRepository()) //

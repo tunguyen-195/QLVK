@@ -304,7 +304,7 @@ function showPopupCommon(type, content, fcBtn) {
 
 	// if type is warning
 	if(type === "warning") {
-		$('#title-popup-common').text(TITLE_WARNING);
+		$('#title-popup-common').text('Chú ý');
 		
 		// show button OK
 		$('#btn-common-ok').removeClass('d-none');
@@ -314,14 +314,14 @@ function showPopupCommon(type, content, fcBtn) {
 	} 
 	// if type is success
 	else if(type === "success") {
-		$('#title-popup-common').text(TITLE_SUCCESS);
+		$('#title-popup-common').text('Thành công');
 		$('#btn-common-ok').removeClass('d-none');
 		$('#btn-common-cancel').addClass('d-none');
 		$('#btn-common-ok').attr('onClick', 'closeModal()');
 	}
 	// if type is confirm
 	else if (type === "confirm") {
-		$('#title-popup-common').text(TITLE_CONFIRM);
+		$('#title-popup-common').text('Xác nhận');
 		
 		// show button OK
 		$('#btn-common-ok').removeClass('d-none');
@@ -332,7 +332,7 @@ function showPopupCommon(type, content, fcBtn) {
 	
 	// if type is error
 	else if (type === "error") {
-		$('#title-popup-common').text(TITLE_ERROR);
+		$('#title-popup-common').text('Lỗi');
 		$('#btn-common-ok').addClass('d-none');
 		$('#btn-common-cancel').removeClass('d-none');
 	}

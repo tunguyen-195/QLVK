@@ -26,7 +26,12 @@ public class ExcelUtil {
 	public static String createFileDownload(List<String> header, List<Object[]> dataExport) throws Exception {
 		String idFile = GenerateUtil.generateID();
 		// Blank workbook
-
+		File directory = new File(Config.get("common.dir.download"));
+		if (!directory.exists()) {
+			directory.mkdir();
+			// If you require it to make the entire directory path including parents,
+			// use directory.mkdirs(); here instead.
+		}
 		try (XSSFWorkbook workbook = new XSSFWorkbook();
 				FileOutputStream out = new FileOutputStream(
 						new File(Config.get("common.dir.download") + idFile + CommonConstant.EXTENSIONS_EXCEL_DOT));) {

@@ -1,5 +1,8 @@
 package com.qlvk.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -7,11 +10,22 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import com.qlvk.common.base.BaseService;
+import com.qlvk.common.component.Messages;
+import com.qlvk.common.constant.CommonConstant;
+import com.qlvk.common.util.Config;
+import com.qlvk.common.util.GenerateUtil;
 import com.qlvk.common.util.StringUtil;
 import com.qlvk.entity.BienBan;
 import com.qlvk.entity.ChiTietMuon;
@@ -268,5 +282,65 @@ public class CBQLService extends BaseService {
 		duyetMuonRep.deleteByMaMuon(maMuon);
 		rep.updateTrangThaiHuy(maMuon);
 		return data;
+	}
+
+	public Map<String, Object> download(String chungLoai, String nhanHieu, String tinhTrang) throws Exception {
+		List<String> header = new ArrayList<>();
+		header.add(Messages.getMessage("AnkenMaster.literal.id"));
+		header.add(Messages.getMessage("AnkenMaster.literal.ankenCode"));
+		header.add(Messages.getMessage("AnkenMaster.literal.ankenName"));
+		header.add(Messages.getMessage("AnkenMaster.literal.startDate"));
+		header.add(Messages.getMessage("AnkenMaster.literal.endDate"));
+		header.add(Messages.getMessage("AnkenMaster.literal.totalLoc"));
+		header.add(Messages.getMessage("AnkenMaster.literal.totalTc"));
+		header.add(Messages.getMessage("AnkenMaster.literal.totalBugIn"));
+		header.add(Messages.getMessage("AnkenMaster.literal.totalBugExt"));
+
+		List<Object[]> danhSachVK = rep.getDSVuKhi(chungLoai, nhanHieu, tinhTrang);
+
+		Map<String, Object> data = new HashMap<>();
+		data.put(CommonConstant.ID_FILE_DOWNLOAD, createFileDownload(danhSachVK));
+		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
+		return data;
+	}
+
+	private String createFileDownload(List<Object[]> dataExport) throws Exception {
+		String idFile = GenerateUtil.generateID();
+		try (FileInputStream excelFile = new FileInputStream(
+				new File(this.getClass().getResource("/report/BCVK-template.xlsx").getFile()));
+				XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+				FileOutputStream out = new FileOutputStream(
+						new File(Config.get("common.dir.download") + idFile + CommonConstant.EXTENSIONS_EXCEL_DOT));) {
+			// Create a blank sheet
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			CellStyle style = workbook.createCellStyle();
+			style.setBorderTop(BorderStyle.THIN);
+			style.setBorderBottom(BorderStyle.THIN);
+			style.setBorderLeft(BorderStyle.THIN);
+			style.setBorderRight(BorderStyle.THIN);
+			int rownum = 8;
+			Row row = null;
+			Cell cell = null;
+			int cellnum = 0;
+
+			if (CollectionUtils.isNotEmpty(dataExport)) {
+				for (Object[] objArr : dataExport) {
+					sheet.shiftRows(rownum, rownum + 10, 1, true, true);
+					row = sheet.createRow(rownum++);
+					cellnum = 0;
+					for (Object obj : objArr) {
+						cell = row.createCell(cellnum++);
+						cell.setCellValue(String.valueOf(obj));
+						cell.setCellStyle(style);
+					}
+				}
+			}
+
+			// Write the workbook in file system
+			workbook.write(out);
+		} catch (Exception e) {
+			throw e;
+		}
+		return idFile;
 	}
 }

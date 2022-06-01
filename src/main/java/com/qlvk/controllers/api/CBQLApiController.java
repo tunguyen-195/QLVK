@@ -144,4 +144,13 @@ public class CBQLApiController {
 				model.getNhanHieuVK(), model.getSoLuong());
 		return data;
 	}
+
+	@RequestMapping(value = "/api/CBQL/download", method = { RequestMethod.GET }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> download(HttpServletRequest request,
+			@RequestParam(value = "chungLoai", defaultValue = "") String chungLoai,
+			@RequestParam(value = "nhanHieu", defaultValue = "") String nhanHieu,
+			@RequestParam(value = "tinhTrang", defaultValue = "") String tinhTrang) throws Exception {
+		return service.download(chungLoai, nhanHieu, tinhTrang);
+	}
 }

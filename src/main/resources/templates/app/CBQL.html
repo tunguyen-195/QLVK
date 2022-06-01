@@ -84,7 +84,7 @@
 			<div class="row user-link">
 				<div class="col col-right">
 					<a href=""> <i class="fa-duotone fa-user-police-tie"></i> <span>
-							Nguyễn Minh Tú</span>
+							[[${user.name}]]</span>
 					</a>
 				</div>
 			</div>
@@ -150,6 +150,7 @@
 												onClick="timKiemVK()">Tìm kiếm</button>
 											<button class="modal-button" style="margin-left: 10px;"
 												id="btn_addNew" onClick="showModelThem()">Thêm mới</button>
+											<button id="btn-download" type = "button" class="modal-button" style="margin-left: 10px;">Tải xuống</button>
 										</div>
 									</div>
 								</div>
@@ -419,6 +420,7 @@
 			</div>
 		</div>
 		<!-- Kết thúc modal cho mượn -->
+		<th:block th:replace="fragments/CommonDownloadFile"/>
 	</div>
 </body>
 </html>
