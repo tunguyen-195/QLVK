@@ -20,6 +20,9 @@ public class BienBan implements Serializable {
 	@Column(name="so_bien_ban")
 	private int soBienBan;
 
+	@Column(name="da_xuat_bien_ban")
+	private int daXuatBienBan;
+
 	@Column(name="ma_cbql")
 	private int maCbql;
 
@@ -39,6 +42,14 @@ public class BienBan implements Serializable {
 
 	public void setSoBienBan(int soBienBan) {
 		this.soBienBan = soBienBan;
+	}
+
+	public int getDaXuatBienBan() {
+		return this.daXuatBienBan;
+	}
+
+	public void setDaXuatBienBan(int daXuatBienBan) {
+		this.daXuatBienBan = daXuatBienBan;
 	}
 
 	public int getMaCbql() {

@@ -522,6 +522,7 @@ html{
     flex-wrap: wrap;
     overflow: scroll;
     height: 640px;
+    overflow-x: hidden;
     background-color: #fff;
   }
 

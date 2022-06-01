@@ -16,4 +16,14 @@ public interface IQLVKRepository extends JpaRepository<Category, Integer> {
 			+ "WHERE (:type = 3 OR a.chung_loai =:type) "
 			+ "AND (a.nhan_hieu_vk_vln_ccht like %:allSearch% OR a.nuoc_san_xuat like %:allSearch% OR a.so_hieu_vk_vln_ccht like %:allSearch% OR b.so_gpsd like %:allSearch%)", nativeQuery = true)
 	public List<Object[]> findListTongLuc(@Param("type") int type, @Param("allSearch") String allSearch);
+
+	@Query(value = "SELECT DISTINCT a.chung_loai FROM vk_vln_ccht a", nativeQuery = true)
+	public List<Object[]> getAllChungLoai();
+
+	@Query(value = "SELECT DISTINCT a.nhan_hieu_vk_vln_ccht FROM vk_vln_ccht a", nativeQuery = true)
+	public List<Object[]> getAllNhanHieu();
+
+	@Query(value = "SELECT DISTINCT a.nhan_hieu_vk_vln_ccht " + " FROM vk_vln_ccht a "
+			+ " WHERE (:chungLoai = '' OR a.chung_loai =:chungLoai) ", nativeQuery = true)
+	public List<Object[]> getNhanHieu(@Param("chungLoai") String chungLoai);
 }

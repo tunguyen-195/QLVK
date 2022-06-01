@@ -22,8 +22,8 @@ public class DanhSachMuon implements Serializable {
 	@Column(name="ma_cbcs")
 	private int maCbcs;
 
-	@Column(name="so_hieu_vk_vln_ccht")
-	private int soHieuVkVlnCcht;
+	@Column(name="nhan_hieu_vk_vln_ccht")
+	private String nhanHieuVkVlnCcht;
 
 	@Column(name="so_luong")
 	private int soLuong;
@@ -47,12 +47,12 @@ public class DanhSachMuon implements Serializable {
 		this.maCbcs = maCbcs;
 	}
 
-	public int getSoHieuVkVlnCcht() {
-		return this.soHieuVkVlnCcht;
+	public String getNhanHieuVkVlnCcht() {
+		return this.nhanHieuVkVlnCcht;
 	}
 
-	public void setSoHieuVkVlnCcht(int soHieuVkVlnCcht) {
-		this.soHieuVkVlnCcht = soHieuVkVlnCcht;
+	public void setNhanHieuVkVlnCcht(String nhanHieuVkVlnCcht) {
+		this.nhanHieuVkVlnCcht = nhanHieuVkVlnCcht;
 	}
 
 	public int getSoLuong() {

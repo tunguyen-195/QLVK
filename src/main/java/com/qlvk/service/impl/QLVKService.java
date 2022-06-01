@@ -51,7 +51,7 @@ public class QLVKService extends BaseService {
 			tongLuc.setNuocSanXuat(StringUtil.toString(object[2]));
 			tongLuc.setSoHieu(StringUtil.toString(object[3]));
 			tongLuc.setSoGiayPhep(StringUtil.toString(object[4]));
- 			tongLuc.setNgayCapPhep(DateUtil.formatQLVK(object[5]));
+			tongLuc.setNgayCapPhep(DateUtil.formatQLVK(object[5]));
 			tongLuc.setCoGiaTriDen(DateUtil.formatQLVK((object[6])));
 			tongLuc.setImgPath(StringUtil.toString(object[7]));
 			tongLuc.setSoLuong(StringUtil.toString(object[8]));
@@ -133,7 +133,6 @@ public class QLVKService extends BaseService {
 			entityVk.setDonViTinh(null);
 			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
 			entityVk.setNuocSanXuat(model.getNuocSanXuat());
-			entityVk.setSoLuong(999);
 			vkVlnCChtRepo.save(entityVk);
 			// Update giay phep su dung
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -167,7 +166,6 @@ public class QLVKService extends BaseService {
 			entityVk.setDonViTinh(null);
 			entityVk.setNhanHieuVkVlnCcht(model.getNhanHieu());
 			entityVk.setNuocSanXuat(model.getNuocSanXuat());
-			entityVk.setSoLuong(999);
 			vkVlnCChtRepo.save(entityVk);
 			// Add giay phep su dung
 			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
@@ -207,5 +205,32 @@ public class QLVKService extends BaseService {
 		// data.put(CommonConstant.RECORD_TOTAL, listSearch.getTotalElements());
 		// data.put(CommonConstant.RECORD_FILTERED, listSearch.getTotalElements());
 		return data;
+	}
+
+	public List<String> getAllChungLoai() {
+		List<Object[]> listChungLoai = qlvkRepo.getAllChungLoai();
+		List<String> outputList = new ArrayList<>();
+		for (Object[] object : listChungLoai) {
+			outputList.add(StringUtil.toString(object[0]));
+		}
+		return outputList;
+	}
+
+	public List<String> getAllNhanHieu() {
+		List<Object[]> listNhanHieu = qlvkRepo.getAllNhanHieu();
+		List<String> outputList = new ArrayList<>();
+		for (Object[] object : listNhanHieu) {
+			outputList.add(StringUtil.toString(object[0]));
+		}
+		return outputList;
+	}
+
+	public List<String> getNhanHieu(String chungLoai) {
+		List<Object[]> listNhanHieu = qlvkRepo.getNhanHieu(chungLoai);
+		List<String> outputList = new ArrayList<>();
+		for (Object[] object : listNhanHieu) {
+			outputList.add(StringUtil.toString(object[0]));
+		}
+		return outputList;
 	}
 }

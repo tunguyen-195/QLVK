@@ -3,11 +3,11 @@ $(document).ready(function() {
 });
 
 // show modal button
-function showModal(soHieuVk) {
+function showModal(nhanHieuVK) {
 	$("body").addClass("modal-open");
 	var obj = document.getElementById('js-modal-detail');
 	obj.classList.add('open');
-	getDetailVk(soHieuVk);
+	getSoLuongVK(nhanHieuVK);
 };
 
 function hideModal() {
@@ -63,20 +63,21 @@ function createImgVK(data) {
 	var str = '<td style="display: grid">';
 	str += '<img src="/QLVK/resources/assets/img/' + data.srcImg + '" '
 	str += ' class="table_image" alt="' + data.srcImg + '"'
-	str += ' onclick="showModal(' + data.soHieuVK + ');"> '
+	str += ' onclick="showModal(' + data.nhanHieu + ');"> '
 	str += '<label>' + data.nhanHieu + '</label>';
+	str += '<input type="hidden" id="nhan_hieu_hidden" value = ' + data.nhanHieu + '>'
 	str += '</td>';
 	return str;
 }
 
-function getDetailVk(soHieuVK) {
+function getSoLuongVK(nhanHieuVK) {
 	$.ajax({
-		url : baseUrl + 'api/CBCS/getDetailVk',
+		url : baseUrl + 'api/CBCS/getSoLuong',
 		contentType : "application/json",
 		type : "GET",
 		dataType : 'json',
 		data : {
-			soHieuVK : soHieuVK
+			nhanHieuVK : nhanHieuVK
 		},
 		success : function(data) {
 			if (data.statusCode == '200') {
@@ -89,17 +90,11 @@ function getDetailVk(soHieuVK) {
 	});
 }
 function setDataToModal(data) {
-	$('#soHieu').text(data.soHieuVK);
-	$('#soHieuHidden').val(data.soHieuVK);
-	$('#chungLoai').text(data.chungLoai);
-	$('#nhanHieu').text(data.nhanHieu);
-	$('#donViTinh').text(data.donViTinh);
-	$('#nuocSanXuat').text(data.nuocSx);
-	if (data.soLuongTonKho == '0') {
-		$('#modal-muon-button').prop('disabled', true);
-	}
-	$('#soLuong').attr('max', data.soLuongTonKho)
-	$('#soLuong').val(data.soLuongTonKho);
+	if (data.soLuongConLai == '0') {
+		$('#modal-muon-button').prop('display', 'hidden');
+	} 
+	$('#soLuong').attr('max', data.soLuongConLai)
+	$('#soLuong').val(data.soLuongConLai);
 	$('input.input-qty')
 			.each(
 					function() {
@@ -126,7 +121,7 @@ function setDataToModal(data) {
 
 function loadNhanHieu() {
 	$.ajax({
-		url : baseUrl + 'api/CBCS/getNhanHieu',
+		url : baseUrl + 'api/QLVK/getNhanHieu',
 		contentType : "application/json",
 		type : "GET",
 		dataType : 'json',
@@ -156,7 +151,7 @@ function createNhanHieuByChungLoai(data) {
 
 function requestMuon() {
 	var soLuong = $('#soLuong').val();
-	var soHieuVK = $('#soHieuHidden').val();
+	var nhanHieuVK = $('#nhan_hieu_hidden').val();
 	$.ajax({
 		url : baseUrl + 'api/CBCS/requestMuon',
 		contentType : "application/json",
@@ -164,7 +159,7 @@ function requestMuon() {
 		dataType : 'json',
 		data : {
 			soLuong : soLuong,
-			soHieuVK : soHieuVK
+			nhanHieuVK : nhanHieuVK
 		},
 		success : function(data) {
 			handleMessageResponse(data);
