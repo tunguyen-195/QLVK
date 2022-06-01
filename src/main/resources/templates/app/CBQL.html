@@ -104,16 +104,16 @@
 					<div class="group-tabs">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active tab-item"><a
+							<li role="presentation"><a
 								href="#tab-vk_vln_ccht" aria-controls="tab-vk_vln_ccht"
-								role="tab" data-toggle="tab" id="tab-ql" class="fas fa-solid">Quản
+								role="tab" data-toggle="tab" id="tab-ql" class="tab-item fas fa-solid active">Quản
 									lý vũ khí</a></li>
-							<li role="presentation" class="tab-item"><a
+							<li role="presentation"><a
 								href="#tab-yc_muon" id="tab-muon" aria-controls="tab-yc_muon"
-								role="tab" data-toggle="tab" class="fas fa-solid">Xử lý mượn</a></li>
-							<li role="presentation" class="tab-item"><a
+								role="tab" data-toggle="tab" class="tab-item fas fa-solid">Xử lý mượn</a></li>
+							<li role="presentation"><a
 								href="#tab-yc_tra" id="tab-tra" aria-controls="tab-yc_tra"
-								role="tab" data-toggle="tab" class="fas fa-solid">Xử lý trả</a></li>
+								role="tab" data-toggle="tab" class="tab-item fas fa-solid">Xử lý trả</a></li>
 						</ul>
 
 						<!-- Tab panes -->
@@ -225,15 +225,15 @@
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="tab-yc_tra">
-								<div class="content-search">
-									<h4>Quản lý trả</h4>
-									<div class="row">
+								<div class="content-search" style="text-align: center;">
+									<h4 class="fa-solid">Quản lý trả</h4>
+									<div class="row input-search">
 										<label class="modal-detail-label">Tìm kiếm</label> <input
-											type="text" id="txt_timKiem_tra">
-									</div>
-									<div>
-										<button class="modal-button" id="btn_timKiem">Tìm
-											kiếm</button>
+											type="text" id="txt_timKiem_tra" class="select-box">
+										<div class="search-button">
+											<button class="modal-button" id="btn_timKiem_tra"
+												onclick="timKiemTra()">Tìm kiếm</button>
+										</div>
 									</div>
 								</div>
 								<div class="tab-pane active">
@@ -241,11 +241,12 @@
 										<div class="pr-0">
 											<table class="table" id="tbl_datatables_tra">
 												<colgroup>
-													<col width="120px">
-													<col width="140px">
-													<col width="140px">
-													<col width="120px">
-													<col width="120px">
+													<col width="100px">
+													<col width="100px">
+													<col width="100px">
+													<col width="100px">
+													<col width="100px">
+													<col width="100px">
 													<col width="100px">
 													<col width="100px">
 													<col width="100px">
@@ -263,6 +264,7 @@
 															VK-VLN-CCHT</th>
 														<th scope="col" class="align-middle">SỐ LƯỢNG</th>
 														<th scope="col" class="align-middle">NGÀY MƯỢN</th>
+														<th scope="col" class="align-middle">CÁN BỘ QUẢN LÝ</th>
 														<th scope="col" class="align-middle">SỐ HIỆU CBQL</th>
 														<th scope="col" class="align-middle">LÃNH ĐẠO DUYỆT</th>
 													</tr>
@@ -358,7 +360,7 @@
 			</div>
 		</div>
 		<!-- Kết thúc modal add -->
-		<!-- Modal cho mượn -->
+		<!-- Modal thu hồi -->
 		<div class="modal-add clearfix" id="js-modal-muon">
 			<div class="modal-add-form js-modal-Bubble">
 				<header class="modal-header">
@@ -420,6 +422,68 @@
 			</div>
 		</div>
 		<!-- Kết thúc modal cho mượn -->
+		<!-- Modal thu hồi -->
+		<div class="modal-add clearfix" id="js-modal-tra">
+			<div class="modal-add-form js-modal-Bubble">
+				<header class="modal-header">
+					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
+					<h4>Thông tin yêu cầu mượn</h4>
+				</header>
+				<div class="modal-body clearfix">
+					<h6>THÔNG TIN LÃNH ĐẠO DUYỆT</h6>
+					<div class="col">
+						<div class="input-container">
+							<label for="lanhDaoDuyet" class="modal-detail-label">Họ
+								và tên : </label> <input type="text" id="txt_lanhDao"
+								readonly="readonly">
+						</div>
+					</div>
+					<h6>THÔNG TIN CÁN BỘ CHIẾN SĨ MƯỢN</h6>
+					<div class="col col-half">
+						<div class="input-container">
+							<label for="soHieu" class="modal-detail-label">Số hiệu
+								CAND : </label> <input type="text" id="txt_soHieu" readonly="readonly">
+						</div>
+					</div>
+					<div class="col col-half">
+						<div class="input-container">
+							<label for="hoTenCBCS" class="modal-detail-label">Họ và
+								tên : </label> <input type="text" id="txt_hoTenCBCS" readonly="readonly">
+						</div>
+					</div>
+					<h6>THÔNG TIN VŨ KHÍ, VẬT LIỆU NỔ, CÔNG CỤ HỖ TRỢ</h6>
+					<div class="col">
+						<div class="input-container">
+							<label for="nhanHieu" class="modal-detail-label">Nhãn
+								hiệu : </label> <input type="text" id="txt_nhanHieu" readonly="readonly">
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container">
+							<label for="nhanHieu" class="modal-detail-label">Số hiệu vũ khí : </label> 
+							<div id="list_soHieuVK"></div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container">
+							<label for="soLuong" class="modal-detail-label">Số lượng
+								: </label> <input type="text" id="txt_soLuong" readonly="readonly">
+							<input type="hidden" id="txt_maMuon"> <input
+								type="hidden" id="txt_maDuyet">
+						</div>
+					</div>
+					<div class="col row" style="justify-content: center;">
+						<button class="modal-button" id="modal-add-button"
+							onclick="thuHoi()">Thu hồi</button>
+						<button class="modal-button modal-cancel-button"
+							id="modal-cancel-button" style="margin-left: 10px;"
+							onclick="hideModal(document.getElementById('js-modal-muon'))">Hủy
+							bỏ</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Kết thúc modal thu hồi -->
 		<th:block th:replace="fragments/CommonDownloadFile"/>
 	</div>
 </body>

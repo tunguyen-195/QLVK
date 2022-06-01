@@ -520,3 +520,6 @@ body.modal-open {
 	font-size: 18px;
 	z-index: 0;
 }
+table.dataTable thead th {
+  white-space: initial;
+}

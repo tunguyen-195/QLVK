@@ -31,7 +31,7 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 
 	@Query(value = "SELECT e.so_hieu_cand as 'soHieuCBCS', e.ho_ten as 'hoTenCBCS', a.so_hieu_vk_vln_ccht, "
 			+ " c.nhan_hieu_vk_vln_ccht, c.so_luong, b.ngay_muon, f.so_hieu_cand as 'soHieuCBQL', "
-			+ " f.ho_ten as 'hoTenCBQL', d.ho_ten as 'lanhDaoDuyet' "
+			+ " f.ho_ten as 'hoTenCBQL', d.ho_ten as 'lanhDaoDuyet', e.don_vi "
 			+ "FROM duyet_muon a INNER JOIN bien_ban b ON a.ma_duyet = b.ma_duyet "
 			+ "INNER JOIN danh_sach_muon c ON a.ma_muon = c.ma_muon "
 			+ "INNER JOIN  cbcs d ON a.ma_lanh_dao = d.ma_cbcs " + "INNER JOIN cbcs e ON c.ma_cbcs = e.ma_cbcs "
@@ -46,19 +46,14 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE vk_vln_ccht SET tinh_trang = '1' "
+	@Query(value = "UPDATE vk_vln_ccht SET tinh_trang =:tinhTrang "
 			+ "WHERE so_hieu_vk_vln_ccht =:soHieu", nativeQuery = true)
-	public void updateTinhTrangVK(@Param("soHieu") int soHieu);
+	public void updateTinhTrangVK(@Param("soHieu") int soHieu, @Param("tinhTrang") int tinhTrang);
 
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE danh_sach_muon SET trang_thai_muon = '2' WHERE ma_muon =:maMuon", nativeQuery = true)
-	public void updateTrangThaiMuon(@Param("maMuon") int maMuon);
-
-	@Transactional
-	@Modifying
-	@Query(value = "UPDATE danh_sach_muon SET trang_thai_muon = '3' WHERE ma_muon =:maMuon", nativeQuery = true)
-	public void updateTrangThaiHuy(@Param("maMuon") int maMuon);
+	@Query(value = "UPDATE danh_sach_muon SET trang_thai_muon =:trangThai WHERE ma_muon =:maMuon", nativeQuery = true)
+	public void updateTrangThaiMuon(@Param("maMuon") int maMuon, @Param("trangThai") int trangThai);
 
 	@Transactional
 	@Modifying

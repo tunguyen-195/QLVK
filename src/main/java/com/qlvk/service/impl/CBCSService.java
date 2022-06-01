@@ -49,7 +49,7 @@ public class CBCSService extends BaseService {
 		return model;
 	}
 
-	public Map<String, Object> requestMuon(String userId, String nhanHieuVK, int soLuongMuon) {
+	public Map<String, Object> requestMuon(String userId, String nhanHieuVK, int soLuongMuon, String lyDo) {
 		Map<String, Object> data = new HashMap<>();
 		int soLuongConLai = rep.getTongSoLuong(nhanHieuVK) - rep.getSoLuongDaMuon(nhanHieuVK);
 		if (soLuongMuon > soLuongConLai) {
@@ -64,6 +64,8 @@ public class CBCSService extends BaseService {
 			dsMuon.setMaCbcs(maCbcs);
 			dsMuon.setNhanHieuVkVlnCcht(nhanHieuVK);
 			dsMuon.setSoLuong(soLuongMuon);
+			dsMuon.setTrangThaiMuon(0);
+			dsMuon.setLyDo(lyDo);
 			dsMuonRep.save(dsMuon);
 			data.put("statusCode", "200");
 			data.put("messageInfor", "Gửi yêu cầu mượn thành công");

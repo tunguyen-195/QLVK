@@ -69,13 +69,13 @@ public class CBCSApiController {
 
 	@RequestMapping(value = "/api/CBCS/requestMuon", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public Map<String, Object> requestMuon(HttpServletRequest request,
-			@RequestParam(value = "soLuong", defaultValue = "") String soLuong,
-			@RequestParam(value = "nhanHieuVK", defaultValue = "") String nhanHieuVK) {
+	public Map<String, Object> requestMuon(HttpServletRequest request, @RequestParam(value = "soLuong") String soLuong,
+			@RequestParam(value = "nhanHieuVK") String nhanHieuVK, @RequestParam(value = "lyDo") String lyDo) {
 
 		User user = (User) request.getSession().getAttribute(CommonConstant.USER_INFO);
 
-		Map<String, Object> data = cbcsService.requestMuon(user.getUserId(), nhanHieuVK, Integer.parseInt(soLuong));
+		Map<String, Object> data = cbcsService.requestMuon(user.getUserId(), nhanHieuVK, Integer.parseInt(soLuong),
+				lyDo);
 
 		return data;
 	}

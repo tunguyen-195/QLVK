@@ -10,6 +10,7 @@ public class DanhSachTraModel {
 	private String hoTenCBQL;
 	private String soHieuCBQL;
 	private String lanhDaoDuyet;
+	private String donVi;
 
 	public String getSoHieuCBCS() {
 		return soHieuCBCS;
@@ -81,6 +82,14 @@ public class DanhSachTraModel {
 
 	public void setLanhDaoDuyet(String lanhDaoDuyet) {
 		this.lanhDaoDuyet = lanhDaoDuyet;
+	}
+
+	public String getDonVi() {
+		return donVi;
+	}
+
+	public void setDonVi(String donVi) {
+		this.donVi = donVi;
 	}
 
 }

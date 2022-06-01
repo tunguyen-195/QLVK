@@ -25,6 +25,9 @@ public class DuyetMuon implements Serializable {
 	@Column(name="ma_muon")
 	private int maMuon;
 
+	@Column(name="so_hieu_vk_vln_ccht")
+	private int soHieuVkVlnCcht;
+
 	public DuyetMuon() {
 	}
 
@@ -50,6 +53,14 @@ public class DuyetMuon implements Serializable {
 
 	public void setMaMuon(int maMuon) {
 		this.maMuon = maMuon;
+	}
+
+	public int getSoHieuVkVlnCcht() {
+		return this.soHieuVkVlnCcht;
+	}
+
+	public void setSoHieuVkVlnCcht(int soHieuVkVlnCcht) {
+		this.soHieuVkVlnCcht = soHieuVkVlnCcht;
 	}
 
 }

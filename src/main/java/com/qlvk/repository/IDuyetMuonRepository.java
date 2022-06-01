@@ -13,6 +13,6 @@ public interface IDuyetMuonRepository extends JpaRepository<DuyetMuon, Integer> 
 	
 	@Modifying
 	@Transactional
-	@Query(value="DELETE FROM danh_sach_muon WHERE ma_muon =:maMuon", nativeQuery = true)
+	@Query(value="DELETE FROM duyet_muon WHERE ma_muon =:maMuon", nativeQuery = true)
 	public void deleteByMaMuon(@Param("maMuon") int maMuon);
 }

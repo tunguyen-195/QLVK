@@ -24,6 +24,7 @@ import com.qlvk.model.ChoMuonModel;
 import com.qlvk.model.DanhSachMuonModel;
 import com.qlvk.model.DanhSachTraModel;
 import com.qlvk.model.DanhSachVKModel;
+import com.qlvk.model.ThuHoiModel;
 import com.qlvk.model.User;
 import com.qlvk.service.impl.CBQLService;
 
@@ -145,6 +146,14 @@ public class CBQLApiController {
 		return data;
 	}
 
+	@RequestMapping(value = "/api/CBQL/tuChoi", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> tuChoi(@RequestBody ChoMuonModel model, HttpServletResponse response,
+			HttpServletRequest request) {
+		Map<String, Object> data = service.huyMuon(model.getMaMuon(), model.getMaDuyet());
+		return data;
+	}
+
 	@RequestMapping(value = "/api/CBQL/download", method = { RequestMethod.GET }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> download(HttpServletRequest request,
@@ -152,5 +161,12 @@ public class CBQLApiController {
 			@RequestParam(value = "nhanHieu", defaultValue = "") String nhanHieu,
 			@RequestParam(value = "tinhTrang", defaultValue = "") String tinhTrang) throws Exception {
 		return service.download(chungLoai, nhanHieu, tinhTrang);
+	}
+
+	@RequestMapping(value = "/api/CBQL/thuHoi", method = RequestMethod.POST, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> thuHoi(@RequestBody ThuHoiModel model, HttpServletResponse response,
+			HttpServletRequest request) {
+		return service.thuHoi(model.getSoBienBan(), model.getMaMuon(), model.getSoHieuVK());
 	}
 }

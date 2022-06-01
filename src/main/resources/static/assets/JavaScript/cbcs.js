@@ -63,9 +63,8 @@ function createImgVK(data) {
 	var str = '<td style="display: grid">';
 	str += '<img src="/QLVK/resources/assets/img/' + data.srcImg + '" '
 	str += ' class="table_image" alt="' + data.srcImg + '"'
-	str += ' onclick="showModal(' + data.nhanHieu + ');"> '
+	str += ' onclick="showModal(&#39;' + data.nhanHieu + '&#39;);"> '
 	str += '<label>' + data.nhanHieu + '</label>';
-	str += '<input type="hidden" id="nhan_hieu_hidden" value = ' + data.nhanHieu + '>'
 	str += '</td>';
 	return str;
 }
@@ -81,7 +80,7 @@ function getSoLuongVK(nhanHieuVK) {
 		},
 		success : function(data) {
 			if (data.statusCode == '200') {
-				setDataToModal(data.data);
+				setDataToModal(data.data, nhanHieuVK);
 			}
 		},
 		error : function(xhr) {
@@ -89,12 +88,14 @@ function getSoLuongVK(nhanHieuVK) {
 		}
 	});
 }
-function setDataToModal(data) {
+function setDataToModal(data, nhanHieuVK) {
 	if (data.soLuongConLai == '0') {
-		$('#modal-muon-button').prop('display', 'hidden');
-	} 
-	$('#soLuong').attr('max', data.soLuongConLai)
-	$('#soLuong').val(data.soLuongConLai);
+		$('#modal-muon-button').prop('disabled', true);
+	} else {
+		$('#modal-muon-button').prop('disabled', false);
+	}
+	$('#soLuong').attr('max', data.soLuongConLai);
+	$('#nhan_hieu_hidden').val(nhanHieuVK);
 	$('input.input-qty')
 			.each(
 					function() {
@@ -131,13 +132,13 @@ function loadNhanHieu() {
 		success : function(data) {
 			if (data.statusCode == '200') {
 				createNhanHieuByChungLoai(data.data);
+				getListImgVK();
 			}
 		},
 		error : function(xhr) {
 			showPopupCommon('error', 'Exception', null);
 		}
 	});
-	getListImgVK();
 }
 
 function createNhanHieuByChungLoai(data) {
@@ -152,21 +153,27 @@ function createNhanHieuByChungLoai(data) {
 function requestMuon() {
 	var soLuong = $('#soLuong').val();
 	var nhanHieuVK = $('#nhan_hieu_hidden').val();
-	$.ajax({
-		url : baseUrl + 'api/CBCS/requestMuon',
-		contentType : "application/json",
-		type : "GET",
-		dataType : 'json',
-		data : {
-			soLuong : soLuong,
-			nhanHieuVK : nhanHieuVK
-		},
-		success : function(data) {
-			handleMessageResponse(data);
-			hideModal();
-		},
-		error : function(xhr) {
-			showPopupCommon('error', 'Exception', null);
-		}
-	});
+	var lyDo = $('#lyDo').val();
+	if (soLuong <= 0) {
+		alert("số lượng phải khác 0");
+	} else {
+		$.ajax({
+			url : baseUrl + 'api/CBCS/requestMuon',
+			contentType : "application/json",
+			type : "GET",
+			dataType : 'json',
+			data : {
+				soLuong : soLuong,
+				nhanHieuVK : nhanHieuVK,
+				lyDo : lyDo
+			},
+			success : function(data) {
+				handleMessageResponse(data);
+				hideModal();
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	}
 }

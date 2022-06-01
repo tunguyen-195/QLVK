@@ -221,6 +221,8 @@ function initialTableTra() {
 	}, {
 		data : 'hoTenCBCS'
 	}, {
+		data : 'donVi'
+	}, {
 		data : 'soHieuVK'
 	}, {
 		data : 'nhanHieuVK'
@@ -275,6 +277,10 @@ function initialTableTra() {
 					'orderable' : false
 				}, {
 					'targets' : [ 8 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 9 ],
 					'searchable' : false,
 					'orderable' : false
 				} ],
@@ -451,6 +457,18 @@ function showModalMuon(data) {
 	$('#txt_maDuyet').val(data.maDuyet);
 	getSoHieuVK(data.nhanHieuVK);
 }
+
+function showModalTra(data) {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-tra');
+	obj.classList.add('open');
+	$('#txt_lanhDao').val(data.lanhDaoDuyet);
+	$('#txt_soHieu').val(data.soHieuCBCS);
+	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
+	$('#soHieuVK').val(data.soHieuVK);
+	$('#txt_nhanHieu').val(data.nhanHieuVK);
+	$('#txt_soLuong').val(data.soLuong);
+}
 function getSoHieuVK(nhanHieu) {
 	$.ajax({
 		url : baseUrl + 'api/CBQL/getSoHieu',
@@ -501,4 +519,25 @@ function choMuon() {
 }
 function taoBienBan(data) {
 	alert("Biên bản nè");
+}
+
+function tuChoi(){
+	var choMuonModel = {};
+	choMuonModel.maMuon = $('#txt_maMuon').val();
+	choMuonModel.maDuyet = $('#txt_maDuyet').val();
+	$.ajax({
+		url : baseUrl + 'api/CBQL/tuChoi',
+		contentType : "application/json",
+		type : "POST",
+		dataType : 'json',
+		data : JSON.stringify(choMuonModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-muon'));
+			timKiemMuon();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
 }

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,6 +30,7 @@ import com.qlvk.entity.BienBan;
 import com.qlvk.entity.ChiTietMuon;
 import com.qlvk.entity.DanhSachMuon;
 import com.qlvk.entity.DuyetMuon;
+import com.qlvk.entity.PhieuTra;
 import com.qlvk.entity.VkVlnCcht;
 import com.qlvk.model.DanhSachMuonModel;
 import com.qlvk.model.DanhSachTraModel;
@@ -40,6 +40,7 @@ import com.qlvk.repository.ICBQLRepository;
 import com.qlvk.repository.IChiTietMuonRepository;
 import com.qlvk.repository.IDanhSachMuonRepository;
 import com.qlvk.repository.IDuyetMuonRepository;
+import com.qlvk.repository.IPhieuTraRepository;
 import com.qlvk.repository.IVkVlnCchtRepository;
 
 @Service
@@ -58,6 +59,8 @@ public class CBQLService extends BaseService {
 	IChiTietMuonRepository chiTietRep;
 	@Autowired
 	MessageSource message;
+	@Autowired
+	IPhieuTraRepository phieuTraRep;
 
 	public List<DanhSachVKModel> getDanhSachVK(String chungLoai, String nhanHieu, String tinhTrang) {
 		List<DanhSachVKModel> outputList = new ArrayList<>();
@@ -125,6 +128,7 @@ public class CBQLService extends BaseService {
 			model.setSoHieuCBQL(StringUtil.toString(object[6]));
 			model.setHoTenCBQL(StringUtil.toString(object[7]));
 			model.setLanhDaoDuyet(StringUtil.toString(object[8]));
+			model.setDonVi(StringUtil.toString(object[9]));
 			outputList.add(model);
 		}
 
@@ -211,7 +215,7 @@ public class CBQLService extends BaseService {
 		vk.setTinhTrang("1");
 		vkRep.save(vk);
 		// update tinh trang muon
-		rep.updateTrangThaiMuon(maMuon);
+		rep.updateTrangThaiMuon(maMuon, 2);
 		// update so hieu vu khi tai table duyet_muon
 		rep.updateSohieuVK(maDuyet, maMuon, soHieuVK);
 		// insert vao table bien_ban
@@ -246,7 +250,7 @@ public class CBQLService extends BaseService {
 		List<ChiTietMuon> listChiTiet = new ArrayList<>();
 		for (int i = 0; i < soLuong; i++) {
 			// update tinh trang vu khi
-			rep.updateTinhTrangVK(listSoHieu.get(i));
+			rep.updateTinhTrangVK(listSoHieu.get(i), 1);
 
 			// insert chi_tiet_muon
 			chiTietMuon = new ChiTietMuon();
@@ -257,7 +261,7 @@ public class CBQLService extends BaseService {
 		}
 		chiTietRep.saveAll(listChiTiet);
 		// update tinh trang muon
-		rep.updateTrangThaiMuon(maMuon);
+		rep.updateTrangThaiMuon(maMuon, 2);
 
 		// insert vao table bien_ban
 		BienBan bienBan = new BienBan();
@@ -275,12 +279,16 @@ public class CBQLService extends BaseService {
 		Map<String, Object> data = new HashMap<>();
 		DuyetMuon duyetMuon = duyetMuonRep.getOne(maDuyet);
 		if (duyetMuon == null) {
-			data.put("error", message.getMessage("test", new Object[0], new Locale("vn")));
+			data.put("statusCode", "500");
+			data.put("messageError", "Không tồn tại yêu cầu mượn");
 			return data;
 		}
 		// xoa tat ca trong duyet muon theo ma muon
 		duyetMuonRep.deleteByMaMuon(maMuon);
-		rep.updateTrangThaiHuy(maMuon);
+		// update trạng thái ở danh sách mượn
+		rep.updateTrangThaiMuon(maMuon, 3);
+		data.put("statusCode", "200");
+		data.put("messageInfo", "Đã từ chối yêu cầu thành công");
 		return data;
 	}
 
@@ -342,5 +350,28 @@ public class CBQLService extends BaseService {
 			throw e;
 		}
 		return idFile;
+	}
+
+	public Map<String, Object> thuHoi(int soBienBan, int maMuon, int soHieuVk) {
+		Map<String, Object> data = new HashMap<>();
+		try {
+			// tao thong tin phieu tra
+			PhieuTra phieuTra = new PhieuTra();
+			phieuTra.setNgayTra(new Date());
+			phieuTra.setSoBienBan(soBienBan);
+			phieuTraRep.save(phieuTra);
+
+			// update trang thai muon (hoan thanh)
+			rep.updateTrangThaiMuon(maMuon, 4);
+
+			// update tinh trang vu khi (con)
+			rep.updateTinhTrangVK(soHieuVk, 0);
+			data.put("statusCode", "200");
+			data.put("messageInfo", "Đã cập nhật thông tin thu hồi");
+		} catch (Exception e) {
+			data.put("statusCode", "500");
+			data.put("messageError", "Cập nhật thông tin thu hồi thất bại");
+		}
+		return data;
 	}
 }
