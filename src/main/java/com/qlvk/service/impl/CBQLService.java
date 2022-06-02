@@ -293,19 +293,7 @@ public class CBQLService extends BaseService {
 	}
 
 	public Map<String, Object> download(String chungLoai, String nhanHieu, String tinhTrang) throws Exception {
-		List<String> header = new ArrayList<>();
-		header.add(Messages.getMessage("AnkenMaster.literal.id"));
-		header.add(Messages.getMessage("AnkenMaster.literal.ankenCode"));
-		header.add(Messages.getMessage("AnkenMaster.literal.ankenName"));
-		header.add(Messages.getMessage("AnkenMaster.literal.startDate"));
-		header.add(Messages.getMessage("AnkenMaster.literal.endDate"));
-		header.add(Messages.getMessage("AnkenMaster.literal.totalLoc"));
-		header.add(Messages.getMessage("AnkenMaster.literal.totalTc"));
-		header.add(Messages.getMessage("AnkenMaster.literal.totalBugIn"));
-		header.add(Messages.getMessage("AnkenMaster.literal.totalBugExt"));
-
 		List<Object[]> danhSachVK = rep.getDSVuKhi(chungLoai, nhanHieu, tinhTrang);
-
 		Map<String, Object> data = new HashMap<>();
 		data.put(CommonConstant.ID_FILE_DOWNLOAD, createFileDownload(danhSachVK));
 		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
