@@ -47,14 +47,14 @@ public class CBCSApiController {
 		}
 	}
 
-	@RequestMapping(value = "/api/CBCS/getDetailVk", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "/api/CBCS/getSoLuong", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public Map<String, Object> getDetailVk(HttpServletRequest request,
-			@RequestParam(value = "soHieuVK", defaultValue = "") String soHieuVK) throws Exception {
+	public Map<String, Object> getSoLuong(HttpServletRequest request,
+			@RequestParam(value = "nhanHieuVK", defaultValue = "") String nhanHieuVK) throws Exception {
 		try {
 			logger.info("Start search");
 			// Get List Food
-			CBCSModel detail = cbcsService.getDetailVK(soHieuVK);
+			CBCSModel detail = cbcsService.getSoLuong(nhanHieuVK);
 			Map<String, Object> data = new HashMap<>();
 			data.put("statusCode", "200");
 			data.put(CommonConstant.DATA, detail);
@@ -67,27 +67,15 @@ public class CBCSApiController {
 		}
 	}
 
-	@RequestMapping(value = "/api/CBCS/getNhanHieu", method = RequestMethod.GET, produces = {
-			MediaType.APPLICATION_JSON_VALUE })
-	public Map<String, Object> getNhanHieu(HttpServletRequest request,
-			@RequestParam(value = "chungLoai", defaultValue = "") String chungLoai) {
-		Map<String, Object> data = new HashMap<>();
-		List<String> listNhanHieu = cbcsService.getNhanHieu(chungLoai);
-		data.put("statusCode", "200");
-		data.put(CommonConstant.DATA, listNhanHieu);
-		return data;
-	}
-
 	@RequestMapping(value = "/api/CBCS/requestMuon", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public Map<String, Object> requestMuon(HttpServletRequest request,
-			@RequestParam(value = "soLuong", defaultValue = "") String soLuong,
-			@RequestParam(value = "soHieuVK", defaultValue = "") String soHieuVK) {
+	public Map<String, Object> requestMuon(HttpServletRequest request, @RequestParam(value = "soLuong") String soLuong,
+			@RequestParam(value = "nhanHieuVK") String nhanHieuVK, @RequestParam(value = "lyDo") String lyDo) {
 
 		User user = (User) request.getSession().getAttribute(CommonConstant.USER_INFO);
 
-		Map<String, Object> data = cbcsService.requestMuon(user.getUserId(), Integer.parseInt(soHieuVK),
-				Integer.parseInt(soLuong));
+		Map<String, Object> data = cbcsService.requestMuon(user.getUserId(), nhanHieuVK, Integer.parseInt(soLuong),
+				lyDo);
 
 		return data;
 	}

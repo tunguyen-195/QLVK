@@ -5,22 +5,22 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the duyet_muon database table.
+ * The persistent class for the chi_tiet_muon database table.
  * 
  */
 @Entity
-@Table(name="duyet_muon")
-@NamedQuery(name="DuyetMuon.findAll", query="SELECT d FROM DuyetMuon d")
-public class DuyetMuon implements Serializable {
+@Table(name="chi_tiet_muon")
+@NamedQuery(name="ChiTietMuon.findAll", query="SELECT c FROM ChiTietMuon c")
+public class ChiTietMuon implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ma_chi_tiet")
+	private int maChiTiet;
+
 	@Column(name="ma_duyet")
 	private int maDuyet;
-
-	@Column(name="ma_lanh_dao")
-	private int maLanhDao;
 
 	@Column(name="ma_muon")
 	private int maMuon;
@@ -28,7 +28,15 @@ public class DuyetMuon implements Serializable {
 	@Column(name="so_hieu_vk_vln_ccht")
 	private int soHieuVkVlnCcht;
 
-	public DuyetMuon() {
+	public ChiTietMuon() {
+	}
+
+	public int getMaChiTiet() {
+		return this.maChiTiet;
+	}
+
+	public void setMaChiTiet(int maChiTiet) {
+		this.maChiTiet = maChiTiet;
 	}
 
 	public int getMaDuyet() {
@@ -37,14 +45,6 @@ public class DuyetMuon implements Serializable {
 
 	public void setMaDuyet(int maDuyet) {
 		this.maDuyet = maDuyet;
-	}
-
-	public int getMaLanhDao() {
-		return this.maLanhDao;
-	}
-
-	public void setMaLanhDao(int maLanhDao) {
-		this.maLanhDao = maLanhDao;
 	}
 
 	public int getMaMuon() {

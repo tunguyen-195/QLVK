@@ -3,11 +3,11 @@ $(document).ready(function() {
 });
 
 // show modal button
-function showModal(soHieuVk) {
+function showModal(nhanHieuVK) {
 	$("body").addClass("modal-open");
 	var obj = document.getElementById('js-modal-detail');
 	obj.classList.add('open');
-	getDetailVk(soHieuVk);
+	getSoLuongVK(nhanHieuVK);
 };
 
 function hideModal() {
@@ -63,24 +63,24 @@ function createImgVK(data) {
 	var str = '<td style="display: grid">';
 	str += '<img src="/QLVK/resources/assets/img/' + data.srcImg + '" '
 	str += ' class="table_image" alt="' + data.srcImg + '"'
-	str += ' onclick="showModal(' + data.soHieuVK + ');"> '
+	str += ' onclick="showModal(&#39;' + data.nhanHieu + '&#39;);"> '
 	str += '<label>' + data.nhanHieu + '</label>';
 	str += '</td>';
 	return str;
 }
 
-function getDetailVk(soHieuVK) {
+function getSoLuongVK(nhanHieuVK) {
 	$.ajax({
-		url : baseUrl + 'api/CBCS/getDetailVk',
+		url : baseUrl + 'api/CBCS/getSoLuong',
 		contentType : "application/json",
 		type : "GET",
 		dataType : 'json',
 		data : {
-			soHieuVK : soHieuVK
+			nhanHieuVK : nhanHieuVK
 		},
 		success : function(data) {
 			if (data.statusCode == '200') {
-				setDataToModal(data.data);
+				setDataToModal(data.data, nhanHieuVK);
 			}
 		},
 		error : function(xhr) {
@@ -88,18 +88,14 @@ function getDetailVk(soHieuVK) {
 		}
 	});
 }
-function setDataToModal(data) {
-	$('#soHieu').text(data.soHieuVK);
-	$('#soHieuHidden').val(data.soHieuVK);
-	$('#chungLoai').text(data.chungLoai);
-	$('#nhanHieu').text(data.nhanHieu);
-	$('#donViTinh').text(data.donViTinh);
-	$('#nuocSanXuat').text(data.nuocSx);
-	if (data.soLuongTonKho == '0') {
+function setDataToModal(data, nhanHieuVK) {
+	if (data.soLuongConLai == '0') {
 		$('#modal-muon-button').prop('disabled', true);
+	} else {
+		$('#modal-muon-button').prop('disabled', false);
 	}
-	$('#soLuong').attr('max', data.soLuongTonKho)
-	$('#soLuong').val(data.soLuongTonKho);
+	$('#soLuong').attr('max', data.soLuongConLai);
+	$('#nhan_hieu_hidden').val(nhanHieuVK);
 	$('input.input-qty')
 			.each(
 					function() {
@@ -126,7 +122,7 @@ function setDataToModal(data) {
 
 function loadNhanHieu() {
 	$.ajax({
-		url : baseUrl + 'api/CBCS/getNhanHieu',
+		url : baseUrl + 'api/QLVK/getNhanHieu',
 		contentType : "application/json",
 		type : "GET",
 		dataType : 'json',
@@ -136,13 +132,13 @@ function loadNhanHieu() {
 		success : function(data) {
 			if (data.statusCode == '200') {
 				createNhanHieuByChungLoai(data.data);
+				getListImgVK();
 			}
 		},
 		error : function(xhr) {
 			showPopupCommon('error', 'Exception', null);
 		}
 	});
-	getListImgVK();
 }
 
 function createNhanHieuByChungLoai(data) {
@@ -156,22 +152,28 @@ function createNhanHieuByChungLoai(data) {
 
 function requestMuon() {
 	var soLuong = $('#soLuong').val();
-	var soHieuVK = $('#soHieuHidden').val();
-	$.ajax({
-		url : baseUrl + 'api/CBCS/requestMuon',
-		contentType : "application/json",
-		type : "GET",
-		dataType : 'json',
-		data : {
-			soLuong : soLuong,
-			soHieuVK : soHieuVK
-		},
-		success : function(data) {
-			handleMessageResponse(data);
-			hideModal();
-		},
-		error : function(xhr) {
-			showPopupCommon('error', 'Exception', null);
-		}
-	});
+	var nhanHieuVK = $('#nhan_hieu_hidden').val();
+	var lyDo = $('#lyDo').val();
+	if (soLuong <= 0) {
+		alert("số lượng phải khác 0");
+	} else {
+		$.ajax({
+			url : baseUrl + 'api/CBCS/requestMuon',
+			contentType : "application/json",
+			type : "GET",
+			dataType : 'json',
+			data : {
+				soLuong : soLuong,
+				nhanHieuVK : nhanHieuVK,
+				lyDo : lyDo
+			},
+			success : function(data) {
+				handleMessageResponse(data);
+				hideModal();
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	}
 }

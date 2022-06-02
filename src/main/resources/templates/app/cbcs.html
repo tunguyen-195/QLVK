@@ -84,7 +84,7 @@
 			<div class="row user-link">
 				<div class="col col-right">
 					<a href=""> <i class="fa-duotone fa-user-police-tie"></i> <span>
-							Nguyễn Minh Tú</span>
+							[[${user.name}]]</span>
 					</a>
 				</div>
 			</div>
@@ -122,7 +122,8 @@
 										<option th:value="${item}">[[${item}]]</option>
 									</th:block>
 								</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
-									id="list-nhanHieu" class="select-box" onchange="getListImgVK();">
+									id="list-nhanHieu" class="select-box"
+									onchange="getListImgVK();">
 									<option value="">--Lựa chọn--</option>
 									<th:block th:each="item, iState : ${listNhanHieu}">
 										<option th:value="${item}">[[${item}]]</option>
@@ -156,52 +157,25 @@
 			<div class="modal-detail-form js-modal-Bubble">
 				<header class="modal-header">
 					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
-					<h4>Thông tin vũ khí, vật liệu nổ, công cụ hỗ trợ</h4>
+					<h4>Chọn số lượng vũ khí cần mượn</h4>
 				</header>
-
 				<div class="modal-body clearfix">
 					<div class="col col-half">
-						<div class="input-container">
-							<label class="modal-detail-label">Số hiệu</label> <span
-								class="span-detail" id="soHieu">Số hiệu</span> <input
-								type="hidden" id="soHieuHidden">
-						</div>
-					</div>
-
-					<div class="col col-half">
-						<div class="input-container">
-							<label class="modal-detail-label">Chủng loại</label> <span
-								class="span-detail" id="chungLoai"></span>
-						</div>
-					</div>
-
-					<div class="col col-half">
-						<div class="input-container">
-							<label class="modal-detail-label">Nhãn hiệu</label> <span
-								class="span-detail" id="nhanHieu"></span>
-						</div>
-					</div>
-
-					<div class="col col-half">
-						<div class="input-container">
-							<label class="modal-detail-label">Đơn vị tính</label> <span
-								class="span-detail" id="donViTinh"></span>
-						</div>
-					</div>
-
-					<div class="col col-half">
-						<div class="input-container">
-							<label class="modal-detail-label">Nước sản xuất</label> <span
-								class="span-detail" id="nuocSanXuat"></span>
-						</div>
-					</div>
-					<div class="col col-half">
-						<div class="input-container">
+						<div class="input-container-cbcs">
 							<label for="soLuong" class="modal-detail-label">Số lượng</label>
 							<input class="minus is-form" type="button" value="-"> <input
 								aria-label="soLuong" class="input-qty" max="" min="1"
-								id="soLuong" name="soLuong" type="number" value="1"> <input
+								id="soLuong" name="soLuong" type="number" value="1" disabled> <input
 								class="plus is-form" type="button" value="+">
+								<input type="hidden" id="nhan_hieu_hidden">
+						</div>
+					</div>
+					<div class="col col-half">
+						<div class="input-container-cbcs row">
+							<label for="lyDo" class="modal-detail-label">Lý do mượn</label>
+							<div>
+								<textarea rows="4" cols="25" id="lyDo"></textarea>
+							</div>
 						</div>
 					</div>
 					<div class="col row" style="justify-content: center;">

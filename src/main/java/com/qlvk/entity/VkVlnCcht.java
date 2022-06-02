@@ -15,7 +15,6 @@ public class VkVlnCcht implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="so_hieu_vk_vln_ccht")
 	private int soHieuVkVlnCcht;
 
@@ -31,11 +30,8 @@ public class VkVlnCcht implements Serializable {
 	@Column(name="nuoc_san_xuat")
 	private String nuocSanXuat;
 
-	@Column(name="so_luong")
-	private int soLuong;
-
-	@Column(name="so_luong_ton_kho")
-	private int soLuongTonKho;
+	@Column(name="tinh_trang")
+	private String tinhTrang;
 
 	public VkVlnCcht() {
 	}
@@ -80,20 +76,12 @@ public class VkVlnCcht implements Serializable {
 		this.nuocSanXuat = nuocSanXuat;
 	}
 
-	public int getSoLuong() {
-		return this.soLuong;
+	public String getTinhTrang() {
+		return this.tinhTrang;
 	}
 
-	public void setSoLuong(int soLuong) {
-		this.soLuong = soLuong;
-	}
-
-	public int getSoLuongTonKho() {
-		return this.soLuongTonKho;
-	}
-
-	public void setSoLuongTonKho(int soLuongTonKho) {
-		this.soLuongTonKho = soLuongTonKho;
+	public void setTinhTrang(String tinhTrang) {
+		this.tinhTrang = tinhTrang;
 	}
 
 }

@@ -1,109 +1,72 @@
 var modeSearch;
 $(document).ready(function() {
-    //--------------------------------------------NEW
-    initialTable();
-    $('#tbl_datatables').DataTable().ajax.reload();
-	$('#search').keyup(function(e){
+	// --------------------------------------------NEW
+	initialTableQL();
+	initialTableMuon();
+	initialTableTra();
+	$('#tbl_datatables_vk').DataTable().ajax.reload();
+	$('#tab-ql').click(function() {
+		$('#tbl_datatables_vk').DataTable().ajax.reload();
+	});
+	$('#tab-muon').click(function() {
+		$('#tbl_datatables_muon').DataTable().ajax.reload();
+	});
+	$('#tab-tra').click(function() {
+		$('#tbl_datatables_tra').DataTable().ajax.reload();
+	});
+
+	$('#search').keyup(function(e) {
 		var code = e.key;
-		if(code==="Enter") {
+		if (code === "Enter") {
 			loadInfor();
 		}
 	});
 
-	$('.tabs #tab-TL').click(function(){
-		modeSearch = '0';
-		$('#search').val('');
-		$('.tab-content').show();
-		loadInfor();
-	});
-	$('.tabs #tab-VK').click(function(){
-		modeSearch = '1';
-		$('#search').val('');
-		$('.tab-content').hide();
-		loadInfor();
-	});
-
-	$('.tabs #tab-VLN').click(function(){
-		modeSearch = '2';
-		$('#search').val('');
-		$('.tab-content').hide();
-		loadInfor();
-	});
-	
-	$('.tabs #tab-CCHT').click(function(){
-		modeSearch = '3';
-		$('#search').val('');
-		$('.tab-content').hide();
-		loadInfor();
-	});
-
-	var table = $('#tbl_datatables').DataTable();
-	$('#tbl_datatables tbody').on('click', 'tr', function () {
-		if ( $(this).children().hasClass('dataTables_empty') ) {
+	var tableVk = $('#tbl_datatables_vk').DataTable();
+	$('#tbl_datatables_vk tbody').on('click', 'tr', function() {
+		if ($(this).children().hasClass('dataTables_empty')) {
 			return;
 		}
-		showModal(document.getElementById('js-modal-info'));
+		var data = tableVk.row(this).data();
+		showModalVk(data);
 	});
 
-	//--------------------------------------------------------------------------
+	var tableMuon = $('#tbl_datatables_muon').DataTable();
+	$('#tbl_datatables_muon tbody').on('click', 'tr', function() {
+		if ($(this).children().hasClass('dataTables_empty')) {
+			return;
+		}
+		var data = tableMuon.row(this).data();
+		showModalMuon(data);
+	});
 	
-    const jQUery = document.querySelector.bind(document);
-    const jQUery2 = document.querySelectorAll.bind(document);
-    
-    const tabs = jQUery2(".tab-item");
-    const panes = jQUery2(".tab-pane");
-    
-    const tabActive = jQUery(".tab-item.active");
-    const line = jQUery(".tabs .line");
-    
-    line.style.left = tabActive.offsetLeft + "px";
-    line.style.width = tabActive.offsetWidth + "px";
-    
-    tabs.forEach((tab, index) => {
-      const pane = panes[index];
-    
-      tab.onclick = function () {
-    	  jQUery(".tab-item.active").classList.remove("active");
-    	  jQUery(".tab-pane.active").classList.remove("active");
-    
-        line.style.left = this.offsetLeft + "px";
-        line.style.width = this.offsetWidth + "px";
-    
-        this.classList.add("active");
-        pane.classList.add("active");
-      };
-    });
+	$('#btn-download').click(function() {
 
- // stop bubble in modal
-    const modalBubbles = document.querySelectorAll('.js-modal-Bubble');
-
-    for (const modalBubble of modalBubbles) {
-      modalBubble.addEventListener('click', preventBubble,false);
-    };
-
-    //var defaultChucvu = document.getElementById('js-addVK-danhmuc'); // give an id to your input and set it as variable
-    //    defaultChucvu.value ='Vũ khí'; // set default value instead of html attribute
-    //    defaultChucvu.onfocus = function() { defaultChucvu.value =''; }; // on focus - clear input
-        // defaultChucvu.onblur = function() { defaultChucvu.value ='Cán bộ chiến sỹ'; }; // on leave restore it.
-
-        //search
-        document.getElementById('searchIcon').onclick = function() {
-          document.getElementById('search').classList.add("visible");
-          document.getElementById('clear').classList.add("visible");
-          document.getElementById('search-icon').classList.add("visible");
-          document.getElementById('search').focus();
-          document.getElementById('searchIcon').classList.add("hide");
-      }
-      document.getElementById('clear').onclick = function() {
-        document.getElementById('searchIcon').classList.remove("hide");
-        document.getElementById('search').classList.remove("visible");
-        document.getElementById('clear').classList.remove("visible");
-      }
-});
-
-function loadInfor(){
+		$.ajax({
+			contentType : "application/json",
+			url : baseUrl + 'api/CBQL/download',
+			data : {
+				chungLoai:$('#list-chungloai').val(),nhanHieu:$('#list-nhanHieu').val(),tinhTrang:$('#list_tinhTrang').val()
+			},
+			type : "GET",
+			dataType : 'json',
+			timeout : 30000, // ms
+			success : function(data) {
+				if (data.statusCode == '200') {
+					executeDownloadFile(data.idFileDownload);
+				} else {
+					showToastMessage('error', 'TODO');
+				}
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	});
+})
+function loadInfor() {
 	if (!modeSearch || modeSearch == '0') {
-		$('#tbl_datatables').DataTable().ajax.reload();
+		$('#tbl_datatables_vk').DataTable().ajax.reload();
 	} else if (modeSearch == '1') {
 		getListVuKhi();
 	} else if (modeSearch == '2') {
@@ -112,128 +75,249 @@ function loadInfor(){
 
 	}
 }
-function prepareAdd(){
-	if (!modeSearch || modeSearch == '0') {
-		$('#js-addVK-danhmuc').val('')
-	} else if (modeSearch == '1') {
-		$('#js-addVK-danhmuc').val('Vũ khí');
-	} else if (modeSearch == '2') {
-		$('#js-addVK-danhmuc').val('Vật liệu nổ');
-	} else if (modeSearch == '3') {
-		$('#js-addVK-danhmuc').val('Công cụ hỗ trợ');
-	}
-	resetData();
-}
-function resetData(){
-	$('#js-addVK-chungloai').val('');
-	$('#js-addVK-nhanhieu').val('');
-	$('#js-addVK-sohieu').val('');
-	$('#js-addVK-nuocsanxuat').val('');
-	$('#js-addVK-sogiayphep').val('');
-	$('#js-addVK-ngaycapphep').val('');
-	$('#js-addVK-cogiatriden').val('');
-}
-function initialTable() {
+function initialTableQL() {
 
 	// Define Columns
-	var columns = [
-			{
-				data : 'stt'
-			},{
-				data : 'chungLoai'
-			},{
-				data : 'nhanHieu'
-			},{
-				data : 'nuocSanXuat'
-			},{
-				data : 'soHieu'
-			},{
-				data : 'soGiayPhep'
-			},{
-				data : 'ngayCapPhep'
-			},{
-				data : 'coGiaTriDen'
-			}];
+	var columns = [ {
+		data : 'soHieu'
+	}, {
+		data : 'chungLoai'
+	}, {
+		data : 'nhanHieu'
+	}, {
+		data : 'donViTinh'
+	}, {
+		data : 'nuocSX'
+	}, {
+		data : 'tinhTrang'
+	} ];
 
-	//Create DataTable
+	// Create DataTable
 	createDataTableCommon();
-	$('#tbl_datatables').DataTable({
-		'columns' : columns,
-		'columnDefs' : [{
-			'targets' : [0],
-			'searchable' : false,
-			'orderable': false
-		},{
-			'targets' : [1],
-			'searchable' : false,
-			'orderable': false
-		}
-		,{
-			'targets' : [2],
-			'searchable' : false,
-			'orderable': false
-		}
-		,{
-			'targets' : [3],
-			'searchable' : false,
-			'orderable': false
-		}
-		,{
-			'targets' : [4],
-			'searchable' : false,
-			'orderable': false
-		},{
-			'targets' : [5],
-			'searchable' : false,
-			'orderable': false
-		},{
-			'targets' : [6],
-			'searchable' : false,
-			'orderable': false
-		},{
-			'targets' : [7],
-			'searchable' : false,
-			'orderable': false
-		}],
-		"order": [[ 1, "ASC" ]],
-		'ajax' : {
-			
-			'url' : baseUrl + 'api/QLVK/searchTongLuc',
-			"contentType": "application/json",
-			"type": "GET",
-			'data' : function(d) {
+	$('#tbl_datatables_vk').DataTable(
+			{
+				'columns' : columns,
+				'columnDefs' : [ {
+					'targets' : [ 0 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 1 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 2 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 3 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 4 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 5 ],
+					'searchable' : false,
+					'orderable' : false
+				} ],
+				'order' : [ [ 1, "ASC" ] ],
+				'ajax' : {
+					'url' : baseUrl + 'api/CBQL/searchDsVK',
+					'contentType' : 'application/json',
+					'type' : 'GET',
+					'data' : function(d) {
 
-				// set search keyword to parameter
-				d.allSearch = $('#search').val();
+						// set search keyword to parameter
+						d.chungLoai = $('#list-chungloai').val();
+						d.nhanHieu = $('#list-nhanHieu').val();
+						d.tinhTrang = $('#list_tinhTrang').val();
+					},
+					'complete' : function(response) {
+						checkDataTable('tbl_datatables_vk',
+								response.responseJSON.recordsTotal);
+					},
+					'error' : function(xhr) {
+						handleApiError(xhr);
+					}
+				}
+			});
+	checkDataTable('tbl_datatables_vk', 0);
+}
+function initialTableMuon() {
 
-				// set order to parameter
-				var order = $('#tbl_datatables').DataTable().order();
-				var columnIndex = order[0][0];
-				d.orderColumn = columns[columnIndex].data;
-				d.orderDirection = order[0][1];
-			},
-			complete : function(response) {
-				checkDataTable('tbl_datatables', response.responseJSON.recordsTotal);
-			},
-			error : function(xhr) {
-				handleApiError(xhr);
-			}
-		}
-	});
-	checkDataTable('tbl_datatables', 0);
+	// Define Columns
+	var columns = [ {
+		data : 'lanhDaoDuyet'
+	}, {
+		data : 'soHieuCBCS'
+	}, {
+		data : 'hoTenCBCS'
+	}, {
+		data : 'soHieuVK'
+	}, {
+		data : 'nhanHieuVK'
+	}, {
+		data : 'soLuong'
+	} ];
+
+	// Create DataTable
+	createDataTableCommon();
+	$('#tbl_datatables_muon').DataTable(
+			{
+				'columns' : columns,
+				'columnDefs' : [ {
+					'targets' : [ 0 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 1 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 2 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 3 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 4 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 5 ],
+					'searchable' : false,
+					'orderable' : false
+				} ],
+				"order" : [ [ 1, "ASC" ] ],
+				'ajax' : {
+
+					'url' : baseUrl + 'api/CBQL/searchDsMuon',
+					"contentType" : "application/json",
+					"type" : "GET",
+					'data' : function(d) {
+						// set search keyword to parameter
+						d.timKiem = $('#txt_timKiem_muon').val();
+					},
+					complete : function(response) {
+						checkDataTable('tbl_datatables_muon',
+								response.responseJSON.recordsTotal);
+					},
+					error : function(xhr) {
+						handleApiError(xhr);
+					}
+				}
+			});
+	checkDataTable('tbl_datatables_muon', 0);
+}
+function initialTableTra() {
+
+	// Define Columns
+	var columns = [ {
+		data : 'soHieuCBCS'
+	}, {
+		data : 'hoTenCBCS'
+	}, {
+		data : 'donVi'
+	}, {
+		data : 'soHieuVK'
+	}, {
+		data : 'nhanHieuVK'
+	}, {
+		data : 'soLuong'
+	}, {
+		data : 'ngayMuon'
+	}, {
+		data : 'hoTenCBQL'
+	}, {
+		data : 'soHieuCBQL'
+	}, {
+		data : 'lanhDaoDuyet'
+	} ];
+
+	// Create DataTable
+	createDataTableCommon();
+	$('#tbl_datatables_tra').DataTable(
+			{
+				'columns' : columns,
+				'columnDefs' : [ {
+					'targets' : [ 0 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 1 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 2 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 3 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 4 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 5 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 6 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 7 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 8 ],
+					'searchable' : false,
+					'orderable' : false
+				}, {
+					'targets' : [ 9 ],
+					'searchable' : false,
+					'orderable' : false
+				} ],
+				"order" : [ [ 1, "ASC" ] ],
+				'ajax' : {
+
+					'url' : baseUrl + 'api/CBQL/searchDsTra',
+					"contentType" : "application/json",
+					"type" : "GET",
+					'data' : function(d) {
+						// set search keyword to parameter
+						d.timKiem = $('#txt_timKiem_tra').val();
+					},
+					complete : function(response) {
+						checkDataTable('tbl_datatables_tra',
+								response.responseJSON.recordsTotal);
+					},
+					error : function(xhr) {
+						handleApiError(xhr);
+					}
+				}
+			});
+	checkDataTable('tbl_datatables_tra', 0);
 }
 
-function getListVuKhi() {
+function loadNhanHieu(chungLoai, flg) {
 	$.ajax({
+		url : baseUrl + 'api/QLVK/getNhanHieu',
 		contentType : "application/json",
-		url : baseUrl + 'api/QLVK/searchTongLuc',
-		data : {allSearch:$('#search').val(), type:'0'},
 		type : "GET",
 		dataType : 'json',
-		timeout : 30000, // ms
+		data : {
+			chungLoai : $(chungLoai).val()
+		},
 		success : function(data) {
 			if (data.statusCode == '200') {
-				reloadPageVuKhi(data.data);
+				createNhanHieuByChungLoai(data.data, flg);
 			}
 		},
 		error : function(xhr) {
@@ -242,46 +326,218 @@ function getListVuKhi() {
 	});
 }
 
-function reloadPageVuKhi(data) {
-	$( "#response-vu-khi").empty();
-	var dataIndex;
-	for (var i = 0; i <data.length;i++) {
-		dataIndex = data[i];
-		$( "#response-vu-khi").append(createHTMLVuKhi(dataIndex));
+function createNhanHieuByChungLoai(data, flg) {
+	var str = '<option value="">--Lựa chọn--</option>';
+	for (var i = 0; i < data.length; i++) {
+		str += '<option value="' + data[i] + '">' + data[i] + '</option>'
+	}
+	if (flg == 1) {
+		$('#list-nhanHieu').empty();
+		$('#list-nhanHieu').append(str);
+	} else {
+		$('#in_nhanHieu').empty();
+		$('#in_nhanHieu').append(str);
 	}
 }
-function createHTMLVuKhi(data){
-	var str ='<div class="col col-third tab-item-field">';
-	str +='<div class="tab-item-img-vk">';
-	str +='<img id = "img123" src="/QLVK/myImage/imageDisplay?id='+data.imgPath+'" style="height:292px;width:336px">';
-	str +='</div>';
-	str +='<div class="row tab-item-text">';
-	str +='<p class="tab-item-name">'+data.chungLoai+'</p>';
-	str +='<p class="tab-item-content">';
-	str +='Số lượng:<span class="item-quantily">'+data.soLuong+'</span>';
-	str +='</p>';
-	str +='<p class="tab-item-content">';
-	str +='Giấy phép sử dụng:<span class="item-quantily">'+data.soGiayPhep+'</span>';
-	str +='</p>';
-	str +='<div class="row">';
-	str +='<div class="col-right">';
-	str +='<input class="modal-login-button" formmethod="post" type="button" value="Mượn">';
-	str +='</div>';
-	str +='</div>';
-	str +='</div>';
-	str +='</div>';
-	return str;
+function timKiemVK() {
+	$('#tbl_datatables_vk').DataTable().ajax.reload();
+}
+function timKiemMuon() {
+	$('#tbl_datatables_muon').DataTable().ajax.reload();
 }
 
 // show modal button
-function showModal(obj){
-  obj.classList.add('open');
+function showModalVk(data) {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-add');
+	obj.classList.add('open');
+	$('#modal-add-button').hide();
+	$('#modal-update-button').show();
+	$('#modal-del-button').show();
+	$("#txt_soHieu").prop("readonly", true);
+	$('#txt_soHieu').val(data.soHieu);
+	$('#in_chungloai').val(data.chungLoai);
+	$('#in_nhanHieu').val(data.nhanHieu);
+	$('#txt_donViTinh').val(data.donViTinh);
+	$('#txt_nuocSX').val(data.nuocSX);
+	$('#in_tinhTrang').val(data.tinhTrang);
+};
+function hideModal(obj) {
+	obj.classList.remove('open');
+	$("body").removeClass("modal-open");
 };
 
-function hideModal(obj){
-  obj.classList.remove('open');
-};
+function showModelThem() {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-add');
+	obj.classList.add('open');
+	$('#modal-add-button').show();
+	$('#modal-update-button').hide();
+	$('#modal-del-button').hide();
+	$("#txt_soHieu").prop("readonly", false);
+}
+function themMoi() {
+	var danhSachVKModel = {};
+	danhSachVKModel.soHieu = $.trim($('#txt_soHieu').val());
+	danhSachVKModel.chungLoai = $.trim($('#in_chungloai').val());
+	danhSachVKModel.nhanHieu = $.trim($('#in_nhanHieu').val());
+	danhSachVKModel.nuocSX = $.trim($('#txt_nuocSX').val());
+	danhSachVKModel.tinhTrang = $.trim($('#in_tinhTrang').val());
+	danhSachVKModel.donViTinh = $.trim($('#txt_donViTinh').val());
+	$.ajax({
+		url : baseUrl + 'api/CBQL/createVK',
+		contentType : "application/json",
+		type : "POST",
+		dataType : 'json',
+		data : JSON.stringify(danhSachVKModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-add'));
+			timKiemVK();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function capNhat() {
+	var danhSachVKModel = {};
+	danhSachVKModel.soHieu = $.trim($('#txt_soHieu').val());
+	danhSachVKModel.chungLoai = $.trim($('#in_chungloai').val());
+	danhSachVKModel.nhanHieu = $.trim($('#in_nhanHieu').val());
+	danhSachVKModel.nuocSX = $.trim($('#txt_nuocSX').val());
+	danhSachVKModel.tinhTrang = $.trim($('#in_tinhTrang').val());
+	danhSachVKModel.donViTinh = $.trim($('#txt_donViTinh').val());
+	$.ajax({
+		url : baseUrl + 'api/CBQL/updateVK',
+		contentType : "application/json",
+		type : "PUT",
+		dataType : 'json',
+		data : JSON.stringify(danhSachVKModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-add'));
+			timKiemVK();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function xoa() {
+	var danhSachVKModel = {};
+	danhSachVKModel.soHieu = $.trim($('#txt_soHieu').val());
+	$.ajax({
+		url : baseUrl + 'api/CBQL/delVK',
+		contentType : "application/json",
+		type : "DELETE",
+		dataType : 'json',
+		data : JSON.stringify(danhSachVKModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-add'));
+			timKiemVK();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function showModalMuon(data) {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-muon');
+	obj.classList.add('open');
+	$('#txt_lanhDao').val(data.lanhDaoDuyet);
+	$('#txt_soHieu').val(data.soHieuCBCS);
+	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
+	$('#soHieuVK').val(data.soHieuVK);
+	$('#txt_nhanHieu').val(data.nhanHieuVK);
+	$('#txt_soLuong').val(data.soLuong);
+	$('#txt_maMuon').val(data.maMuon);
+	$('#txt_maDuyet').val(data.maDuyet);
+	getSoHieuVK(data.nhanHieuVK);
+}
 
-function preventBubble(event){
-  event.stopPropagation();
-};
+function showModalTra(data) {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-tra');
+	obj.classList.add('open');
+	$('#txt_lanhDao').val(data.lanhDaoDuyet);
+	$('#txt_soHieu').val(data.soHieuCBCS);
+	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
+	$('#soHieuVK').val(data.soHieuVK);
+	$('#txt_nhanHieu').val(data.nhanHieuVK);
+	$('#txt_soLuong').val(data.soLuong);
+}
+function getSoHieuVK(nhanHieu) {
+	$.ajax({
+		url : baseUrl + 'api/CBQL/getSoHieu',
+		contentType : "application/json",
+		type : "GET",
+		dataType : 'json',
+		data : {
+			nhanHieu : nhanHieu
+		},
+		success : function(data) {
+			taoDanhSachSoHieu(data.data);
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function taoDanhSachSoHieu(data) {
+	var str = '<option value="">--Lựa chọn--</option>';
+	for (var i = 0; i < data.length; i++) {
+		str += '<option value="' + data[i] + '">' + data[i] + '</option>'
+	}
+	$('#soHieuVK').empty();
+	$('#soHieuVK').append(str);
+}
+function choMuon() {
+	var choMuonModel = {};
+	choMuonModel.maMuon = $('#txt_maMuon').val();
+	choMuonModel.maDuyet = $('#txt_maDuyet').val();
+	choMuonModel.soHieuVK = $('#soHieuVK').val();
+	choMuonModel.soLuong = $('#txt_soLuong').val();
+	choMuonModel.nhanHieuVK = $('#txt_nhanHieu').val();
+	$.ajax({
+		url : baseUrl + 'api/CBQL/choMuon',
+		contentType : "application/json",
+		type : "POST",
+		dataType : 'json',
+		data : JSON.stringify(choMuonModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-muon'));
+			taoBienBan(data.data);
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function taoBienBan(data) {
+	alert("Biên bản nè");
+}
+
+function tuChoi(){
+	var choMuonModel = {};
+	choMuonModel.maMuon = $('#txt_maMuon').val();
+	choMuonModel.maDuyet = $('#txt_maDuyet').val();
+	$.ajax({
+		url : baseUrl + 'api/CBQL/tuChoi',
+		contentType : "application/json",
+		type : "POST",
+		dataType : 'json',
+		data : JSON.stringify(choMuonModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-muon'));
+			timKiemMuon();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
