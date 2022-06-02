@@ -64,4 +64,13 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 
 	@Query(value = "SELECT a.ma_cbcs  FROM cbcs a  WHERE (a.user_id =:userId) ", nativeQuery = true)
 	public int getMaCBCSByUserID(@Param("userId") String userId);
+
+	@Query(value = 
+			"SELECT a.chung_loai, a.nhan_hieu_vk_vln_ccht, a.so_hieu_vk_vln_ccht, a.nuoc_san_xuat, "
+			+ "b.so_gpsd, b.ngay_cap, b.ngay_het_han FROM vk_vln_ccht a left join gpsd b on a.so_hieu_vk_vln_ccht = b.so_hieu_vk_vln_ccht " 
+			+ " WHERE (:chungLoai = '' or a.chung_loai =:chungLoai) "
+			+ "AND (:nhanHieu = '' or a.nhan_hieu_vk_vln_ccht =:nhanHieu) "
+			+ "AND (:tinhTrang = '' or a.tinh_trang =:tinhTrang)", nativeQuery = true)
+	public List<Object[]> getDSVuKhiDownload(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu,
+			@Param("tinhTrang") String tinhTrang);
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -293,7 +294,7 @@ public class CBQLService extends BaseService {
 	}
 
 	public Map<String, Object> download(String chungLoai, String nhanHieu, String tinhTrang) throws Exception {
-		List<Object[]> danhSachVK = rep.getDSVuKhi(chungLoai, nhanHieu, tinhTrang);
+		List<Object[]> danhSachVK = rep.getDSVuKhiDownload(chungLoai, nhanHieu, tinhTrang);
 		Map<String, Object> data = new HashMap<>();
 		data.put(CommonConstant.ID_FILE_DOWNLOAD, createFileDownload(danhSachVK));
 		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
@@ -318,17 +319,25 @@ public class CBQLService extends BaseService {
 			Row row = null;
 			Cell cell = null;
 			int cellnum = 0;
-
+			int index =1;
 			if (CollectionUtils.isNotEmpty(dataExport)) {
 				for (Object[] objArr : dataExport) {
 					sheet.shiftRows(rownum, rownum + 10, 1, true, true);
 					row = sheet.createRow(rownum++);
 					cellnum = 0;
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(String.valueOf(index));
+					cell.setCellStyle(style);
+					cellnum = 1;
 					for (Object obj : objArr) {
 						cell = row.createCell(cellnum++);
-						cell.setCellValue(String.valueOf(obj));
+						cell.setCellValue(obj == null? "" : String.valueOf(obj));
 						cell.setCellStyle(style);
 					}
+					cell = row.createCell(cellnum++);
+					cell.setCellValue("");
+					cell.setCellStyle(style);
+					index++;
 				}
 			}
 
