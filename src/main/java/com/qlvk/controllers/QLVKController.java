@@ -25,6 +25,12 @@ public class QLVKController extends BaseController {
 		if (user != null && user.getRole().equals("ROLE_CBQL")) {
 			return initCBQL(request, model);
 		}
+		if (user != null && user.getRole().equals("ROLE_CBCS")) {
+			return initCBCS(request, model);
+		}
+		if (user != null && user.getRole().equals("ROLE_LANH_DAO")) {
+			return initCBCS(request, model);
+		}
 		return "app/index";
 	}
 
@@ -42,5 +48,10 @@ public class QLVKController extends BaseController {
 		model.addAttribute("listChungLoai", service.getAllChungLoai());
 		model.addAttribute("listNhanHieu", service.getAllNhanHieu());
 		return "app/cbcs";
+	}
+	@RequestMapping(value = { "/LanhDao" }, method = RequestMethod.GET)
+	public String initLanhDao(HttpServletRequest request, Model model) {
+		initial(model);
+		return "app/lanhdao";
 	}
 }
