@@ -11,6 +11,8 @@ public class DanhSachTraModel {
 	private String soHieuCBQL;
 	private String lanhDaoDuyet;
 	private String donVi;
+	private int maMuon;
+	private int soBienBan;
 
 	public String getSoHieuCBCS() {
 		return soHieuCBCS;
@@ -90,6 +92,22 @@ public class DanhSachTraModel {
 
 	public void setDonVi(String donVi) {
 		this.donVi = donVi;
+	}
+
+	public int getMaMuon() {
+		return maMuon;
+	}
+
+	public void setMaMuon(int maMuon) {
+		this.maMuon = maMuon;
+	}
+
+	public int getSoBienBan() {
+		return soBienBan;
+	}
+
+	public void setSoBienBan(int soBienBan) {
+		this.soBienBan = soBienBan;
 	}
 
 }

@@ -121,13 +121,13 @@ public class CBQLApiController {
 		return data;
 	}
 
-	@RequestMapping(value = "/api/CBQL/getSoHieu", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "/api/CBQL/getDsSoHieu", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public Map<String, Object> getSoHieu(HttpServletRequest request,
-			@RequestParam(value = "nhanHieu") String nhanHieu) {
+			@RequestParam(value = "maMuon") String maMuon) {
 
 		Map<String, Object> data = new HashMap<>();
-		List<String> listData = service.getSoHieu(nhanHieu);
+		List<Integer> listData = service.getDsSoHieu(Integer.parseInt(maMuon));
 		data.put("statusCode", "200");
 		data.put(CommonConstant.DATA, listData);
 		return data;

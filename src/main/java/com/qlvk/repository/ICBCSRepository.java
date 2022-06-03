@@ -2,7 +2,6 @@ package com.qlvk.repository;
 
 import java.util.List;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,11 +28,8 @@ public interface ICBCSRepository extends JpaRepository<Category, Integer> {
 	@Query(value = "SELECT a.ma_cbcs " + " FROM cbcs a " + " WHERE (a.user_id =:userId) ", nativeQuery = true)
 	public int getMaCBCSByUserID(@Param("userId") String userId);
 
-	// @Transactional
-	// @Modifying
-	// @Query(value = "UPDATE vk_vln_ccht "
-	// + " SET so_luong_ton_kho = :soLuongTonKhoUpdate "
-	// + " WHERE so_hieu_vk_vln_ccht = :sohieu ", nativeQuery = true)
-	// public void updateVkVlnCcht(@Param("sohieu") int so_hieu_vk_vln_ccht,
-	// @Param("soLuongTonKhoUpdate") int soLuongTonKhoUpdate);
+	@Query(value = "SELECT nhan_hieu_vk_vln_ccht, ma_muon "
+			+ "FROM danh_sach_muon "
+			+ "WHERE ma_cbcs = :maCBCS AND trang_thai_muon = '3'", nativeQuery = true)
+	public List<Object[]> getDsYeuCauBiTuChoi(@Param("maCBCS") int maCBCS);
 }

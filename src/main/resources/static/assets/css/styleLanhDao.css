@@ -310,7 +310,7 @@ body.modal-open {
 /* Hết style nội dung bảng */
 
 /* modal add */
-.modal-addVK {
+.modal-detail {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -322,11 +322,11 @@ body.modal-open {
 	display: none;
 }
 
-.modal-addVK.open {
+.modal-detail.open {
 	display: flex;
 }
 
-.modal-addVK-form {
+.modal-detail-form {
 	position: relative;
 	background-color: #dcebe9;
 	width: 800px;
@@ -339,35 +339,6 @@ body.modal-open {
 }
 
 /* end modal add */
-
-/* modal show info */
-.modal-info {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.8);
-	display: none;
-}
-
-.modal-info.open {
-	display: flex;
-}
-
-.modal-info-form {
-	position: relative;
-	background-color: #dcebe9;
-	width: 1100px;
-	color: #F6FBF5;
-	font: 16px;
-	border-radius: 4px;
-	animation: loginFormArrive ease 0.4s;
-	border-radius: 8px;
-	box-shadow: 0 10px 25px rgba(0, 62, 116, 0.8);
-}
 
 .info-container {
 	/* display: flex;
@@ -403,32 +374,10 @@ body.modal-open {
 
 /*end modal show info */
 
-/* modal editVK */
-.modal-editVK {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	align-items: center;
-	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.8);
-	display: none;
-}
-
-.modal-editVK.open {
-	display: flex;
-}
-
-#response-vu-khi {
-	overflow: scroll;
-	height: 600px;
-}
-
 .modal-detail-label {
 	top: 12px;
 	left: 16px;
-	width: 120px;
+	width: 200px;
 	padding: 0 4px 0 0;
 	background-color: #dcebe9;
 	color: #006A91;
@@ -441,15 +390,11 @@ body.modal-open {
 	top: 0px;
 	left: 0px;
 	height: 100%;
-	border: 1px solid #006A91;
-	color: #000;
-	border-radius: 4px;
 	font-size: 18px;
 	text-transform: unset;
 	padding: 0 28px;
-	outline: none;
-	background: none;
 	z-index: 1;
+	margin: 0px 10px 0px 0px;
 }
 
 .select-box {
@@ -468,6 +413,7 @@ body.modal-open {
 	width: 100px;
 	padding-right: 8px;
 	margin-bottom: 16px;
+	margin-right: 10px;
 	background-color: #006A91;
 	color: #F6FBF5;
 	border-width: 0.9px;

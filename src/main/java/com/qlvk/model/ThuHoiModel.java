@@ -1,9 +1,11 @@
 package com.qlvk.model;
 
+import java.util.List;
+
 public class ThuHoiModel {
 	private int soBienBan;
 	private int maMuon;
-	private int soHieuVK;
+	private List<String> soHieuVK;
 
 	public int getSoBienBan() {
 		return soBienBan;
@@ -21,11 +23,11 @@ public class ThuHoiModel {
 		this.maMuon = maMuon;
 	}
 
-	public int getSoHieuVK() {
+	public List<String> getSoHieuVK() {
 		return soHieuVK;
 	}
 
-	public void setSoHieuVK(int soHieuVK) {
+	public void setSoHieuVK(List<String> soHieuVK) {
 		this.soHieuVK = soHieuVK;
 	}
 

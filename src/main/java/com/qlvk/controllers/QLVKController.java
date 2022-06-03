@@ -29,7 +29,7 @@ public class QLVKController extends BaseController {
 			return initCBCS(request, model);
 		}
 		if (user != null && user.getRole().equals("ROLE_LANH_DAO")) {
-			return initCBCS(request, model);
+			return initLanhDao(request, model);
 		}
 		return "app/index";
 	}

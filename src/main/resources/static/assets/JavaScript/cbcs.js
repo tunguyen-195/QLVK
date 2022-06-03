@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	kiemTraYeuCau();
 	getListImgVK();
 });
 
@@ -177,3 +178,60 @@ function requestMuon() {
 		});
 	}
 }
+var listMaMuon = [];
+function kiemTraYeuCau() {
+	listMaMuon = [];
+	$.ajax({
+		url : baseUrl + 'api/CBCS/kiemTra',
+		contentType : "application/json",
+		type : "GET",
+		dataType : 'json',
+		data : {},
+		success : function(data) {
+			if(data.status = 'ng') {
+				taoDsNhanHieu(data.listNhanHieu);
+				listMaMuon = data.listMaMuon;
+				showModalhuy();
+			}
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function taoDsNhanHieu(data){
+	var str = '';
+	for( var i = 0; i < data.length; i++) {
+		str += '<input class="nhanHieu model-huy-text" value="'+data[i]+'" readonly="readonly">';
+	}
+	$('#dsNhanHieu').empty();
+	$('#dsNhanHieu').append(str);
+}
+function xacNhan(){
+	var listNhanHieu = $('.nhanHieu').map((_,el) => el.value).get();
+	$.ajax({
+		url : baseUrl + 'api/CBCS/xacNhanHuy',
+		contentType : "application/json",
+		type : "DELETE",
+		dataType : 'json',
+		data : JSON.stringify(listMaMuon),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModalHuy();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function showModalhuy() {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-tuChoi');
+	obj.classList.add('open');
+};
+
+function hideModalHuy() {
+	var obj = document.getElementById('js-modal-tuChoi');
+	obj.classList.remove('open');
+	$("body").removeClass("modal-open");
+};

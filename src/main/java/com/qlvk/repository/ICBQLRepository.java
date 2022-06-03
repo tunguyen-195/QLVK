@@ -24,25 +24,26 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 			+ " b.so_hieu_vk_vln_ccht, c.nhan_hieu_vk_vln_ccht, c.so_luong, c.ma_muon, b.ma_duyet "
 			+ "FROM cbcs a INNER JOIN duyet_muon b ON a.ma_cbcs = b.ma_lanh_dao "
 			+ "INNER JOIN danh_sach_muon c ON b.ma_muon = c.ma_muon " + "INNER JOIN cbcs d ON c.ma_cbcs = d.ma_cbcs "
-			+ "WHERE c.trang_thai_muon = '1' :timKiem = '' OR (a.ho_ten like %:timKiem% OR d.so_hieu_cand like %:timKiem% "
+			+ "WHERE c.trang_thai_muon = '1' AND (:timKiem = '' OR (a.ho_ten like %:timKiem% OR d.so_hieu_cand like %:timKiem% "
 			+ "OR d.ho_ten like %:timKiem% OR b.so_hieu_vk_vln_ccht like %:timKiem% "
-			+ "OR c.nhan_hieu_vk_vln_ccht like %:timKiem%) ", nativeQuery = true)
+			+ "OR c.nhan_hieu_vk_vln_ccht like %:timKiem%)) ", nativeQuery = true)
 	public List<Object[]> getDSMuon(@Param("timKiem") String timKiem);
 
-	@Query(value = "SELECT e.so_hieu_cand as 'soHieuCBCS', e.ho_ten as 'hoTenCBCS', a.so_hieu_vk_vln_ccht, "
+	@Query(value = "SELECT e.so_hieu_cand as 'soHieuCBCS', e.ho_ten as 'hoTenCBCS', "
 			+ " c.nhan_hieu_vk_vln_ccht, c.so_luong, b.ngay_muon, f.so_hieu_cand as 'soHieuCBQL', "
-			+ " f.ho_ten as 'hoTenCBQL', d.ho_ten as 'lanhDaoDuyet', e.don_vi "
+			+ " f.ho_ten as 'hoTenCBQL', d.ho_ten as 'lanhDaoDuyet', e.don_vi, c.ma_muon, b.so_bien_ban "
 			+ "FROM duyet_muon a INNER JOIN bien_ban b ON a.ma_duyet = b.ma_duyet "
-			+ "INNER JOIN danh_sach_muon c ON a.ma_muon = c.ma_muon "
-			+ "INNER JOIN  cbcs d ON a.ma_lanh_dao = d.ma_cbcs " + "INNER JOIN cbcs e ON c.ma_cbcs = e.ma_cbcs "
+			+ "INNER JOIN danh_sach_muon c ON a.ma_muon = c.ma_muon AND c.trang_thai_muon = '2' "
+			+ "INNER JOIN  cbcs d ON a.ma_lanh_dao = d.ma_cbcs " 
+			+ "INNER JOIN cbcs e ON c.ma_cbcs = e.ma_cbcs "
 			+ "INNER JOIN cbcs f ON b.ma_cbql = f.ma_cbcs "
-			+ "WHERE :timKiem = '' OR (e.so_hieu_cand like %:timKiem% OR e.ho_ten like %:timKiem% OR a.so_hieu_vk_vln_ccht like %:timKiem% "
+			+ "WHERE :timKiem = '' OR (e.so_hieu_cand like %:timKiem% OR e.ho_ten like %:timKiem% "
 			+ "OR c.nhan_hieu_vk_vln_ccht like %:timKiem% OR f.so_hieu_cand like %:timKiem% "
 			+ "OR f.ho_ten like %:timKiem% OR d.ho_ten like %:timKiem%)", nativeQuery = true)
 	public List<Object[]> getDSTra(@Param("timKiem") String timKiem);
 
 	@Query(value = "SELECT so_hieu_vk_vln_ccht FROM vk_vln_ccht WHERE nhan_hieu_vk_vln_ccht =:nhanHieu ", nativeQuery = true)
-	public List<Integer> getSoHieu(@Param("nhanHieu") String nhanHieu);
+	public List<Integer> getSoHieuVK(@Param("nhanHieu") String nhanHieu);
 
 	@Transactional
 	@Modifying
@@ -73,4 +74,7 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 			+ "AND (:tinhTrang = '' or a.tinh_trang =:tinhTrang)", nativeQuery = true)
 	public List<Object[]> getDSVuKhiDownload(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu,
 			@Param("tinhTrang") String tinhTrang);
+	
+	@Query(value = "SELECT so_hieu_vk_vln_ccht FROM chi_tiet_muon WHERE ma_muon =:maMuon ", nativeQuery = true)
+	public List<Integer> getDsSoHieu(@Param("maMuon") int maMuon);
 }

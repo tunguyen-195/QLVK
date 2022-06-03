@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -22,7 +21,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import com.qlvk.common.base.BaseService;
-import com.qlvk.common.component.Messages;
 import com.qlvk.common.constant.CommonConstant;
 import com.qlvk.common.util.Config;
 import com.qlvk.common.util.GenerateUtil;
@@ -122,14 +120,15 @@ public class CBQLService extends BaseService {
 			model = new DanhSachTraModel();
 			model.setSoHieuCBCS(StringUtil.toString(object[0]));
 			model.setHoTenCBCS(StringUtil.toString(object[1]));
-			model.setSoHieuVK(StringUtil.toString(object[2]));
-			model.setNhanHieuVK(StringUtil.toString(object[3]));
-			model.setSoLuong(Integer.parseInt(StringUtil.toString(object[4])));
-			model.setNgayMuon(StringUtil.toString(object[5]));
-			model.setSoHieuCBQL(StringUtil.toString(object[6]));
-			model.setHoTenCBQL(StringUtil.toString(object[7]));
-			model.setLanhDaoDuyet(StringUtil.toString(object[8]));
-			model.setDonVi(StringUtil.toString(object[9]));
+			model.setNhanHieuVK(StringUtil.toString(object[2]));
+			model.setSoLuong(Integer.parseInt(StringUtil.toString(object[3])));
+			model.setNgayMuon(StringUtil.toString(object[4]));
+			model.setSoHieuCBQL(StringUtil.toString(object[5]));
+			model.setHoTenCBQL(StringUtil.toString(object[6]));
+			model.setLanhDaoDuyet(StringUtil.toString(object[7]));
+			model.setDonVi(StringUtil.toString(object[8]));
+			model.setMaMuon(Integer.parseInt(StringUtil.toString(object[9])));
+			model.setSoBienBan(Integer.parseInt(StringUtil.toString(object[10])));
 			outputList.add(model);
 		}
 
@@ -189,13 +188,8 @@ public class CBQLService extends BaseService {
 		return out;
 	}
 
-	public List<String> getSoHieu(String nhanHieu) {
-		List<Integer> listSoHieu = rep.getSoHieu(nhanHieu);
-		List<String> out = new ArrayList<>();
-		for (Integer soHieu : listSoHieu) {
-			out.add(StringUtil.toString(soHieu));
-		}
-		return out;
+	public List<Integer> getDsSoHieu(int maMuon) {
+		return rep.getDsSoHieu(maMuon);
 	}
 
 	public Map<String, Object> choMuon(String userId, int maMuon, int maDuyet, int soHieuVK) {
@@ -240,7 +234,7 @@ public class CBQLService extends BaseService {
 			data.put("messageError", "không tồn tại yêu cầu mượn");
 			return data;
 		}
-		List<Integer> listSoHieu = rep.getSoHieu(nhanHieu);
+		List<Integer> listSoHieu = rep.getSoHieuVK(nhanHieu);
 		if (soLuong > listSoHieu.size()) {
 			data.put("statusCode", "500");
 			data.put("messageError", "Không đủ số lượng vũ khí");
@@ -319,7 +313,7 @@ public class CBQLService extends BaseService {
 			Row row = null;
 			Cell cell = null;
 			int cellnum = 0;
-			int index =1;
+			int index = 1;
 			if (CollectionUtils.isNotEmpty(dataExport)) {
 				for (Object[] objArr : dataExport) {
 					sheet.shiftRows(rownum, rownum + 10, 1, true, true);
@@ -331,7 +325,7 @@ public class CBQLService extends BaseService {
 					cellnum = 1;
 					for (Object obj : objArr) {
 						cell = row.createCell(cellnum++);
-						cell.setCellValue(obj == null? "" : String.valueOf(obj));
+						cell.setCellValue(obj == null ? "" : String.valueOf(obj));
 						cell.setCellStyle(style);
 					}
 					cell = row.createCell(cellnum++);
@@ -349,7 +343,7 @@ public class CBQLService extends BaseService {
 		return idFile;
 	}
 
-	public Map<String, Object> thuHoi(int soBienBan, int maMuon, int soHieuVk) {
+	public Map<String, Object> thuHoi(int soBienBan, int maMuon, List<String> dsSoHieuVk) {
 		Map<String, Object> data = new HashMap<>();
 		try {
 			// tao thong tin phieu tra
@@ -362,7 +356,9 @@ public class CBQLService extends BaseService {
 			rep.updateTrangThaiMuon(maMuon, 4);
 
 			// update tinh trang vu khi (con)
-			rep.updateTinhTrangVK(soHieuVk, 0);
+			for(String soHieuVK : dsSoHieuVk) {
+				rep.updateTinhTrangVK(Integer.parseInt(soHieuVK), 0);
+			}
 			data.put("statusCode", "200");
 			data.put("messageInfo", "Đã cập nhật thông tin thu hồi");
 		} catch (Exception e) {
