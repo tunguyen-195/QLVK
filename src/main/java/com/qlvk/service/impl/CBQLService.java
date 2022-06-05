@@ -200,40 +200,7 @@ public class CBQLService extends BaseService {
 		return rep.getDsSoHieu(maMuon);
 	}
 
-	public Map<String, Object> choMuon(String userId, int maMuon, int maDuyet, int soHieuVK) {
-		Map<String, Object> data = new HashMap<>();
-		DanhSachMuon dsMuon = dsMuonRep.getOne(maMuon);
-		if (dsMuon == null) {
-			data.put("statusCode", "500");
-			data.put("messageError", "không tồn tại yêu cầu mượn");
-			return data;
-		}
-		VkVlnCcht vk = vkRep.getOne(soHieuVK);
-		if (vk == null) {
-			data.put("statusCode", "500");
-			data.put("messageError", "Không tồn tại vũ khí");
-			return data;
-		}
-		// update tinh trang vk
-		vk.setTinhTrang("1");
-		vkRep.save(vk);
-		// update tinh trang muon
-		rep.updateTrangThaiMuon(maMuon, 2);
-		// update so hieu vu khi tai table duyet_muon
-		rep.updateSohieuVK(maDuyet, maMuon, soHieuVK);
-		// insert vao table bien_ban
-		BienBan bienBan = new BienBan();
-		bienBan.setMaDuyet(maDuyet);
-		bienBan.setMaCbql(rep.getMaCBCSByUserID(userId));
-		bienBan.setNgayMuon(new Date());
-		bienBan.setDaXuatBienBan(0);
-		bienBanRep.save(bienBan);
-		data.put("statusCode", "200");
-		data.put("messageInfo", "Tạo biên bản thành công");
-		return data;
-	}
-
-	public Map<String, Object> choMuon2(String userId, int maMuon, int maDuyet, String nhanHieu, int soLuong) {
+	public Map<String, Object> choMuon(String userId, int maMuon, int maDuyet, String nhanHieu, int soLuong) {
 
 		Map<String, Object> data = new HashMap<>();
 		DanhSachMuon dsMuon = dsMuonRep.getOne(maMuon);
@@ -275,6 +242,8 @@ public class CBQLService extends BaseService {
 		bienBanRep.save(bienBan);
 		data.put("statusCode", "200");
 		data.put("messageInfo", "Tạo biên bản thành công");
+		data.put("maMuon", maMuon);
+		data.put("soBienBan", bienBan.getSoBienBan());
 		return data;
 	}
 
@@ -304,12 +273,13 @@ public class CBQLService extends BaseService {
 	}
 
 	public Map<String, Object> downloadBaocao(String ngayBatDau, String ngayKetThuc) throws Exception {
-		List<Object[]> danhSachVK = rep.getDSBaocao();
+		List<Object[]> danhSachVK = rep.getDSBaocao(ngayBatDau, ngayKetThuc);
 		Map<String, Object> data = new HashMap<>();
 		data.put(CommonConstant.ID_FILE_DOWNLOAD, createFileDownloadBaoCao(danhSachVK, ngayBatDau, ngayKetThuc));
 		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
 		return data;
 	}
+
 	private String createFileDownload(List<Object[]> dataExport) throws Exception {
 		String idFile = GenerateUtil.generateID();
 		try (FileInputStream excelFile = new FileInputStream(
@@ -344,7 +314,7 @@ public class CBQLService extends BaseService {
 						if (obj != null && obj instanceof Date) {
 							cell.setCellValue(DateUtil.formatQLVK(obj));
 						} else {
-							if (cellnum == 6 && obj != null ) {
+							if (cellnum == 6 && obj != null) {
 								obj = obj + "/GP";
 							}
 							cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
@@ -357,7 +327,7 @@ public class CBQLService extends BaseService {
 				}
 			}
 
-			row = sheet.createRow(rownum+6);
+			row = sheet.createRow(rownum + 6);
 			cell = row.createCell(0);
 			cell.setCellValue(getUser().getName());
 			CellStyle style2 = workbook.createCellStyle();
@@ -371,7 +341,8 @@ public class CBQLService extends BaseService {
 		return idFile;
 	}
 
-	private String createFileDownloadBaoCao(List<Object[]> dataExport, String ngayBatDau, String ngayKetThuc) throws Exception {
+	private String createFileDownloadBaoCao(List<Object[]> dataExport, String ngayBatDau, String ngayKetThuc)
+			throws Exception {
 		String idFile = GenerateUtil.generateID();
 		try (FileInputStream excelFile = new FileInputStream(
 				new File(this.getClass().getResource("/report/Muon_Tamplate.xlsx").getFile()));
@@ -386,15 +357,15 @@ public class CBQLService extends BaseService {
 			style.setBorderLeft(BorderStyle.THIN);
 			style.setBorderRight(BorderStyle.THIN);
 
-//			Row rowT = sheet.getRow(4);
-//			Cell cellT = rowT.getCell(0);
-//			if (StringUtils.isEmpty(ngayBatDau)) {
-//				ngayBatDau = "30/04/1945";
-//			}
-//			if (StringUtils.isEmpty(ngayKetThuc)) {
-//				ngayKetThuc = "99/99/9999";
-//			}
-//			cellT.setCellValue("Từ " +ngayBatDau+" đến "+ngayKetThuc+"");
+			Row rowT = sheet.getRow(4);
+			Cell cellT = rowT.getCell(0);
+			if (StringUtils.isEmpty(ngayBatDau)) {
+				ngayBatDau = "30/04/1945";
+			}
+			if (StringUtils.isEmpty(ngayKetThuc)) {
+				ngayKetThuc = "99/99/9999";
+			}
+			cellT.setCellValue("Từ " + ngayBatDau + " đến " + ngayKetThuc + "");
 			int rownum = 8;
 			Row row = null;
 			Cell cell = null;
@@ -413,7 +384,7 @@ public class CBQLService extends BaseService {
 						cell = row.createCell(cellnum++);
 						cell.setCellStyle(style);
 						cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
-						
+
 						if (cellnum == 2 && obj != null && obj instanceof Integer) {
 							String usserId = rep.getUserIDByMaCBCS(Integer.parseInt(String.valueOf(obj)));
 							if (StringUtils.isNotEmpty(usserId)) {
@@ -428,7 +399,7 @@ public class CBQLService extends BaseService {
 				}
 			}
 
-			row = sheet.createRow(rownum+6);
+			row = sheet.createRow(rownum + 6);
 			cell = row.createCell(0);
 			cell.setCellValue(getUser().getName());
 			CellStyle style2 = workbook.createCellStyle();
@@ -441,6 +412,113 @@ public class CBQLService extends BaseService {
 		}
 		return idFile;
 	}
+
+	public Map<String, Object> downBienBan(int maMuon) throws Exception {
+		List<Object[]> dataBienBan = rep.getDataBienBan(maMuon);
+		List<Object[]> bienBanInfo = rep.getBienBanInfo(maMuon);
+		Map<String, Object> data = new HashMap<>();
+		data.put(CommonConstant.ID_FILE_DOWNLOAD, createBienBan(bienBanInfo.get(0), dataBienBan));
+		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
+		return data;
+	}
+
+	private String createBienBan(Object[] bienBanIndo, List<Object[]> data) throws Exception {
+		String idFile = GenerateUtil.generateID();
+		try (FileInputStream excelFile = new FileInputStream(
+				new File(this.getClass().getResource("/report/Tra_Tamplate.xlsx").getFile()));
+				XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+				FileOutputStream out = new FileOutputStream(
+						new File(Config.get("common.dir.download") + idFile + CommonConstant.EXTENSIONS_EXCEL_DOT));) {
+			// Create a blank sheet
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			CellStyle style = workbook.createCellStyle();
+			style.setBorderTop(BorderStyle.THIN);
+			style.setBorderBottom(BorderStyle.THIN);
+			style.setBorderLeft(BorderStyle.THIN);
+			style.setBorderRight(BorderStyle.THIN);
+
+			// ghi ngay muon
+			Row rowT = sheet.getRow(3);
+			Cell cellT = rowT.createCell(3);
+			cellT.setCellValue("Tuyên Quang, ngày " + StringUtil.toString(bienBanIndo[2]));
+
+			// ghi ten cbcs
+			Row rowN = sheet.getRow(9);
+			Cell cellN = rowN.getCell(0);
+			cellN.setCellValue("Căn cứ Báo cáo đề xuất của " + StringUtil.toString(bienBanIndo[0])
+					+ " đã được Lãnh đạo Công an thành phố Tuyên Quang phê duyệt.");
+
+			// ghi ngay giao
+			Row row3 = sheet.getRow(11);
+			Cell cell3 = row3.getCell(0);
+			cell3.setCellValue("Địa điểm bàn giao: ngày " + StringUtil.toString(bienBanIndo[2])
+					+ " tại kho vũ khí Công an thành phố Tuyên Quang, chúng tôi gồm:");
+
+			// ghi ben giao
+			Row row4 = sheet.getRow(14);
+			Cell cell4 = row4.getCell(0);
+			cell4.setCellValue(
+					"- Tên người bàn giao: " + StringUtil.toString(bienBanIndo[3]) + " –  cán bộ Đội Tổng hợp.");
+			Row row5 = sheet.getRow(15);
+			Cell cell5 = row5.getCell(0);
+			cell5.setCellValue("- Số CMND hoặc CMCAND: " + StringUtil.toString(bienBanIndo[4]));
+
+			// ghi ben nhan
+			Row row6 = sheet.getRow(18);
+			Cell cell6 = row6.getCell(0);
+			cell6.setCellValue("- Tên người tiếp nhận bàn giao:  " + StringUtil.toString(bienBanIndo[0]));
+			Row row7 = sheet.getRow(19);
+			Cell cell7 = row7.getCell(0);
+			cell7.setCellValue("- Số CMND hoặc CMCAND:  " + StringUtil.toString(bienBanIndo[1]));
+
+			int rownum = 23;
+			Row row = null;
+			Cell cell = null;
+			int cellnum = 0;
+			int index = 1;
+			if (CollectionUtils.isNotEmpty(data)) {
+				for (Object[] objArr : data) {
+					sheet.shiftRows(rownum, rownum + 8, 1, true, true);
+					row = sheet.createRow(rownum++);
+					cellnum = 0;
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(String.valueOf(index));
+					cell.setCellStyle(style);
+					cellnum = 1;
+					for (Object obj : objArr) {
+						cell = row.createCell(cellnum++);
+						cell.setCellStyle(style);
+						cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
+					}
+					index++;
+				}
+			}
+
+			CellStyle style2 = workbook.createCellStyle();
+			style2.setAlignment(HorizontalAlignment.CENTER);
+			row = sheet.createRow(rownum + 8);
+			cell = row.createCell(0);
+			cell.setCellValue(getUser().getName());
+
+			Cell cell8 = row.createCell(3);
+			cell8.setCellValue(StringUtil.toString(bienBanIndo[0]));
+			cell8.setCellStyle(style2);
+
+			Row row9 = sheet.createRow(rownum + 14);
+			Cell cell9 = row9.createCell(0);
+			cell9.setCellValue(StringUtil.toString(bienBanIndo[5]));
+			cell9.setCellStyle(style2);
+
+			cell.setCellStyle(style2);
+			// Write the workbook in file system
+			workbook.write(out);
+		} catch (Exception e) {
+			throw e;
+		}
+
+		return idFile;
+	}
+
 	public Map<String, Object> thuHoi(int soBienBan, int maMuon, List<String> dsSoHieuVk) {
 		Map<String, Object> data = new HashMap<>();
 		try {
@@ -454,7 +532,7 @@ public class CBQLService extends BaseService {
 			rep.updateTrangThaiMuon(maMuon, 4);
 
 			// update tinh trang vu khi (con)
-			for(String soHieuVK : dsSoHieuVk) {
+			for (String soHieuVK : dsSoHieuVk) {
 				rep.updateTinhTrangVK(Integer.parseInt(soHieuVK), 0);
 			}
 			data.put("statusCode", "200");

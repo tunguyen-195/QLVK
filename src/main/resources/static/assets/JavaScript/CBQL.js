@@ -516,7 +516,9 @@ function choMuon() {
 		success : function(data) {
 			handleMessageResponse(data);
 			hideModal(document.getElementById('js-modal-muon'));
-			taoBienBan(data.data);
+			if(data.statusCode == '200') {
+				taoBienBan(data);
+			}
 			timKiemMuon();
 		},
 		error : function(xhr) {
@@ -525,7 +527,27 @@ function choMuon() {
 	});
 }
 function taoBienBan(data) {
-	alert("Biên bản nè");
+	$.ajax({
+		contentType : "application/json",
+		url : baseUrl + 'api/CBQL/downBienBan',
+		async : true,
+		data : {
+			maMuon : data.maMuon
+		},
+		type : "GET",
+		dataType : 'json',
+		timeout : 30000, // ms
+		success : function(data) {
+			if (data.statusCode == '200') {
+				executeDownloadFile(data.idFileDownload);
+			} else {
+				showToastMessage('error', 'TODO');
+			}
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
 }
 
 function tuChoi(){

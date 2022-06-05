@@ -19,67 +19,17 @@
 <body>
 	<div layout:fragment="content" th:remove="tag">
 		<div id="main">
-
 			<div id="header">
-
 				<div id="pre-header">
-
 					<div class="police-logo">
 						<img th:src="@{/resources/assets/img/Logo.png}" alt="">
 					</div>
-
 					<div id="sologan">
 						<p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ -
 							Công cụ hỗ trợ</p>
 						<p id="sologan-tq">Công an thành phố Tuyên Quang</p>
 					</div>
-
 				</div>
-
-				<!-- 				<div id="nav"> -->
-
-				<!-- 					begin menu navigation -->
-				<!-- 					<ul id="menu-nav"> -->
-
-				<!-- 						<li><a href="#" id="menu-trangchu2"> <i -->
-				<!-- 								class="fa-solid fa-dagger"></i> Quản lý VK-VLN-CCHT -->
-				<!-- 						</a></li> -->
-
-				<!-- 						<li><a href="#" id="menu-trangchu3"> <i -->
-				<!-- 								class="fa-solid fa-file-certificate"></i> Quản lý Giấy phép -->
-				<!-- 						</a></li> -->
-
-				<!-- 						<li><a href="#" id="menu-trangchu4"> <i -->
-				<!-- 								class="fa-solid fa-folder-open"></i> Quản lý Hồ sơ -->
-				<!-- 						</a></li> -->
-
-				<!-- 						<li><a href="#tab-TL"> <i -->
-				<!-- 								class="fa-solid fa-arrow-right-arrow-left"></i> Quản lý Mượn/Trả -->
-				<!-- 								<i class="fa-solid fa-caret-down"></i> -->
-				<!-- 						</a> -->
-				<!-- 							<ul id="sub-menu-nav"> -->
-				<!-- 								<li><a href="#">Xử lý yêu cầu mượn</a></li> -->
-				<!-- 								<li><a href="#">Xử lý yêu cầu trả</a></li> -->
-				<!-- 							</ul></li> -->
-
-
-
-				<!-- 						<li><a href="#tab-TL"> <i -->
-				<!-- 								class="fa-solid fa-file-chart-column"></i> Báo cáo - Thống kê <i -->
-				<!-- 								class="fa-solid fa-caret-down"></i> -->
-				<!-- 						</a> -->
-				<!-- 							<ul id="sub-menu-nav"> -->
-				<!-- 								<li><a href="#">VK-VLN-CCHT</a></li> -->
-				<!-- 								<li><a href="#">Giấy phép</a></li> -->
-				<!-- 								<li><a href="#">Lượt Mượn/Trả</a></li> -->
-				<!-- 								<li><a href="#">Hồ sơ</a></li> -->
-				<!-- 							</ul></li> -->
-
-				<!-- 						<li><a th:href="@{/logout}" id="menu-trangchu3"> <i -->
-				<!-- 								class="fa-solid fa-address-book"></i> Đăng xuất -->
-				<!-- 						</a></li> -->
-				<!-- 					</ul> -->
-				<!-- 				</div> -->
 			</div>
 			<div class="row user-link">
 				<div class="col col-right">
@@ -186,11 +136,6 @@
 									<button class="modal-button" id="btn_timKiem_muon"
 										onclick="timKiemMuon()">Tìm kiếm</button>
 								</div>
-								<label class="modal-detail-label2" style="margin-left: 100px;">Báo cáo mượn</label> 
-								<input type="text" id="ngayBatDau" placeholder="Ngày bắt đầu" class="select-box" style="margin-left: 10px;">
-								<input type="text" id="ngayKetThuc" placeholder="Ngày kết thúc" class="select-box" style="margin-left: 10px;">
-								<button id="btn-download2" type="button" class="modal-button"
-										style="margin-left: 10px;">Tải xuống</button>
 							</div>
 						</div>
 						<div class="tab-pane active">
@@ -233,6 +178,11 @@
 									<button class="modal-button" id="btn_timKiem_tra"
 										onclick="timKiemTra()">Tìm kiếm</button>
 								</div>
+								<label class="modal-detail-label2" style="margin-left: 100px;">Báo cáo mượn</label> 
+								<input type="text" id="ngayBatDau" placeholder="Ngày bắt đầu" class="select-box" style="margin-left: 10px;">
+								<input type="text" id="ngayKetThuc" placeholder="Ngày kết thúc" class="select-box" style="margin-left: 10px;">
+								<button id="btn-download2" type="button" class="modal-button"
+										style="margin-left: 10px;">Tải xuống</button>
 							</div>
 						</div>
 						<div class="tab-pane active">
