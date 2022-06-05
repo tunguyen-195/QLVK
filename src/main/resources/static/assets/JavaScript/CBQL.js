@@ -72,6 +72,30 @@ $(document).ready(function() {
 			}
 		});
 	});
+	$( "#ngayBatDau" ).datepicker();
+	$( "#ngayKetThuc" ).datepicker();
+	$('#btn-download2').click(function() {
+		$.ajax({
+			contentType : "application/json",
+			url : baseUrl + 'api/CBQL/downloadBaoCao',
+			data : {
+				ngayBatDau:$('#ngayBatDau').val(),ngayKetThuc:$('#ngayKetThuc').val()
+			},
+			type : "GET",
+			dataType : 'json',
+			timeout : 30000, // ms
+			success : function(data) {
+				if (data.statusCode == '200') {
+					executeDownloadFile(data.idFileDownload);
+				} else {
+					showToastMessage('error', 'TODO');
+				}
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	});
 })
 function loadInfor() {
 	if (!modeSearch || modeSearch == '0') {

@@ -162,6 +162,13 @@ public class CBQLApiController {
 			@RequestParam(value = "tinhTrang", defaultValue = "") String tinhTrang) throws Exception {
 		return service.download(chungLoai, nhanHieu, tinhTrang);
 	}
+	@RequestMapping(value = "/api/CBQL/downloadBaoCao", method = { RequestMethod.GET }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> downloadBaocao(HttpServletRequest request,
+			@RequestParam(value = "ngayBatDau", defaultValue = "") String ngayBatDau,
+			@RequestParam(value = "ngayKetThuc", defaultValue = "") String ngayKetThuc) throws Exception {
+		return service.downloadBaocao(ngayBatDau, ngayKetThuc);
+	}
 
 	@RequestMapping(value = "/api/CBQL/thuHoi", method = RequestMethod.POST, produces = {
 			MediaType.APPLICATION_JSON_VALUE })

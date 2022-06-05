@@ -74,7 +74,11 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 			+ "AND (:tinhTrang = '' or a.tinh_trang =:tinhTrang)", nativeQuery = true)
 	public List<Object[]> getDSVuKhiDownload(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu,
 			@Param("tinhTrang") String tinhTrang);
-	
+
+	@Query(value = 
+			"select ma_cbcs, nhan_hieu_vk_vln_ccht, '' as so_hieu, so_luong, ly_do from danh_sach_muon", nativeQuery = true)
+	public List<Object[]> getDSBaocao();
+
 	@Query(value = "SELECT so_hieu_vk_vln_ccht FROM chi_tiet_muon WHERE ma_muon =:maMuon ", nativeQuery = true)
 	public List<Integer> getDsSoHieu(@Param("maMuon") int maMuon);
 }

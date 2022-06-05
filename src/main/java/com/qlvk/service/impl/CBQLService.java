@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.qlvk.common.base.BaseService;
 import com.qlvk.common.constant.CommonConstant;
 import com.qlvk.common.util.Config;
+import com.qlvk.common.util.DateUtil;
 import com.qlvk.common.util.GenerateUtil;
 import com.qlvk.common.util.StringUtil;
 import com.qlvk.entity.BienBan;
@@ -295,6 +298,13 @@ public class CBQLService extends BaseService {
 		return data;
 	}
 
+	public Map<String, Object> downloadBaocao(String ngayBatDau, String ngayKetThuc) throws Exception {
+		List<Object[]> danhSachVK = rep.getDSBaocao();
+		Map<String, Object> data = new HashMap<>();
+		data.put(CommonConstant.ID_FILE_DOWNLOAD, createFileDownloadBaoCao(danhSachVK, ngayBatDau, ngayKetThuc));
+		data.put(CommonConstant.STATUS_CODE, CommonConstant.STATUS_OK);
+		return data;
+	}
 	private String createFileDownload(List<Object[]> dataExport) throws Exception {
 		String idFile = GenerateUtil.generateID();
 		try (FileInputStream excelFile = new FileInputStream(
@@ -325,8 +335,15 @@ public class CBQLService extends BaseService {
 					cellnum = 1;
 					for (Object obj : objArr) {
 						cell = row.createCell(cellnum++);
-						cell.setCellValue(obj == null ? "" : String.valueOf(obj));
 						cell.setCellStyle(style);
+						if (obj != null && obj instanceof Date) {
+							cell.setCellValue(DateUtil.formatQLVK(obj));
+						} else {
+							if (cellnum == 6 && obj != null ) {
+								obj = obj + "/GP";
+							}
+							cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
+						}
 					}
 					cell = row.createCell(cellnum++);
 					cell.setCellValue("");
@@ -335,6 +352,12 @@ public class CBQLService extends BaseService {
 				}
 			}
 
+			row = sheet.createRow(rownum+6);
+			cell = row.createCell(0);
+			cell.setCellValue(getUser().getName());
+			CellStyle style2 = workbook.createCellStyle();
+			style2.setAlignment(HorizontalAlignment.CENTER);
+			cell.setCellStyle(style2);
 			// Write the workbook in file system
 			workbook.write(out);
 		} catch (Exception e) {
@@ -343,6 +366,69 @@ public class CBQLService extends BaseService {
 		return idFile;
 	}
 
+	private String createFileDownloadBaoCao(List<Object[]> dataExport, String ngayBatDau, String ngayKetThuc) throws Exception {
+		String idFile = GenerateUtil.generateID();
+		try (FileInputStream excelFile = new FileInputStream(
+				new File(this.getClass().getResource("/report/Muon_Tamplate.xlsx").getFile()));
+				XSSFWorkbook workbook = new XSSFWorkbook(excelFile);
+				FileOutputStream out = new FileOutputStream(
+						new File(Config.get("common.dir.download") + idFile + CommonConstant.EXTENSIONS_EXCEL_DOT));) {
+			// Create a blank sheet
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			CellStyle style = workbook.createCellStyle();
+			style.setBorderTop(BorderStyle.THIN);
+			style.setBorderBottom(BorderStyle.THIN);
+			style.setBorderLeft(BorderStyle.THIN);
+			style.setBorderRight(BorderStyle.THIN);
+			
+			Row rowT = sheet.getRow(4);
+			Cell cellT = rowT.getCell(0);
+			if (StringUtils.isEmpty(ngayBatDau)) {
+				ngayBatDau = "30/04/1945";
+			}
+			if (StringUtils.isEmpty(ngayKetThuc)) {
+				ngayKetThuc = "99/99/9999";
+			}
+			cellT.setCellValue("Từ " +ngayBatDau+" đến "+ngayKetThuc+"");
+			//CellStyle styleT = workbook.createCellStyle();
+			//styleT.setAlignment(HorizontalAlignment.CENTER);
+			//cellT.setCellStyle(styleT);
+			int rownum = 8;
+			Row row = null;
+			Cell cell = null;
+			int cellnum = 0;
+			int index = 1;
+			if (CollectionUtils.isNotEmpty(dataExport)) {
+				for (Object[] objArr : dataExport) {
+					sheet.shiftRows(rownum, rownum + 8, 1, true, true);
+					row = sheet.createRow(rownum++);
+					cellnum = 0;
+					cell = row.createCell(cellnum++);
+					cell.setCellValue(String.valueOf(index));
+					cell.setCellStyle(style);
+					cellnum = 1;
+					for (Object obj : objArr) {
+						cell = row.createCell(cellnum++);
+						cell.setCellStyle(style);
+						cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
+					}
+					index++;
+				}
+			}
+
+			row = sheet.createRow(rownum+6);
+			cell = row.createCell(0);
+			cell.setCellValue(getUser().getName());
+			CellStyle style2 = workbook.createCellStyle();
+			style2.setAlignment(HorizontalAlignment.CENTER);
+			cell.setCellStyle(style2);
+			// Write the workbook in file system
+			workbook.write(out);
+		} catch (Exception e) {
+			throw e;
+		}
+		return idFile;
+	}
 	public Map<String, Object> thuHoi(int soBienBan, int maMuon, List<String> dsSoHieuVk) {
 		Map<String, Object> data = new HashMap<>();
 		try {

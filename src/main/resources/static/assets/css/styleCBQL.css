@@ -437,6 +437,17 @@ body.modal-open {
 	z-index: 0;
 }
 
+.modal-detail-label2 {
+	top: 12px;
+	left: 16px;
+	width: 200px;
+	padding: 0 4px 0 0;
+	background-color: #dcebe9;
+	color: #006A91;
+	font-size: 18px;
+	transition: 0.5s;
+	z-index: 0;
+}
 .modal-detail-input {
 	top: 0px;
 	left: 0px;
