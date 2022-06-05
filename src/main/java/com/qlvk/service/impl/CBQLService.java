@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ import com.qlvk.common.util.Config;
 import com.qlvk.common.util.DateUtil;
 import com.qlvk.common.util.GenerateUtil;
 import com.qlvk.common.util.StringUtil;
+import com.qlvk.entity.AppUser;
 import com.qlvk.entity.BienBan;
 import com.qlvk.entity.ChiTietMuon;
 import com.qlvk.entity.DanhSachMuon;
@@ -43,6 +45,7 @@ import com.qlvk.repository.IChiTietMuonRepository;
 import com.qlvk.repository.IDanhSachMuonRepository;
 import com.qlvk.repository.IDuyetMuonRepository;
 import com.qlvk.repository.IPhieuTraRepository;
+import com.qlvk.repository.IUserRepository;
 import com.qlvk.repository.IVkVlnCchtRepository;
 
 @Service
@@ -63,6 +66,8 @@ public class CBQLService extends BaseService {
 	MessageSource message;
 	@Autowired
 	IPhieuTraRepository phieuTraRep;
+	@Autowired
+	IUserRepository userRepo;
 
 	public List<DanhSachVKModel> getDanhSachVK(String chungLoai, String nhanHieu, String tinhTrang) {
 		List<DanhSachVKModel> outputList = new ArrayList<>();
@@ -411,6 +416,16 @@ public class CBQLService extends BaseService {
 						cell = row.createCell(cellnum++);
 						cell.setCellStyle(style);
 						cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
+						
+						if (cellnum == 2 && obj != null && obj instanceof Integer) {
+							String usserId = rep.getUserIDByMaCBCS(Integer.parseInt(String.valueOf(obj)));
+							if (StringUtils.isNotEmpty(usserId)) {
+								Optional<AppUser> userOp = userRepo.findUser(usserId);
+								if (userOp.isPresent()) {
+									cell.setCellValue(userOp.get().getName());
+								}
+							}
+						}
 					}
 					index++;
 				}
