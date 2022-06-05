@@ -385,19 +385,16 @@ public class CBQLService extends BaseService {
 			style.setBorderBottom(BorderStyle.THIN);
 			style.setBorderLeft(BorderStyle.THIN);
 			style.setBorderRight(BorderStyle.THIN);
-			
-			Row rowT = sheet.getRow(4);
-			Cell cellT = rowT.getCell(0);
-			if (StringUtils.isEmpty(ngayBatDau)) {
-				ngayBatDau = "30/04/1945";
-			}
-			if (StringUtils.isEmpty(ngayKetThuc)) {
-				ngayKetThuc = "99/99/9999";
-			}
-			cellT.setCellValue("Từ " +ngayBatDau+" đến "+ngayKetThuc+"");
-			//CellStyle styleT = workbook.createCellStyle();
-			//styleT.setAlignment(HorizontalAlignment.CENTER);
-			//cellT.setCellStyle(styleT);
+
+//			Row rowT = sheet.getRow(4);
+//			Cell cellT = rowT.getCell(0);
+//			if (StringUtils.isEmpty(ngayBatDau)) {
+//				ngayBatDau = "30/04/1945";
+//			}
+//			if (StringUtils.isEmpty(ngayKetThuc)) {
+//				ngayKetThuc = "99/99/9999";
+//			}
+//			cellT.setCellValue("Từ " +ngayBatDau+" đến "+ngayKetThuc+"");
 			int rownum = 8;
 			Row row = null;
 			Cell cell = null;
