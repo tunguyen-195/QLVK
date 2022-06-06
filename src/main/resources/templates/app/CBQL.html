@@ -45,19 +45,18 @@
 						<ul class="nav nav-tabs" role="tablist">
 							<li role="presentation"><a href="#tab-vk_vln_ccht"
 								aria-controls="tab-vk_vln_ccht" role="tab" data-toggle="tab"
-								id="tab-ql" class="tab-item fa-solid fa-dagger active">Quản lý vũ
-									khí</a></li>
+								id="tab-ql" class="tab-item fa-solid fa-dagger active">Quản
+									lý vũ khí</a></li>
 							<li role="presentation"><a href="#tab-yc_muon" id="tab-muon"
 								aria-controls="tab-yc_muon" role="tab" data-toggle="tab"
 								class="tab-item fa-solid fa-dagger">Xử lý mượn</a></li>
 							<li role="presentation"><a href="#tab-yc_tra" id="tab-tra"
 								aria-controls="tab-yc_tra" role="tab" data-toggle="tab"
 								class="tab-item fa-solid fa-dagger">Xử lý trả</a></li>
-							<li style = "margin-right = 0px;">
-								<a th:href="@{/logout}" id="logout"
+							<li style=""><a th:href="@{/logout}" id="logout"
 								class="tab-item fa-solid"> <i
-								class="fa-solid fa-address-book"></i>Đăng xuất</a>
-							</li>
+									class="fa-solid fa-address-book"></i>Đăng xuất
+							</a></li>
 						</ul>
 					</div>
 				</div>
@@ -148,7 +147,6 @@
 											<col width="100px">
 											<col width="100px">
 											<col width="100px">
-											<col width="100px">
 										</colgroup>
 										<thead class="text-color-header">
 											<tr>
@@ -156,8 +154,6 @@
 												<th scope="col" class="align-middle">SỐ HIỆU CAND, CBCS</th>
 												<th scope="col" class="align-middle">HỌ VÀ TÊN CBCS
 													MƯỢN</th>
-												<th scope="col" class="align-middle">SỐ HIỆU
-													VK-VLN-CCHT</th>
 												<th scope="col" class="align-middle">NHÃN HIỆU
 													VK-VLN-CCHT</th>
 												<th scope="col" class="align-middle">SỐ LƯỢNG MƯỢN</th>
@@ -178,11 +174,14 @@
 									<button class="modal-button" id="btn_timKiem_tra"
 										onclick="timKiemTra()">Tìm kiếm</button>
 								</div>
-								<label class="modal-detail-label2" style="margin-left: 100px;">Báo cáo mượn</label> 
-								<input type="text" id="ngayBatDau" placeholder="Ngày bắt đầu" class="select-box" style="margin-left: 10px;">
-								<input type="text" id="ngayKetThuc" placeholder="Ngày kết thúc" class="select-box" style="margin-left: 10px;">
+								<label class="modal-detail-label2" style="margin-left: 100px;">Báo
+									cáo mượn</label> <input type="text" id="ngayBatDau"
+									placeholder="Ngày bắt đầu" class="select-box"
+									style="margin-left: 10px;"> <input type="text"
+									id="ngayKetThuc" placeholder="Ngày kết thúc" class="select-box"
+									style="margin-left: 10px;">
 								<button id="btn-download2" type="button" class="modal-button"
-										style="margin-left: 10px;">Tải xuống</button>
+									style="margin-left: 10px;">Tải xuống</button>
 							</div>
 						</div>
 						<div class="tab-pane active">
@@ -244,24 +243,13 @@
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="chungLoai" class="modal-detail-label">Chủng
-								loại : </label> <select id="in_chungloai" class="select-box"
-								onchange="loadNhanHieu(this, &#39;0&#39;)">
-								<option value="">--Lựa chọn--</option>
-								<th:block th:each="item, iState : ${listChungLoai}">
-									<option th:value="${item}">[[${item}]]</option>
-								</th:block>
-							</select>
+								loại : </label> <input type="text" id="in_chungloai" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="nhanHieu" class="modal-detail-label">Nhãn
-								hiệu : </label> <select id="in_nhanHieu" class="select-box">
-								<option value="">--Lựa chọn--</option>
-								<th:block th:each="item, iState : ${listNhanHieu}">
-									<option th:value="${item}">[[${item}]]</option>
-								</th:block>
-							</select>
+								hiệu : </label> <input type="text" id="in_nhanHieu" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
@@ -322,7 +310,7 @@
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="soHieu" class="modal-detail-label">Số hiệu
-								CAND : </label> <input type="text" id="txt_soHieu" class="select-box"
+								CAND : </label> <input type="text" id="txt_soHieu_cand" class="select-box"
 								readonly="readonly">
 						</div>
 					</div>

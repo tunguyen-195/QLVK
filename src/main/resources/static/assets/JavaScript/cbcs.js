@@ -1,6 +1,27 @@
 $(document).ready(function() {
 	kiemTraYeuCau();
 	getListImgVK();
+
+	$('input.is-form').on('click', function() {
+		var $this = $(this);
+		var $soLuong = $('#soLuong');
+		var min = Number($soLuong.attr('min'));
+		var max = Number($soLuong.attr('max'));
+		var d = Number($soLuong.val());
+		if ($(this).hasClass('minus')) {
+			if (d > min) {
+				d += -1
+			}
+			$soLuong.val(d);
+		} else if ($(this).hasClass('plus')) {
+			var x = d + 1;
+			if (x <= max) {
+				d += 1
+			}
+			$soLuong.val(d);
+		}
+		
+	});
 });
 
 // show modal button
@@ -8,6 +29,8 @@ function showModal(nhanHieuVK) {
 	$("body").addClass("modal-open");
 	var obj = document.getElementById('js-modal-detail');
 	obj.classList.add('open');
+	$('#soLuong').val('');
+	$('#lyDo').val('');
 	getSoLuongVK(nhanHieuVK);
 };
 
@@ -90,35 +113,20 @@ function getSoLuongVK(nhanHieuVK) {
 	});
 }
 function setDataToModal(data, nhanHieuVK) {
-	if (data.soLuongConLai == '0') {
+	if (data.soLuongConLai <= '0') {
 		$('#modal-muon-button').prop('disabled', true);
+		$('#soLuong').attr('min', '0');
+		$('#soLuong').attr('max', '0');
+		$('#soLuong').val('0');
+		$('#hetSoLuong').show();
 	} else {
 		$('#modal-muon-button').prop('disabled', false);
+		$('#soLuong').attr('min', '1');
+		$('#soLuong').attr('max', data.soLuongConLai);
+		$('#soLuong').val('1');
+		$('#hetSoLuong').hide();
 	}
-	$('#soLuong').attr('max', data.soLuongConLai);
 	$('#nhan_hieu_hidden').val(nhanHieuVK);
-	$('input.input-qty')
-			.each(
-					function() {
-						var $this = $(this), qty = $this.parent().find(
-								'.is-form'), min = Number($this.attr('min')), max = Number($this
-								.attr('max'))
-						if (min == 0) {
-							var d = 0
-						} else
-							d = min
-						$(qty).on('click', function() {
-							if ($(this).hasClass('minus')) {
-								if (d > min)
-									d += -1
-							} else if ($(this).hasClass('plus')) {
-								var x = Number($this.val()) + 1
-								if (x <= max)
-									d += 1
-							}
-							$this.attr('value', d).val(d)
-						})
-					});
 }
 
 function loadNhanHieu() {
@@ -188,7 +196,7 @@ function kiemTraYeuCau() {
 		dataType : 'json',
 		data : {},
 		success : function(data) {
-			if(data.status = 'ng') {
+			if(data.status == 'ng') {
 				taoDsNhanHieu(data.listNhanHieu);
 				listMaMuon = data.listMaMuon;
 				showModalhuy();

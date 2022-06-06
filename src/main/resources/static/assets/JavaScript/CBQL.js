@@ -188,8 +188,6 @@ function initialTableMuon() {
 	}, {
 		data : 'hoTenCBCS'
 	}, {
-		data : 'soHieuVK'
-	}, {
 		data : 'nhanHieuVK'
 	}, {
 		data : 'soLuong'
@@ -218,10 +216,6 @@ function initialTableMuon() {
 					'orderable' : false
 				}, {
 					'targets' : [ 4 ],
-					'searchable' : false,
-					'orderable' : false
-				}, {
-					'targets' : [ 5 ],
 					'searchable' : false,
 					'orderable' : false
 				} ],
@@ -418,6 +412,7 @@ function showModelThem() {
 	$('#modal-update-button').hide();
 	$('#modal-del-button').hide();
 	$("#txt_soHieu").prop("readonly", false);
+	$('#js-modal-add :input').val('');
 }
 function themMoi() {
 	var danhSachVKModel = {};
@@ -491,7 +486,7 @@ function showModalMuon(data) {
 	var obj = document.getElementById('js-modal-muon');
 	obj.classList.add('open');
 	$('#txt_lanhDao').val(data.lanhDaoDuyet);
-	$('#txt_soHieu').val(data.soHieuCBCS);
+	$('#txt_soHieu_cand').val(data.soHieuCBCS);
 	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
 	$('#soHieuVK').val(data.soHieuVK);
 	$('#txt_nhanHieu').val(data.nhanHieuVK);

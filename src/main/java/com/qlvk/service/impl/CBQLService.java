@@ -86,9 +86,6 @@ public class CBQLService extends BaseService {
 			case "1":
 				model.setTinhTrang("Đã mượn");
 				break;
-			case "2":
-				model.setTinhTrang("Hỏng");
-				break;
 			default:
 				model.setTinhTrang("Không xác định");
 			}
@@ -156,7 +153,7 @@ public class CBQLService extends BaseService {
 		entity.setNhanHieuVkVlnCcht(model.getNhanHieu());
 		entity.setDonViTinh(model.getDonViTinh());
 		entity.setNuocSanXuat(model.getNuocSX());
-		entity.setTinhTrang(model.getTinhTrang());
+		entity.setTinhTrang(StringUtils.isEmpty(model.getTinhTrang()) ? "0" : model.getTinhTrang());
 		vkRep.save(entity);
 		out.put("statusCode", "200");
 		out.put("messageInfor", "Thêm mới thành công");
@@ -317,7 +314,11 @@ public class CBQLService extends BaseService {
 							if (cellnum == 6 && obj != null) {
 								obj = obj + "/GP";
 							}
-							cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
+							if(obj == null) {
+								cell.setCellValue("");
+							} else {
+								cell.setCellValue(String.valueOf(obj));
+							}
 						}
 					}
 					cell = row.createCell(cellnum++);
@@ -329,7 +330,7 @@ public class CBQLService extends BaseService {
 
 			row = sheet.createRow(rownum + 6);
 			cell = row.createCell(0);
-			cell.setCellValue(getUser().getName());
+			cell.setCellValue(rep.getHoTenByUserId(getUser().getUserId()));
 			CellStyle style2 = workbook.createCellStyle();
 			style2.setAlignment(HorizontalAlignment.CENTER);
 			cell.setCellStyle(style2);
@@ -359,12 +360,8 @@ public class CBQLService extends BaseService {
 
 			Row rowT = sheet.getRow(4);
 			Cell cellT = rowT.getCell(0);
-			if (StringUtils.isEmpty(ngayBatDau)) {
-				ngayBatDau = "30/04/1945";
-			}
-			if (StringUtils.isEmpty(ngayKetThuc)) {
-				ngayKetThuc = "99/99/9999";
-			}
+			ngayBatDau = StringUtil.toString(dataExport.get(0)[5]);
+			ngayKetThuc = StringUtil.toString(dataExport.get(dataExport.size() - 1)[5]);
 			cellT.setCellValue("Từ " + ngayBatDau + " đến " + ngayKetThuc + "");
 			int rownum = 8;
 			Row row = null;
@@ -401,7 +398,7 @@ public class CBQLService extends BaseService {
 
 			row = sheet.createRow(rownum + 6);
 			cell = row.createCell(0);
-			cell.setCellValue(getUser().getName());
+			cell.setCellValue(rep.getHoTenByUserId(getUser().getUserId()));
 			CellStyle style2 = workbook.createCellStyle();
 			style2.setAlignment(HorizontalAlignment.CENTER);
 			cell.setCellStyle(style2);
@@ -422,7 +419,7 @@ public class CBQLService extends BaseService {
 		return data;
 	}
 
-	private String createBienBan(Object[] bienBanIndo, List<Object[]> data) throws Exception {
+	private String createBienBan(Object[] bienBanInfo, List<Object[]> data) throws Exception {
 		String idFile = GenerateUtil.generateID();
 		try (FileInputStream excelFile = new FileInputStream(
 				new File(this.getClass().getResource("/report/Tra_Tamplate.xlsx").getFile()));
@@ -440,36 +437,36 @@ public class CBQLService extends BaseService {
 			// ghi ngay muon
 			Row rowT = sheet.getRow(3);
 			Cell cellT = rowT.createCell(3);
-			cellT.setCellValue("Tuyên Quang, ngày " + StringUtil.toString(bienBanIndo[2]));
+			cellT.setCellValue("Tuyên Quang, ngày " + StringUtil.toString(bienBanInfo[2]));
 
 			// ghi ten cbcs
 			Row rowN = sheet.getRow(9);
 			Cell cellN = rowN.getCell(0);
-			cellN.setCellValue("Căn cứ Báo cáo đề xuất của " + StringUtil.toString(bienBanIndo[0])
+			cellN.setCellValue("Căn cứ Báo cáo đề xuất của " + StringUtil.toString(bienBanInfo[0])
 					+ " đã được Lãnh đạo Công an thành phố Tuyên Quang phê duyệt.");
 
 			// ghi ngay giao
 			Row row3 = sheet.getRow(11);
 			Cell cell3 = row3.getCell(0);
-			cell3.setCellValue("Địa điểm bàn giao: ngày " + StringUtil.toString(bienBanIndo[2])
+			cell3.setCellValue("Địa điểm bàn giao: ngày " + StringUtil.toString(bienBanInfo[2])
 					+ " tại kho vũ khí Công an thành phố Tuyên Quang, chúng tôi gồm:");
 
 			// ghi ben giao
 			Row row4 = sheet.getRow(14);
 			Cell cell4 = row4.getCell(0);
 			cell4.setCellValue(
-					"- Tên người bàn giao: " + StringUtil.toString(bienBanIndo[3]) + " –  cán bộ Đội Tổng hợp.");
+					"- Tên người bàn giao: " + StringUtil.toString(bienBanInfo[3]) + " –  cán bộ Đội Tổng hợp.");
 			Row row5 = sheet.getRow(15);
 			Cell cell5 = row5.getCell(0);
-			cell5.setCellValue("- Số CMND hoặc CMCAND: " + StringUtil.toString(bienBanIndo[4]));
+			cell5.setCellValue("- Số CMND hoặc CMCAND: " + StringUtil.toString(bienBanInfo[4]));
 
 			// ghi ben nhan
 			Row row6 = sheet.getRow(18);
 			Cell cell6 = row6.getCell(0);
-			cell6.setCellValue("- Tên người tiếp nhận bàn giao:  " + StringUtil.toString(bienBanIndo[0]));
+			cell6.setCellValue("- Tên người tiếp nhận bàn giao:  " + StringUtil.toString(bienBanInfo[0]));
 			Row row7 = sheet.getRow(19);
 			Cell cell7 = row7.getCell(0);
-			cell7.setCellValue("- Số CMND hoặc CMCAND:  " + StringUtil.toString(bienBanIndo[1]));
+			cell7.setCellValue("- Số CMND hoặc CMCAND:  " + StringUtil.toString(bienBanInfo[1]));
 
 			int rownum = 23;
 			Row row = null;
@@ -478,7 +475,7 @@ public class CBQLService extends BaseService {
 			int index = 1;
 			if (CollectionUtils.isNotEmpty(data)) {
 				for (Object[] objArr : data) {
-					sheet.shiftRows(rownum, rownum + 8, 1, true, true);
+					sheet.shiftRows(rownum, rownum + 20, 1, true, true);
 					row = sheet.createRow(rownum++);
 					cellnum = 0;
 					cell = row.createCell(cellnum++);
@@ -496,17 +493,17 @@ public class CBQLService extends BaseService {
 
 			CellStyle style2 = workbook.createCellStyle();
 			style2.setAlignment(HorizontalAlignment.CENTER);
-			row = sheet.createRow(rownum + 8);
+			row = sheet.getRow(rownum + 8);
 			cell = row.createCell(0);
-			cell.setCellValue(getUser().getName());
+			cell.setCellValue(StringUtil.toString(bienBanInfo[3]));
 
 			Cell cell8 = row.createCell(3);
-			cell8.setCellValue(StringUtil.toString(bienBanIndo[0]));
+			cell8.setCellValue(StringUtil.toString(bienBanInfo[0]));
 			cell8.setCellStyle(style2);
 
-			Row row9 = sheet.createRow(rownum + 14);
+			Row row9 = sheet.getRow(rownum + 16);
 			Cell cell9 = row9.createCell(0);
-			cell9.setCellValue(StringUtil.toString(bienBanIndo[5]));
+			cell9.setCellValue(StringUtil.toString(bienBanInfo[5]));
 			cell9.setCellStyle(style2);
 
 			cell.setCellStyle(style2);

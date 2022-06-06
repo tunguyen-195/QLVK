@@ -76,16 +76,18 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 	public List<Object[]> getDSVuKhiDownload(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu,
 			@Param("tinhTrang") String tinhTrang);
 
-	@Query(value = "select a.ma_cbcs, a.nhan_hieu_vk_vln_ccht, d.so_hieu_vk_vln_ccht, so_luong, ly_do from danh_sach_muon a "
+	@Query(value = "select a.ma_cbcs, a.nhan_hieu_vk_vln_ccht, d.so_hieu_vk_vln_ccht, so_luong, ly_do, c.ngay_muon "
+			+ "FROM danh_sach_muon a "
 			+ "INNER JOIN duyet_muon b ON a.ma_muon = b.ma_muon "
 			+ "INNER JOIN chi_tiet_muon d ON a.ma_muon = d.ma_muon "
 			+ "INNER JOIN bien_ban c ON b.ma_duyet = c.ma_duyet " + "WHERE a.trang_thai_muon = '2' "
 			+ "AND (((:ngayBatDau = '' AND :ngayKetThuc = '') OR c.ngay_muon BETWEEN :ngayBatDau AND :ngayKetThuc) "
 			+ "OR (:ngayBatDau = '' OR c.ngay_muon <= :ngayKetThuc) "
-			+ "OR (:ngayKetThuc = '' OR c.ngay_muon >= :ngayBatDau))", nativeQuery = true)
+			+ "OR (:ngayKetThuc = '' OR c.ngay_muon >= :ngayBatDau)) "
+			+ "ORDER BY c.ngay_muon", nativeQuery = true)
 	public List<Object[]> getDSBaocao(@Param("ngayBatDau") String ngayBatDau, @Param("ngayKetThuc") String ngayKetThuc);
 
-	@Query(value = "SELECT b.chung_loai, b.nhan_hieu_vk_vln_ccht, b.so_hieu_vk_vln_ccht, '1', c.ly_do "
+	@Query(value = "SELECT b.chung_loai, b.nhan_hieu_vk_vln_ccht, b.so_hieu_vk_vln_ccht, '1', 'Tốt, đảm bảo sử dụng' "
 			+ "FROM danh_sach_muon c INNER JOIN chi_tiet_muon a ON c.ma_muon = a.ma_muon "
 			+ "INNER JOIN vk_vln_ccht b ON a.so_hieu_vk_vln_ccht = b.so_hieu_vk_vln_ccht "
 			+ "WHERE a.ma_muon = :maMuon" , nativeQuery = true)
@@ -104,4 +106,7 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 
 	@Query(value = "SELECT so_hieu_vk_vln_ccht FROM chi_tiet_muon WHERE ma_muon =:maMuon ", nativeQuery = true)
 	public List<Integer> getDsSoHieu(@Param("maMuon") int maMuon);
+	
+	@Query(value = "SELECT ho_ten FROM cbcs WHERE user_id = :userId", nativeQuery = true)
+	public String getHoTenByUserId(@Param("userId") String userId);
 }

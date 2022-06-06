@@ -268,13 +268,16 @@
 					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
 					<h4>Chọn số lượng vũ khí cần mượn</h4>
 				</header>
+				<div>
+					<span id="hetSoLuong">Vũ khí này đã được mượn hết</span>
+				</div>
 				<div class="modal-body clearfix">
 					<div class="col col-half">
 						<div class="input-container-cbcs">
 							<label for="soLuong" class="modal-detail-label">Số lượng</label>
 							<input class="minus is-form" type="button" value="-"> <input
-								aria-label="soLuong" class="input-qty" max="" min="1"
-								id="soLuong" name="soLuong" type="number" value="1" disabled>
+								aria-label="soLuong" class="input-qty" max="" min=""
+								id="soLuong" name="soLuong" type="number" value="" disabled>
 							<input class="plus is-form" type="button" value="+"> <input
 								type="hidden" id="nhan_hieu_hidden">
 						</div>
@@ -308,18 +311,16 @@
 				<div class="modal-body clearfix">
 					<div class="col col-half">
 						<div class="input-container-cbcs row">
-							<label for="lyDo" class="modal-label-dssohieu">Danh sách nhãn hiệu</label>
-							<div id="dsNhanHieu" style="display: grid">
-							</div>
+							<label for="lyDo" class="modal-label-dssohieu">Danh sách
+								nhãn hiệu</label>
+							<div id="dsNhanHieu" style="display: grid"></div>
 						</div>
 					</div>
 					<div class="col row" style="justify-content: center;">
 						<button class="modal-button" id="modal-muon-button"
 							onclick="xacNhan()">Xác nhận</button>
 						<button class="modal-button modal-cancel-button "
-							id="modal-cancel-button"
-							onclick="hideModalHuy()">Hủy
-							bỏ</button>
+							id="modal-cancel-button" onclick="hideModalHuy()">Hủy bỏ</button>
 					</div>
 				</div>
 			</div>
