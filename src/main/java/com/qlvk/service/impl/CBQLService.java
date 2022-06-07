@@ -3,6 +3,8 @@ package com.qlvk.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -360,8 +362,15 @@ public class CBQLService extends BaseService {
 
 			Row rowT = sheet.getRow(4);
 			Cell cellT = rowT.getCell(0);
-			ngayBatDau = StringUtil.toString(dataExport.get(0)[5]);
-			ngayKetThuc = StringUtil.toString(dataExport.get(dataExport.size() - 1)[5]);
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+			if(StringUtils.isEmpty(ngayBatDau)) {
+				DateFormat dff = new SimpleDateFormat("yyyy-MM-dd");
+				ngayBatDau = df.format(dff.parse(StringUtil.toString(dataExport.get(0)[5])));
+			}
+			if(StringUtils.isEmpty(ngayKetThuc)) {
+				
+				ngayKetThuc = df.format(new Date());
+			}
 			cellT.setCellValue("Từ " + ngayBatDau + " đến " + ngayKetThuc + "");
 			int rownum = 8;
 			Row row = null;
@@ -377,7 +386,11 @@ public class CBQLService extends BaseService {
 					cell.setCellValue(String.valueOf(index));
 					cell.setCellStyle(style);
 					cellnum = 1;
+					int col = 0;
 					for (Object obj : objArr) {
+						if(col == 5) {
+							break;
+						}
 						cell = row.createCell(cellnum++);
 						cell.setCellStyle(style);
 						cell.setCellValue("'" + obj == null ? "" : String.valueOf(obj));
@@ -391,6 +404,7 @@ public class CBQLService extends BaseService {
 								}
 							}
 						}
+						col++;
 					}
 					index++;
 				}

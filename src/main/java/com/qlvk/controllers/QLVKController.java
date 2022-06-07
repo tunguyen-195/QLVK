@@ -34,7 +34,6 @@ public class QLVKController extends BaseController {
 		return "app/index";
 	}
 
-	@RequestMapping(value = { "/CBQL" }, method = RequestMethod.GET)
 	public String initCBQL(HttpServletRequest request, Model model) {
 		initial(model);
 		model.addAttribute("listChungLoai", service.getAllChungLoai());
@@ -42,14 +41,12 @@ public class QLVKController extends BaseController {
 		return "app/CBQL";
 	}
 	
-	@RequestMapping(value = { "/CBCS" }, method = RequestMethod.GET)
 	public String initCBCS(HttpServletRequest request, Model model) {
 		initial(model);
 		model.addAttribute("listChungLoai", service.getAllChungLoai());
 		model.addAttribute("listNhanHieu", service.getAllNhanHieu());
 		return "app/cbcs";
 	}
-	@RequestMapping(value = { "/LanhDao" }, method = RequestMethod.GET)
 	public String initLanhDao(HttpServletRequest request, Model model) {
 		initial(model);
 		return "app/lanhdao";

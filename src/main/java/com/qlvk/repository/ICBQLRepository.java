@@ -76,8 +76,8 @@ public interface ICBQLRepository extends JpaRepository<Category, Integer> {
 	public List<Object[]> getDSVuKhiDownload(@Param("chungLoai") String chungLoai, @Param("nhanHieu") String nhanHieu,
 			@Param("tinhTrang") String tinhTrang);
 
-	@Query(value = "select a.ma_cbcs, a.nhan_hieu_vk_vln_ccht, d.so_hieu_vk_vln_ccht, so_luong, ly_do, c.ngay_muon "
-			+ "FROM danh_sach_muon a "
+	@Query(value = "select s.ho_ten, a.nhan_hieu_vk_vln_ccht, d.so_hieu_vk_vln_ccht, so_luong, ly_do, c.ngay_muon "
+			+ "FROM danh_sach_muon a INNER JOIN cbcs s ON a.ma_cbcs = s.ma_cbcs "
 			+ "INNER JOIN duyet_muon b ON a.ma_muon = b.ma_muon "
 			+ "INNER JOIN chi_tiet_muon d ON a.ma_muon = d.ma_muon "
 			+ "INNER JOIN bien_ban c ON b.ma_duyet = c.ma_duyet " + "WHERE a.trang_thai_muon = '2' "
