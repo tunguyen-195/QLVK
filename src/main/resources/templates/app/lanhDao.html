@@ -8,12 +8,12 @@
 <link rel="stylesheet" type="text/css"
 	th:href="@{/resources/assets/css/style.css}" />
 <link rel="stylesheet" type="text/css"
-	th:href="@{/resources/assets/css/styleCBCS.css}" />
+	th:href="@{/resources/assets/css/styleLanhDao.css}" />
 <link rel="stylesheet" type="text/css"
 	th:href="@{/resources/assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css}" />
 <!-- begin borrow form -->
 <script type="text/javascript" th:inline="javascript" charset="UTF-8"
-	th:src="@{/resources/assets/JavaScript/cbcs.js}"></script>
+	th:src="@{/resources/assets/JavaScript/lanhDao.js}"></script>
 <title>CBCS</title>
 </head>
 <body>
@@ -221,23 +221,15 @@
 
 					<!-- begin search -->
 					<form>
-						<div class="content-search">
-							<div style="text-align: center;">
-								<label class="modal-detail-label">Chủng loại</label> <select
-									id="list-chungloai" class="select-box"
-									onchange="loadNhanHieu()">
-									<option value="">--Lựa chọn--</option>
-									<th:block th:each="item, iState : ${listChungLoai}">
-										<option th:value="${item}">[[${item}]]</option>
-									</th:block>
-								</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
-									id="list-nhanHieu" class="select-box"
-									onchange="getListImgVK();">
-									<option value="">--Lựa chọn--</option>
-									<th:block th:each="item, iState : ${listNhanHieu}">
-										<option th:value="${item}">[[${item}]]</option>
-									</th:block>
-								</select>
+						<div class="content-search" style="text-align: center;">
+							<h4 class="fa-solid">Phê duyệt yêu cầu mượn</h4>
+							<div class="row input-search">
+								<label class="modal-detail-label">Tìm kiếm</label> <input
+									type="text" id="timKiem" class="select-box">
+								<div class="search-button">
+									<button class="modal-button" id="btn_timKiem_tra"
+										onclick="timKiem()">Tìm kiếm</button>
+								</div>
 							</div>
 						</div>
 						<div class="main-content">
@@ -245,7 +237,28 @@
 								<!-- phần nội dung bản -->
 								<div class="ivu-table">
 									<div class="pr-0">
-										<table class="table" id="table_image"></table>
+										<table class="table" id="tbl_datatables_lanhDao">
+											<colgroup>
+												<col width="100px">
+												<col width="100px">
+												<col width="100px">
+												<col width="100px">
+												<col width="100px">
+												<col width="100px">
+											</colgroup>
+											<thead class="text-color-header">
+												<tr>
+													<th scope="col" class="align-middle">SỐ HIỆU CAND</th>
+													<th scope="col" class="align-middle">HỌ VÀ TÊN</th>
+													<th scope="col" class="align-middle">SỐ ĐIỆN THOẠI</th>
+													<th scope="col" class="align-middle">NHÃN HIỆU
+														VK-VLN-CCHT</th>
+													<th scope="col" class="align-middle">SỐ LƯỢNG MƯỢN</th>
+													<th scope="col" class="align-middle">LÝ DO ĐỀ XUẤT
+														MƯỢN</th>
+												</tr>
+											</thead>
+										</table>
 									</div>
 								</div>
 							</div>
@@ -266,61 +279,60 @@
 			<div class="modal-detail-form js-modal-Bubble">
 				<header class="modal-header">
 					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
-					<h4>Chọn số lượng vũ khí cần mượn</h4>
+					<h4>Phê duyệt mượn</h4>
 				</header>
-				<div>
-					<span id="hetSoLuong">Vũ khí này đã được mượn hết</span>
-				</div>
 				<div class="modal-body clearfix">
-					<div class="col col-half">
+					<div class="col">
 						<div class="input-container-cbcs">
-							<label for="soLuong" class="modal-detail-label">Số lượng</label>
-							<input class="minus is-form" type="button" value="-"> <input
-								aria-label="soLuong" class="input-qty" max="" min=""
-								id="soLuong" name="soLuong" type="number" value="" disabled>
-							<input class="plus is-form" type="button" value="+"> <input
-								type="hidden" id="nhan_hieu_hidden">
+							<label for="soHieu" class="modal-detail-label">Số hiệu
+								CAND</label> <input type="text" id="soHieuCAND" class="select-box"
+								readonly="readonly">
 						</div>
 					</div>
-					<div class="col col-half">
-						<div class="input-container-cbcs row">
-							<label for="lyDo" class="modal-detail-label">Lý do mượn</label>
-							<div>
-								<textarea rows="4" cols="25" id="lyDo"></textarea>
-							</div>
+					<div class="col">
+						<div class="input-container-cbcs">
+							<label for="hoTen" class="modal-detail-label">Họ tên</label> <input
+								type="text" id="hoTen" class="select-box" readonly="readonly">
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container-cbcs">
+							<label for="sdt" class="modal-detail-label">Số điện thoại</label>
+							<input type="text" id="sdt" class="select-box"
+								readonly="readonly">
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container-cbcs">
+							<label for="nhanHieu" class="modal-detail-label">Nhãn
+								hiệu</label> <input type="text" id="nhanHieu" class="select-box"
+								readonly="readonly">
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container-cbcs">
+							<label for="soLuong" class="modal-detail-label">Số lượng</label>
+							<input type="text" id="soLuong" class="select-box"
+								readonly="readonly">
+						</div>
+					</div>
+					<div class="col">
+						<div class="input-container-cbcs">
+							<label for="lyDo" class="modal-detail-label">Lý do đề
+								xuất mượn</label>
+							<textarea id="lyDo" class="modal-detail-input"
+								readonly="readonly"></textarea>
+							<input type="hidden" id="maMuon">
 						</div>
 					</div>
 					<div class="col row" style="justify-content: center;">
-						<button class="modal-button" id="modal-muon-button"
-							onclick="requestMuon()">Gửi yêu cầu mượn</button>
+						<button class="modal-button" onclick="pheDuyet()">Phê
+							duyệt</button>
+						<button class="modal-button" onclick="tuChoi()">Từ chối</button>
 						<button class="modal-button modal-cancel-button "
 							id="modal-cancel-button"
 							onclick="hideModal(document.getElementById('js-modal-detail'))">Hủy
 							bỏ</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- model thông báo yêu cầu bị từ chối -->
-		<div class="modal-detail clearfix" id="js-modal-tuChoi">
-			<div class="modal-detail-form js-modal-Bubble">
-				<header class="modal-header">
-					<i class="modal-register-icon fa-solid fa-floppy-disk-pen"></i>
-					<h4>Yêu cầu mượn của bạn đã bị từ chối</h4>
-				</header>
-				<div class="modal-body clearfix">
-					<div class="col col-half">
-						<div class="input-container-cbcs row">
-							<label for="lyDo" class="modal-label-dssohieu">Danh sách
-								nhãn hiệu</label>
-							<div id="dsNhanHieu" style="display: grid"></div>
-						</div>
-					</div>
-					<div class="col row" style="justify-content: center;">
-						<button class="modal-button" id="modal-muon-button"
-							onclick="xacNhan()">Xác nhận</button>
-						<button class="modal-button modal-cancel-button "
-							id="modal-cancel-button" onclick="hideModalHuy()">Hủy bỏ</button>
 					</div>
 				</div>
 			</div>

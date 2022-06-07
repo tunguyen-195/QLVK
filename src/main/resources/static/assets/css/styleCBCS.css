@@ -74,6 +74,17 @@ body.modal-open {
 	z-index: 0;
 }
 
+.modal-detail-label2 {
+	top: 12px;
+	left: 16px;
+	width: 200px;
+	padding: 0 4px 0 0;
+	background-color: #dcebe9;
+	color: #006A91;
+	font-size: 18px;
+	transition: 0.5s;
+	z-index: 0;
+}
 .modal-detail-input {
 	top: 0px;
 	left: 0px;
@@ -185,4 +196,29 @@ textarea {
 	position: relative;
 	height: 100px;
 	margin-bottom: 17px;
+}
+.modal-label-dssohieu {
+	top: 12px;
+	left: 16px;
+	padding: 0 4px 0 0;
+	background-color: #dcebe9;
+	color: #006A91;
+	transition: 0.5s;
+	font-size: 18px;
+	z-index: 0;
+}
+.model-huy-text {
+	width: 130px;
+	top: 12px;
+	height : 27px;
+	left: 16px;
+	padding: 0 4px 0 0;
+	background-color: #dcebe9;
+	color: #006A91;
+	font-size: 18px;
+}
+#hetSoLuong {
+	color: #FF0000;
+	margin-left: 10px;
+	font-size: 18px;
 }

@@ -19,66 +19,16 @@
 <body>
 	<div layout:fragment="content" th:remove="tag">
 		<div id="main">
-
 			<div id="header">
-
 				<div id="pre-header">
-
 					<div class="police-logo">
 						<img th:src="@{/resources/assets/img/Logo.png}" alt="">
 					</div>
-
 					<div id="sologan">
 						<p id="sologan-vk">Hệ thống Quản lý Vũ khí - Vật liệu nổ -
 							Công cụ hỗ trợ</p>
 						<p id="sologan-tq">Công an thành phố Tuyên Quang</p>
 					</div>
-
-				</div>
-
-				<div id="nav">
-
-					<!-- begin menu navigation -->
-					<ul id="menu-nav">
-
-						<li><a href="#" id="menu-trangchu2"> <i
-								class="fa-solid fa-dagger"></i> Quản lý VK-VLN-CCHT
-						</a></li>
-
-						<li><a href="#" id="menu-trangchu3"> <i
-								class="fa-solid fa-file-certificate"></i> Quản lý Giấy phép
-						</a></li>
-
-						<li><a href="#" id="menu-trangchu4"> <i
-								class="fa-solid fa-folder-open"></i> Quản lý Hồ sơ
-						</a></li>
-
-						<li><a href="#tab-TL"> <i
-								class="fa-solid fa-arrow-right-arrow-left"></i> Quản lý Mượn/Trả
-								<i class="fa-solid fa-caret-down"></i>
-						</a>
-							<ul id="sub-menu-nav">
-								<li><a href="#">Xử lý yêu cầu mượn</a></li>
-								<li><a href="#">Xử lý yêu cầu trả</a></li>
-							</ul></li>
-
-
-
-						<li><a href="#tab-TL"> <i
-								class="fa-solid fa-file-chart-column"></i> Báo cáo - Thống kê <i
-								class="fa-solid fa-caret-down"></i>
-						</a>
-							<ul id="sub-menu-nav">
-								<li><a href="#">VK-VLN-CCHT</a></li>
-								<li><a href="#">Giấy phép</a></li>
-								<li><a href="#">Lượt Mượn/Trả</a></li>
-								<li><a href="#">Hồ sơ</a></li>
-							</ul></li>
-
-						<li><a th:href="@{/logout}" id="menu-trangchu3"> <i
-								class="fa-solid fa-address-book"></i> Đăng xuất
-						</a></li>
-					</ul>
 				</div>
 			</div>
 			<div class="row user-link">
@@ -89,189 +39,181 @@
 				</div>
 			</div>
 			<div id="content">
-				<div class="content-header">
-					<div class="row content-title">
-						<p>
-							<i class="fa-solid fa-notes"></i> Vũ khí - Vật liệu nổ - Công cụ
-							hỗ trợ
-						</p>
-					</div>
-				</div>
-
-				<!-- Tab Khám phá -->
-				<div id="content-khampha">
-
+				<div id="nav">
 					<div class="group-tabs">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" role="tablist">
-							<li role="presentation"><a
-								href="#tab-vk_vln_ccht" aria-controls="tab-vk_vln_ccht"
-								role="tab" data-toggle="tab" id="tab-ql" class="tab-item fas fa-solid active">Quản
+							<li role="presentation"><a href="#tab-vk_vln_ccht"
+								aria-controls="tab-vk_vln_ccht" role="tab" data-toggle="tab"
+								id="tab-ql" class="tab-item fa-solid fa-dagger active">Quản
 									lý vũ khí</a></li>
-							<li role="presentation"><a
-								href="#tab-yc_muon" id="tab-muon" aria-controls="tab-yc_muon"
-								role="tab" data-toggle="tab" class="tab-item fas fa-solid">Xử lý mượn</a></li>
-							<li role="presentation"><a
-								href="#tab-yc_tra" id="tab-tra" aria-controls="tab-yc_tra"
-								role="tab" data-toggle="tab" class="tab-item fas fa-solid">Xử lý trả</a></li>
+							<li role="presentation"><a href="#tab-yc_muon" id="tab-muon"
+								aria-controls="tab-yc_muon" role="tab" data-toggle="tab"
+								class="tab-item fa-solid fa-dagger">Xử lý mượn</a></li>
+							<li role="presentation"><a href="#tab-yc_tra" id="tab-tra"
+								aria-controls="tab-yc_tra" role="tab" data-toggle="tab"
+								class="tab-item fa-solid fa-dagger">Xử lý trả</a></li>
+							<li style=""><a th:href="@{/logout}" id="logout"
+								class="tab-item fa-solid"> <i
+									class="fa-solid fa-address-book"></i>Đăng xuất
+							</a></li>
 						</ul>
-
-						<!-- Tab panes -->
-						<div class="tab-content">
-							<div role="tabpanel" class="tab-pane active" id="tab-vk_vln_ccht">
-								<div class="content-search" style="text-align: center;">
-									<h4 class="fa-solid">Danh sách vũ khí, vật liệu nổ, công
-										cụ hỗ trợ</h4>
-									<div class="row">
-										<div class="input-search">
-											<label class="modal-detail-label">Chủng loại</label> <select
-												id="list-chungloai" class="select-box"
-												onchange="loadNhanHieu(this, &#39;1&#39;)">
-												<option value="">--Lựa chọn--</option>
-												<th:block th:each="item, iState : ${listChungLoai}">
-													<option th:value="${item}">[[${item}]]</option>
-												</th:block>
-											</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
-												id="list-nhanHieu" class="select-box">
-												<option value="">--Lựa chọn--</option>
-												<th:block th:each="item, iState : ${listNhanHieu}">
-													<option th:value="${item}">[[${item}]]</option>
-												</th:block>
-											</select> <label class="modal-detail-label">Tình trạng</label> <select
-												id="list_tinhTrang" class="select-box">
-												<option value="">--Lựa chọn--</option>
-												<option value="0">Còn</option>
-												<option value="1">Đã mượn</option>
-												<option value="2">Hỏng</option>
-											</select>
-										</div>
-										<div class="search-button row">
-											<button class="modal-button" id="btn_timKiem"
-												onClick="timKiemVK()">Tìm kiếm</button>
-											<button class="modal-button" style="margin-left: 10px;"
-												id="btn_addNew" onClick="showModelThem()">Thêm mới</button>
-											<button id="btn-download" type = "button" class="modal-button" style="margin-left: 10px;">Tải xuống</button>
-										</div>
-									</div>
+					</div>
+				</div>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="tab-vk_vln_ccht">
+						<div class="content-search" style="text-align: center;">
+							<h4 class="fa-solid">Danh sách vũ khí, vật liệu nổ, công cụ
+								hỗ trợ</h4>
+							<div class="row">
+								<div class="input-search">
+									<label class="modal-detail-label">Chủng loại</label> <select
+										id="list-chungloai" class="select-box"
+										onchange="loadNhanHieu(this, &#39;1&#39;)">
+										<option value="">--Lựa chọn--</option>
+										<th:block th:each="item, iState : ${listChungLoai}">
+											<option th:value="${item}">[[${item}]]</option>
+										</th:block>
+									</select> <label class="modal-detail-label">Nhãn hiệu</label> <select
+										id="list-nhanHieu" class="select-box">
+										<option value="">--Lựa chọn--</option>
+										<th:block th:each="item, iState : ${listNhanHieu}">
+											<option th:value="${item}">[[${item}]]</option>
+										</th:block>
+									</select> <label class="modal-detail-label">Tình trạng</label> <select
+										id="list_tinhTrang" class="select-box">
+										<option value="">--Lựa chọn--</option>
+										<option value="0">Còn</option>
+										<option value="1">Đã mượn</option>
+									</select>
 								</div>
-								<div class="tab-pane active">
-									<div class="ivu-table">
-										<div class="pr-0">
-											<table class="table" id="tbl_datatables_vk">
-												<colgroup>
-													<col width="120px">
-													<col width="140px">
-													<col width="140px">
-													<col width="120px">
-													<col width="120px">
-													<col width="120px">
-												</colgroup>
-												<thead class="text-color-header">
-													<tr>
-														<th scope="col" class="align-middle">SỐ HIỆU</th>
-														<th scope="col" class="align-middle">CHỦNG LOẠI</th>
-														<th scope="col" class="align-middle">NHÃN HIỆU</th>
-														<th scope="col" class="align-middle">ĐƠN VỊ TÍNH</th>
-														<th scope="col" class="align-middle">NƯỚC SẢN XUẤT</th>
-														<th scope="col" class="align-middle">TÌNH TRẠNG</th>
-													</tr>
-												</thead>
-											</table>
-										</div>
-									</div>
+								<div class="search-button row">
+									<button class="modal-button" id="btn_timKiem"
+										onClick="timKiemVK()">Tìm kiếm</button>
+									<button class="modal-button" style="margin-left: 10px;"
+										id="btn_addNew" onClick="showModelThem()">Thêm mới</button>
+									<button id="btn-download" type="button" class="modal-button"
+										style="margin-left: 10px;">Tải xuống</button>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane" id="tab-yc_muon">
-								<div class="content-search" style="text-align: center;">
-									<h4 class="fa-solid">Quản lý yêu cầu mượn</h4>
-									<div class="row input-search">
-										<label class="modal-detail-label">Tìm kiếm</label> <input
-											type="text" id="txt_timKiem_muon" class="select-box">
-										<div class="search-button">
-											<button class="modal-button" id="btn_timKiem_muon"
-												onclick="timKiemMuon()">Tìm kiếm</button>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane active">
-									<div class="ivu-table">
-										<div class="pr-0">
-											<table class="table" id="tbl_datatables_muon">
-												<colgroup>
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-												</colgroup>
-												<thead class="text-color-header">
-													<tr>
-														<th scope="col" class="align-middle">LÃNH ĐẠO DUYỆT</th>
-														<th scope="col" class="align-middle">SỐ HIỆU CAND,
-															CBCS</th>
-														<th scope="col" class="align-middle">HỌ VÀ TÊN CBCS
-															MƯỢN</th>
-														<th scope="col" class="align-middle">SỐ HIỆU
-															VK-VLN-CCHT</th>
-														<th scope="col" class="align-middle">NHÃN HIỆU
-															VK-VLN-CCHT</th>
-														<th scope="col" class="align-middle">SỐ LƯỢNG MƯỢN</th>
-													</tr>
-												</thead>
-											</table>
-										</div>
-									</div>
+						</div>
+						<div class="tab-pane active">
+							<div class="ivu-table">
+								<div class="pr-0">
+									<table class="table" id="tbl_datatables_vk">
+										<colgroup>
+											<col width="120px">
+											<col width="140px">
+											<col width="140px">
+											<col width="120px">
+											<col width="120px">
+											<col width="120px">
+										</colgroup>
+										<thead class="text-color-header">
+											<tr>
+												<th scope="col" class="align-middle">SỐ HIỆU</th>
+												<th scope="col" class="align-middle">CHỦNG LOẠI</th>
+												<th scope="col" class="align-middle">NHÃN HIỆU</th>
+												<th scope="col" class="align-middle">ĐƠN VỊ TÍNH</th>
+												<th scope="col" class="align-middle">NƯỚC SẢN XUẤT</th>
+												<th scope="col" class="align-middle">TÌNH TRẠNG</th>
+											</tr>
+										</thead>
+									</table>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane" id="tab-yc_tra">
-								<div class="content-search" style="text-align: center;">
-									<h4 class="fa-solid">Quản lý trả</h4>
-									<div class="row input-search">
-										<label class="modal-detail-label">Tìm kiếm</label> <input
-											type="text" id="txt_timKiem_tra" class="select-box">
-										<div class="search-button">
-											<button class="modal-button" id="btn_timKiem_tra"
-												onclick="timKiemTra()">Tìm kiếm</button>
-										</div>
-									</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tab-yc_muon">
+						<div class="content-search" style="text-align: center;">
+							<h4 class="fa-solid">Quản lý yêu cầu mượn</h4>
+							<div class="row input-search">
+								<label class="modal-detail-label">Tìm kiếm</label> <input
+									type="text" id="txt_timKiem_muon" class="select-box">
+								<div class="search-button">
+									<button class="modal-button" id="btn_timKiem_muon"
+										onclick="timKiemMuon()">Tìm kiếm</button>
 								</div>
-								<div class="tab-pane active">
-									<div class="ivu-table">
-										<div class="pr-0">
-											<table class="table" id="tbl_datatables_tra">
-												<colgroup>
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-													<col width="100px">
-												</colgroup>
-												<thead class="text-color-header">
-													<tr>
-														<th scope="col" class="align-middle">SỐ HIỆU CAND,
-															CBCS</th>
-														<th scope="col" class="align-middle">HỌ VÀ TÊN CBCS</th>
-														<th scope="col" class="align-middle">ĐƠN VỊ</th>
-														<th scope="col" class="align-middle">SỐ HIỆU
-															VK-VLN-CCHT</th>
-														<th scope="col" class="align-middle">NHÃN HIỆU
-															VK-VLN-CCHT</th>
-														<th scope="col" class="align-middle">SỐ LƯỢNG</th>
-														<th scope="col" class="align-middle">NGÀY MƯỢN</th>
-														<th scope="col" class="align-middle">CÁN BỘ QUẢN LÝ</th>
-														<th scope="col" class="align-middle">SỐ HIỆU CBQL</th>
-														<th scope="col" class="align-middle">LÃNH ĐẠO DUYỆT</th>
-													</tr>
-												</thead>
-											</table>
-										</div>
-									</div>
+							</div>
+						</div>
+						<div class="tab-pane active">
+							<div class="ivu-table">
+								<div class="pr-0">
+									<table class="table" id="tbl_datatables_muon">
+										<colgroup>
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+										</colgroup>
+										<thead class="text-color-header">
+											<tr>
+												<th scope="col" class="align-middle">LÃNH ĐẠO DUYỆT</th>
+												<th scope="col" class="align-middle">SỐ HIỆU CAND, CBCS</th>
+												<th scope="col" class="align-middle">HỌ VÀ TÊN CBCS
+													MƯỢN</th>
+												<th scope="col" class="align-middle">NHÃN HIỆU
+													VK-VLN-CCHT</th>
+												<th scope="col" class="align-middle">SỐ LƯỢNG MƯỢN</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="tab-yc_tra">
+						<div class="content-search" style="text-align: center;">
+							<h4 class="fa-solid">Quản lý trả</h4>
+							<div class="row input-search">
+								<label class="modal-detail-label">Tìm kiếm</label> <input
+									type="text" id="txt_timKiem_tra" class="select-box">
+								<div class="search-button">
+									<button class="modal-button" id="btn_timKiem_tra"
+										onclick="timKiemTra()">Tìm kiếm</button>
+								</div>
+								<label class="modal-detail-label2" style="margin-left: 100px;">Báo
+									cáo mượn</label> <input type="text" id="ngayBatDau"
+									placeholder="Ngày bắt đầu" class="select-box"
+									style="margin-left: 10px;"> <input type="text"
+									id="ngayKetThuc" placeholder="Ngày kết thúc" class="select-box"
+									style="margin-left: 10px;">
+								<button id="btn-download2" type="button" class="modal-button"
+									style="margin-left: 10px;">Tải xuống</button>
+							</div>
+						</div>
+						<div class="tab-pane active">
+							<div class="ivu-table">
+								<div class="pr-0">
+									<table class="table" id="tbl_datatables_tra">
+										<colgroup>
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+											<col width="100px">
+										</colgroup>
+										<thead class="text-color-header">
+											<tr>
+												<th scope="col" class="align-middle">SỐ HIỆU CAND, CBCS</th>
+												<th scope="col" class="align-middle">HỌ VÀ TÊN CBCS</th>
+												<th scope="col" class="align-middle">ĐƠN VỊ</th>
+												<th scope="col" class="align-middle">NHÃN HIỆU
+													VK-VLN-CCHT</th>
+												<th scope="col" class="align-middle">SỐ LƯỢNG</th>
+												<th scope="col" class="align-middle">NGÀY MƯỢN</th>
+												<th scope="col" class="align-middle">CÁN BỘ QUẢN LÝ</th>
+												<th scope="col" class="align-middle">SỐ HIỆU CBQL</th>
+												<th scope="col" class="align-middle">LÃNH ĐẠO DUYỆT</th>
+											</tr>
+										</thead>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -295,42 +237,31 @@
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="soHieu" class="modal-detail-label">Số hiệu :
-							</label> <input type="text" id="txt_soHieu">
+							</label> <input type="text" id="txt_soHieu" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="chungLoai" class="modal-detail-label">Chủng
-								loại : </label> <select id="in_chungloai" class="select-box"
-								onchange="loadNhanHieu(this, &#39;0&#39;)">
-								<option value="">--Lựa chọn--</option>
-								<th:block th:each="item, iState : ${listChungLoai}">
-									<option th:value="${item}">[[${item}]]</option>
-								</th:block>
-							</select>
+								loại : </label> <input type="text" id="in_chungloai" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="nhanHieu" class="modal-detail-label">Nhãn
-								hiệu : </label> <select id="in_nhanHieu" class="select-box">
-								<option value="">--Lựa chọn--</option>
-								<th:block th:each="item, iState : ${listNhanHieu}">
-									<option th:value="${item}">[[${item}]]</option>
-								</th:block>
-							</select>
+								hiệu : </label> <input type="text" id="in_nhanHieu" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="donViTinh" class="modal-detail-label">Đơn vị
-								tính : </label> <input type="text" id="txt_donViTinh">
+								tính : </label> <input type="text" id="txt_donViTinh" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="nuocSX" class="modal-detail-label">Nước sản
-								xuất : </label> <input type="text" id="txt_nuocSX">
+								xuất : </label> <input type="text" id="txt_nuocSX" class="select-box">
 						</div>
 					</div>
 					<div class="col col-half">
@@ -340,7 +271,6 @@
 								<option value="">--Lựa chọn--</option>
 								<option value="0">Còn</option>
 								<option value="1">Đã mượn</option>
-								<option value="2">Hỏng</option>
 							</select>
 						</div>
 					</div>
@@ -372,7 +302,7 @@
 					<div class="col">
 						<div class="input-container">
 							<label for="lanhDaoDuyet" class="modal-detail-label">Họ
-								và tên : </label> <input type="text" id="txt_lanhDao"
+								và tên : </label> <input type="text" id="txt_lanhDao" class="select-box"
 								readonly="readonly">
 						</div>
 					</div>
@@ -380,32 +310,31 @@
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="soHieu" class="modal-detail-label">Số hiệu
-								CAND : </label> <input type="text" id="txt_soHieu" readonly="readonly">
+								CAND : </label> <input type="text" id="txt_soHieu_cand" class="select-box"
+								readonly="readonly">
 						</div>
 					</div>
 					<div class="col col-half">
 						<div class="input-container">
 							<label for="hoTenCBCS" class="modal-detail-label">Họ và
-								tên : </label> <input type="text" id="txt_hoTenCBCS" readonly="readonly">
+								tên : </label> <input type="text" id="txt_hoTenCBCS" class="select-box"
+								readonly="readonly">
 						</div>
 					</div>
 					<h6>THÔNG TIN VŨ KHÍ, VẬT LIỆU NỔ, CÔNG CỤ HỖ TRỢ</h6>
 					<div class="col">
 						<div class="input-container">
 							<label for="nhanHieu" class="modal-detail-label">Nhãn
-								hiệu : </label> <input type="text" id="txt_nhanHieu" readonly="readonly">
+								hiệu : </label> <input type="text" id="txt_nhanHieu" readonly="readonly"
+								class="select-box">
 						</div>
 					</div>
 					<div class="col">
 						<div class="input-container">
-							<!-- 							<label for="soHieuVK" class="modal-label-select_sohieu">Chọn -->
-							<!-- 								số hiệu vũ khí, vật liệu nổ, công cụ hỗ trợ : </label> <select -->
-							<!-- 								id="soHieuVK" class="select-box"> -->
-							<!-- 							</select>  -->
 							<label for="soLuong" class="modal-detail-label">Số lượng
-								: </label> <input type="text" id="txt_soLuong" readonly="readonly">
-							<input type="hidden" id="txt_maMuon"> <input
-								type="hidden" id="txt_maDuyet">
+								: </label> <input type="text" id="txt_soLuong" readonly="readonly"
+								class="select-box"> <input type="hidden" id="txt_maMuon">
+							<input type="hidden" id="txt_maDuyet">
 						</div>
 					</div>
 					<div class="col row" style="justify-content: center;">
@@ -432,44 +361,10 @@
 				<div class="modal-body clearfix">
 					<h6>THÔNG TIN LÃNH ĐẠO DUYỆT</h6>
 					<div class="col">
-						<div class="input-container">
-							<label for="lanhDaoDuyet" class="modal-detail-label">Họ
-								và tên : </label> <input type="text" id="txt_lanhDao"
-								readonly="readonly">
-						</div>
-					</div>
-					<h6>THÔNG TIN CÁN BỘ CHIẾN SĨ MƯỢN</h6>
-					<div class="col col-half">
-						<div class="input-container">
-							<label for="soHieu" class="modal-detail-label">Số hiệu
-								CAND : </label> <input type="text" id="txt_soHieu" readonly="readonly">
-						</div>
-					</div>
-					<div class="col col-half">
-						<div class="input-container">
-							<label for="hoTenCBCS" class="modal-detail-label">Họ và
-								tên : </label> <input type="text" id="txt_hoTenCBCS" readonly="readonly">
-						</div>
-					</div>
-					<h6>THÔNG TIN VŨ KHÍ, VẬT LIỆU NỔ, CÔNG CỤ HỖ TRỢ</h6>
-					<div class="col">
-						<div class="input-container">
-							<label for="nhanHieu" class="modal-detail-label">Nhãn
-								hiệu : </label> <input type="text" id="txt_nhanHieu" readonly="readonly">
-						</div>
-					</div>
-					<div class="col">
-						<div class="input-container">
-							<label for="nhanHieu" class="modal-detail-label">Số hiệu vũ khí : </label> 
-							<div id="list_soHieuVK"></div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="input-container">
-							<label for="soLuong" class="modal-detail-label">Số lượng
-								: </label> <input type="text" id="txt_soLuong" readonly="readonly">
-							<input type="hidden" id="txt_maMuon"> <input
-								type="hidden" id="txt_maDuyet">
+						<div class="input-container-tra row">
+							<label for="listSoHieuVK" class="modal-label-dssohieu">Số
+								hiệu vũ khí, vật liệu nổ, công cụ hỗ trợ : </label>
+							<div id="listSoHieuVK" style="display: grid"></div>
 						</div>
 					</div>
 					<div class="col row" style="justify-content: center;">
@@ -477,14 +372,14 @@
 							onclick="thuHoi()">Thu hồi</button>
 						<button class="modal-button modal-cancel-button"
 							id="modal-cancel-button" style="margin-left: 10px;"
-							onclick="hideModal(document.getElementById('js-modal-muon'))">Hủy
+							onclick="hideModal(document.getElementById('js-modal-tra'))">Hủy
 							bỏ</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- Kết thúc modal thu hồi -->
-		<th:block th:replace="fragments/CommonDownloadFile"/>
+		<th:block th:replace="fragments/CommonDownloadFile" />
 	</div>
 </body>
 </html>

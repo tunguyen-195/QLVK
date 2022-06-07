@@ -121,13 +121,12 @@ public class CBQLApiController {
 		return data;
 	}
 
-	@RequestMapping(value = "/api/CBQL/getSoHieu", method = RequestMethod.GET, produces = {
+	@RequestMapping(value = "/api/CBQL/getDsSoHieu", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public Map<String, Object> getSoHieu(HttpServletRequest request,
-			@RequestParam(value = "nhanHieu") String nhanHieu) {
+	public Map<String, Object> getSoHieu(HttpServletRequest request, @RequestParam(value = "maMuon") String maMuon) {
 
 		Map<String, Object> data = new HashMap<>();
-		List<String> listData = service.getSoHieu(nhanHieu);
+		List<Integer> listData = service.getDsSoHieu(Integer.parseInt(maMuon));
 		data.put("statusCode", "200");
 		data.put(CommonConstant.DATA, listData);
 		return data;
@@ -138,10 +137,7 @@ public class CBQLApiController {
 	public Map<String, Object> choMuon(@RequestBody ChoMuonModel model, HttpServletResponse response,
 			HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute(CommonConstant.USER_INFO);
-		// Map<String, Object> data = service.choMuon(user.getUserId(),
-		// model.getMaMuon(), model.getMaDuyet(),
-		// model.getSoHieuVK());
-		Map<String, Object> data = service.choMuon2(user.getUserId(), model.getMaMuon(), model.getMaDuyet(),
+		Map<String, Object> data = service.choMuon(user.getUserId(), model.getMaMuon(), model.getMaDuyet(),
 				model.getNhanHieuVK(), model.getSoLuong());
 		return data;
 	}
@@ -161,6 +157,21 @@ public class CBQLApiController {
 			@RequestParam(value = "nhanHieu", defaultValue = "") String nhanHieu,
 			@RequestParam(value = "tinhTrang", defaultValue = "") String tinhTrang) throws Exception {
 		return service.download(chungLoai, nhanHieu, tinhTrang);
+	}
+
+	@RequestMapping(value = "/api/CBQL/downloadBaoCao", method = { RequestMethod.GET }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> downloadBaocao(HttpServletRequest request,
+			@RequestParam(value = "ngayBatDau", defaultValue = "") String ngayBatDau,
+			@RequestParam(value = "ngayKetThuc", defaultValue = "") String ngayKetThuc) throws Exception {
+		return service.downloadBaocao(ngayBatDau, ngayKetThuc);
+	}
+
+	@RequestMapping(value = "/api/CBQL/downBienBan", method = { RequestMethod.GET }, produces = {
+			MediaType.APPLICATION_JSON_VALUE })
+	public Map<String, Object> downBienBan(HttpServletRequest request,
+			@RequestParam(value = "maMuon", defaultValue = "") String maMuon) throws Exception {
+		return service.downBienBan(Integer.parseInt(maMuon));
 	}
 
 	@RequestMapping(value = "/api/CBQL/thuHoi", method = RequestMethod.POST, produces = {

@@ -76,4 +76,40 @@ public class CBCSService extends BaseService {
 
 		return data;
 	}
+
+	public Map<String, Object> kiemTraYeuCauBiTuChoi(String userId) {
+		Map<String, Object> data = new HashMap<>();
+		// lấy mã cbcs theo user login
+		int maCBCS = rep.getMaCBCSByUserID(userId);
+		// lấy danh sách yêu cầu mượn đã bị từ chối
+		List<Object[]> listYcTuChoi = rep.getDsYeuCauBiTuChoi(maCBCS);
+
+		// trường hơp không có yêu cầu bị từ chối, hiển thị init bình thường
+		// trường hợp có yêu cầu bị từ chối, hiển thị danh sách nhãn hiệu mượn bị từ
+		// chối
+		if (listYcTuChoi.size() == 0) {
+			data.put("status", "ok");
+		} else {
+			List<String> listNhanHieu = new ArrayList<>();
+			List<String> listMaMuon = new ArrayList<>();
+			for (Object[] object : listYcTuChoi) {
+				listNhanHieu.add(StringUtil.toString(object[0]));
+				listMaMuon.add(StringUtil.toString(object[1]));
+			}
+			data.put("status", "ng");
+			data.put("listNhanHieu", listNhanHieu);
+			data.put("listMaMuon", listMaMuon);
+		}
+		return data;
+	}
+
+	public Map<String, Object> xacNhanDaTuChoi(List<String> listMaMuon) {
+		Map<String, Object> data = new HashMap<>();
+		for (String maMuon : listMaMuon) {
+			dsMuonRep.deleteById(Integer.parseInt(maMuon));
+		}
+		data.put("statusCode", "200");
+		data.put("messageInfor", "Đã xác nhận hủy");
+		return data;
+	}
 }

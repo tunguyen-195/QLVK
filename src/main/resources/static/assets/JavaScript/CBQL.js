@@ -1,4 +1,4 @@
-var modeSearch;
+var dsSoHieu;
 $(document).ready(function() {
 	// --------------------------------------------NEW
 	initialTableQL();
@@ -21,7 +21,7 @@ $(document).ready(function() {
 			loadInfor();
 		}
 	});
-
+	// sự kiện click 1 row tại table
 	var tableVk = $('#tbl_datatables_vk').DataTable();
 	$('#tbl_datatables_vk tbody').on('click', 'tr', function() {
 		if ($(this).children().hasClass('dataTables_empty')) {
@@ -40,6 +40,15 @@ $(document).ready(function() {
 		showModalMuon(data);
 	});
 	
+	var tableTra = $('#tbl_datatables_tra').DataTable();
+	$('#tbl_datatables_tra tbody').on('click', 'tr', function() {
+		if ($(this).children().hasClass('dataTables_empty')) {
+			return;
+		}
+		var data = tableTra.row(this).data();
+		showModalTra(data);
+	});
+	
 	$('#btn-download').click(function() {
 
 		$.ajax({
@@ -47,6 +56,30 @@ $(document).ready(function() {
 			url : baseUrl + 'api/CBQL/download',
 			data : {
 				chungLoai:$('#list-chungloai').val(),nhanHieu:$('#list-nhanHieu').val(),tinhTrang:$('#list_tinhTrang').val()
+			},
+			type : "GET",
+			dataType : 'json',
+			timeout : 30000, // ms
+			success : function(data) {
+				if (data.statusCode == '200') {
+					executeDownloadFile(data.idFileDownload);
+				} else {
+					showToastMessage('error', 'TODO');
+				}
+			},
+			error : function(xhr) {
+				showPopupCommon('error', 'Exception', null);
+			}
+		});
+	});
+	$( "#ngayBatDau" ).datepicker();
+	$( "#ngayKetThuc" ).datepicker();
+	$('#btn-download2').click(function() {
+		$.ajax({
+			contentType : "application/json",
+			url : baseUrl + 'api/CBQL/downloadBaoCao',
+			data : {
+				ngayBatDau:$('#ngayBatDau').val(),ngayKetThuc:$('#ngayKetThuc').val()
 			},
 			type : "GET",
 			dataType : 'json',
@@ -155,8 +188,6 @@ function initialTableMuon() {
 	}, {
 		data : 'hoTenCBCS'
 	}, {
-		data : 'soHieuVK'
-	}, {
 		data : 'nhanHieuVK'
 	}, {
 		data : 'soLuong'
@@ -185,10 +216,6 @@ function initialTableMuon() {
 					'orderable' : false
 				}, {
 					'targets' : [ 4 ],
-					'searchable' : false,
-					'orderable' : false
-				}, {
-					'targets' : [ 5 ],
 					'searchable' : false,
 					'orderable' : false
 				} ],
@@ -223,8 +250,6 @@ function initialTableTra() {
 	}, {
 		data : 'donVi'
 	}, {
-		data : 'soHieuVK'
-	}, {
 		data : 'nhanHieuVK'
 	}, {
 		data : 'soLuong'
@@ -236,6 +261,10 @@ function initialTableTra() {
 		data : 'soHieuCBQL'
 	}, {
 		data : 'lanhDaoDuyet'
+	}, {
+		data : 'maMuon'
+	}, {
+		data : 'soBienBan'
 	} ];
 
 	// Create DataTable
@@ -282,7 +311,13 @@ function initialTableTra() {
 				}, {
 					'targets' : [ 9 ],
 					'searchable' : false,
-					'orderable' : false
+					'orderable' : false,
+					'visible': false
+				}, {
+					'targets' : [ 10 ],
+					'searchable' : false,
+					'orderable' : false,
+					'visible': false
 				} ],
 				"order" : [ [ 1, "ASC" ] ],
 				'ajax' : {
@@ -345,7 +380,9 @@ function timKiemVK() {
 function timKiemMuon() {
 	$('#tbl_datatables_muon').DataTable().ajax.reload();
 }
-
+function timKiemTra() {
+	$('#tbl_datatables_tra').DataTable().ajax.reload();
+}
 // show modal button
 function showModalVk(data) {
 	$("body").addClass("modal-open");
@@ -375,6 +412,7 @@ function showModelThem() {
 	$('#modal-update-button').hide();
 	$('#modal-del-button').hide();
 	$("#txt_soHieu").prop("readonly", false);
+	$('#js-modal-add :input').val('');
 }
 function themMoi() {
 	var danhSachVKModel = {};
@@ -448,52 +486,15 @@ function showModalMuon(data) {
 	var obj = document.getElementById('js-modal-muon');
 	obj.classList.add('open');
 	$('#txt_lanhDao').val(data.lanhDaoDuyet);
-	$('#txt_soHieu').val(data.soHieuCBCS);
+	$('#txt_soHieu_cand').val(data.soHieuCBCS);
 	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
 	$('#soHieuVK').val(data.soHieuVK);
 	$('#txt_nhanHieu').val(data.nhanHieuVK);
 	$('#txt_soLuong').val(data.soLuong);
 	$('#txt_maMuon').val(data.maMuon);
 	$('#txt_maDuyet').val(data.maDuyet);
-	getSoHieuVK(data.nhanHieuVK);
 }
 
-function showModalTra(data) {
-	$("body").addClass("modal-open");
-	var obj = document.getElementById('js-modal-tra');
-	obj.classList.add('open');
-	$('#txt_lanhDao').val(data.lanhDaoDuyet);
-	$('#txt_soHieu').val(data.soHieuCBCS);
-	$('#txt_hoTenCBCS').val(data.hoTenCBCS);
-	$('#soHieuVK').val(data.soHieuVK);
-	$('#txt_nhanHieu').val(data.nhanHieuVK);
-	$('#txt_soLuong').val(data.soLuong);
-}
-function getSoHieuVK(nhanHieu) {
-	$.ajax({
-		url : baseUrl + 'api/CBQL/getSoHieu',
-		contentType : "application/json",
-		type : "GET",
-		dataType : 'json',
-		data : {
-			nhanHieu : nhanHieu
-		},
-		success : function(data) {
-			taoDanhSachSoHieu(data.data);
-		},
-		error : function(xhr) {
-			showPopupCommon('error', 'Exception', null);
-		}
-	});
-}
-function taoDanhSachSoHieu(data) {
-	var str = '<option value="">--Lựa chọn--</option>';
-	for (var i = 0; i < data.length; i++) {
-		str += '<option value="' + data[i] + '">' + data[i] + '</option>'
-	}
-	$('#soHieuVK').empty();
-	$('#soHieuVK').append(str);
-}
 function choMuon() {
 	var choMuonModel = {};
 	choMuonModel.maMuon = $('#txt_maMuon').val();
@@ -510,7 +511,10 @@ function choMuon() {
 		success : function(data) {
 			handleMessageResponse(data);
 			hideModal(document.getElementById('js-modal-muon'));
-			taoBienBan(data.data);
+			if(data.statusCode == '200') {
+				taoBienBan(data);
+			}
+			timKiemMuon();
 		},
 		error : function(xhr) {
 			showPopupCommon('error', 'Exception', null);
@@ -518,7 +522,27 @@ function choMuon() {
 	});
 }
 function taoBienBan(data) {
-	alert("Biên bản nè");
+	$.ajax({
+		contentType : "application/json",
+		url : baseUrl + 'api/CBQL/downBienBan',
+		async : true,
+		data : {
+			maMuon : data.maMuon
+		},
+		type : "GET",
+		dataType : 'json',
+		timeout : 30000, // ms
+		success : function(data) {
+			if (data.statusCode == '200') {
+				executeDownloadFile(data.idFileDownload);
+			} else {
+				showToastMessage('error', 'TODO');
+			}
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
 }
 
 function tuChoi(){
@@ -535,6 +559,57 @@ function tuChoi(){
 			handleMessageResponse(data);
 			hideModal(document.getElementById('js-modal-muon'));
 			timKiemMuon();
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+
+function showModalTra(data) {
+	$("body").addClass("modal-open");
+	var obj = document.getElementById('js-modal-tra');
+	obj.classList.add('open');
+	$('#listSoHieuVK').empty();
+	$('#listSoHieuVK').append('<input type="hidden" id="soBienBan" value="'+ data.soBienBan +'">');
+	$('#listSoHieuVK').append('<input type="hidden" id="maMuon" value="'+ data.maMuon +'">');
+	$.ajax({
+		url : baseUrl + 'api/CBQL/getDsSoHieu',
+		contentType : "application/json",
+		type : "GET",
+		dataType : 'json',
+		data : {maMuon : data.maMuon},
+		success : function(data) {
+			createListSoHieuVK(data.data);
+			dsSoHieu = data.data;
+		},
+		error : function(xhr) {
+			showPopupCommon('error', 'Exception', null);
+		}
+	});
+}
+function createListSoHieuVK(data) {
+	var str = '';
+	for (var i = 0; i < data.length; i++) {
+		str += '<input type="text" value="' + data[i] + '" readonly="readonly" class="select-box">';
+	}
+	$('#listSoHieuVK').append(str);
+}
+function thuHoi() {
+	var thuHoiModel = {};
+	thuHoiModel.soBienBan = $('#soBienBan').val();
+	thuHoiModel.soHieuVK = dsSoHieu;
+	thuHoiModel.maMuon = $('#maMuon').val();
+	$.ajax({
+		url : baseUrl + 'api/CBQL/thuHoi',
+		contentType : "application/json",
+		type : "POST",
+		dataType : 'json',
+		data : JSON.stringify(thuHoiModel),
+		success : function(data) {
+			handleMessageResponse(data);
+			hideModal(document.getElementById('js-modal-tra'));
+			timKiemTra();
 		},
 		error : function(xhr) {
 			showPopupCommon('error', 'Exception', null);
