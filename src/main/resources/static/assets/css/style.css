@@ -239,7 +239,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     font-size: 20px;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     height: 23px;
-    
+    margin-bottom: 0px !important;
 }
 
 #header #sologan #sologan-tq{
@@ -248,6 +248,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     text-shadow: 0 0 1px #000;
     text-transform: uppercase;
     height: 28px;
+    margin-bottom: 0px !important;
 }
 
 
@@ -268,8 +269,8 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     list-style: none;
 }
 
-#nav > #menu-nav > li{
-
+#nav > li > a{
+	margin-right: 20px;
 }
 
 #menu-nav li a{
@@ -288,7 +289,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
 #menu-nav >li > a{
     display: block;
     color: #dceafc;
-    padding: 0 12px;
+    padding: 0 16px;
     text-transform: uppercase;
     line-height: 36px;
 }
@@ -296,10 +297,10 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
 #nav #sub-menu-nav{
     display: none;
     position: absolute;
-    max-width: 270px;
+    width: 204px;
     top: 35px;
     left: 0px;
-    box-shadow: 0 0 4px rgb(8, 92, 122, 0.4);
+/*     box-shadow: 0 0 4px rgb(8, 92, 122, 0.4); */
 }
 
 #nav li:hover  #sub-menu-nav{
@@ -320,7 +321,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     padding-left: 16px;
     padding-right: 6px;
     line-height: 48px;
-    min-width: 204px;
+    width: 204px;
     /* font-size: 15px; */
 }
 
@@ -334,7 +335,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     width: 300px;
     height: 38px;
     background-color: none;
-    /* background-color: #F1D975; */
+    background-color: #F1D975;
     border-radius: 4px;
   }
 
@@ -767,7 +768,7 @@ Caused by: java.lang.ClassNotFoundException: org.eclipse.tm4e.ui.utils.ContentTy
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.8);
-    display: none;
+    display: fixed;
    
 }
 
@@ -1407,7 +1408,7 @@ html{
 }
 
 #header #pre-header #sologan{
-    height: 80px;
+/*     height: 80px; */
     position: absolute;
     text-align: center;
     width: 100%;
@@ -1433,12 +1434,15 @@ html{
 
 
 #nav{
-    height: 57px;
+/*     height: 57px; */
     background-color: rgb(7, 108, 148);
 }
 
 #menu-nav{
     display: inline-block;
+    margin-bottom: 0px !important;
+    padding-inline-start: 10px !important;
+}
 }
 
 #nav #menu-nav li{
@@ -1466,22 +1470,22 @@ html{
     cursor: pointer;
 }
 
-#menu-nav >li > a{
+/* #menu-nav >li > a{
     display: block;
     color: #dceafc;
     padding: 0 12px;
     text-transform: uppercase;
     line-height: 36px;
-}
+} */
 
-#nav #sub-menu-nav{
+/* #nav #sub-menu-nav{
     display: none;
     position: absolute;
     max-width: 270px;
     top: 35px;
     left: 0px;
     box-shadow: 0 0 4px rgb(8, 92, 122, 0.4);
-}
+} */
 
 #nav li:hover  #sub-menu-nav{
     display: block;
@@ -1494,16 +1498,16 @@ html{
  
 }
 
-#sub-menu-nav li a{
+/* #sub-menu-nav li a{
     display: inline-block;
-    /* color: #F6FBF5; */
+    color: #F6FBF5;
     color: rgb(220, 234, 252);
     padding-left: 16px;
     padding-right: 6px;
     line-height: 48px;
     min-width: 204px;
-    /* font-size: 15px; */
-}
+    font-size: 15px;
+} */
 
 /* begin search */
 
@@ -1685,16 +1689,16 @@ html{
     
 }
 
-#contact-wap{
+/* #contact-wap{
     height: 492px;
     background-color: #006a91e6;
     padding-top: 72px;
     padding-bottom: 72px;
 
-}
+} */
 
 /* contact form */
-#contact{
+/* #contact{
     width: calc(1028px);
     min-height: 348px;
     padding: 36px 12px 0 12px;
@@ -1703,7 +1707,7 @@ html{
     margin-left: 36px;
     margin-right: 36px;
     border-radius: 2px;
-}
+} */
 
 #contact h2{
     font-size: 20px;
@@ -1948,7 +1952,7 @@ html{
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.8);
-    display: none;
+    display: flex;
    
 }
 

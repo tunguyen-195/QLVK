@@ -4,8 +4,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Đăng nhập</title>
 	<link rel="icon" type="image/png" th:href="@{resources/login/images/bg-02.jpg}"/>
+	<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/css/style.css}" />
 	<link rel="stylesheet" type="text/css" th:href="@{resources/login/css/util.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{resources/login/css/main.css}">
+	
+
+	<link rel="stylesheet" type="text/css"
+	th:href="@{/resources/assets/Font Awesome/fontawesome-pro-6.0.0-alpha3/fontawesome6/pro/css/all.css}" />
 	<script th:src="@{resources/login/js/main.js}"></script>
 <style th:inline="text">
     .login100-form-title {
@@ -17,9 +23,12 @@
         background-size: 100% 100%;
     }
 </style>
+
+	<script type="text/javascript" th:inline="javascript" charset="UTF-8"
+	th:src="@{/resources/assets/JavaScript/localStore.js}"></script>
 <head>
 <body>
-
+<!-- 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -41,7 +50,7 @@
 						<input class="input100" type="password" name="password" placeholder="Nhập mật khẩu">
 						<span class="focus-input100"></span>
 					</div>
-<!-- 
+
 					<div class="flex-sb-m w-full p-b-30">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
@@ -54,28 +63,90 @@
 								[[#{login.forgotPassword}]]
 							</a>
 						</div>
-					</div> -->
+					</div>
 					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							[[#{login.login}]]
 						</button>
-						<!-- <div>
+						<div>
 							<a href="#" class="txt1" style = "margin-left:120px">
 								[[#{login.register}]]
 							</a>
-						</div> -->
+						</div>
 					</div>
 					<div th:if="${#request.getParameter('error') == 'true'}">
 						<span style = "color:red">[[#{login.loginError}]]</span>
-						<!-- <span style = "color:red" th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+						<span style = "color:red" th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
 							[[#{login.loginError}]]
-						</span> -->
+						</span>
 					</div>
 				</form>
 			</div>
 		</div>
-	</div>
+	</div>  -->
+	
+	
+	   <!-- begin login form -->
+	   
+	   
+    <div class="modal-login" id="js-modal-login"> 
+        <form class="validate-form" name='f' th:action="@{/j_spring_security_check}" method="POST" target="_top">
+            <div class="modal-login-form js-modal-Bubble" onclick="preventBubble">
+
+                <div class="modal-header">
+                    <i class="modal-login-icon fa-solid fa-dagger"></i>
+                    <h4 class="modal-QLVK">Quản lý Vũ khí - Vật liệu nổ - Công cụ hỗ trợ</h4>
+                </div>
+
+                <div class="modal-body clearfix">
+
+                    <div class="col-full">
+                        <div class="input-container">
+                            <input type="text" class="modal-input-register" id="username" name="username" placeholder="Tên đăng nhập" required>
+                            <label for="username" class="modal-register-label">
+                                <i class="modal-user-item fa-solid fa-user"></i>
+                                Tài Khoản
+                        </label>
+                        </div>
+                    </div>
+
+                    <div class="col-full">
+                        <div class="input-container">
+                        	<!-- pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=_-])(?=\S+$).{8,}$" -->
+                            <input type="password" class="modal-input-register js-input-pass" id="password" name="password" placeholder="Mật khẩu" required>
+                            <label for="password" class="modal-register-label">
+                                <i class="modal-pwd-item fa-solid fa-lock"></i>
+                                 Mật khẩu
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="row modal-btn">
+                        <label><input type="checkbox" name="checkbox-02" class="blue" onclick="showPass()" /><span>Hiển thị Mật khẩu</span></label>                              
+                    </div>
+                    
+
+                    <input class="modal-login-button" formmethod="post" type="submit" value="Đăng nhập">
+        
+                    <p class="modal-register-link"><a href="#" onclick="showModal(document.getElementById('js-modal-register'))">Đăng ký </a>tài khoản</p>
+                </div>
+
+            </div>
+            
+            		<div th:if="${#request.getParameter('error') == 'true'}">
+						<span style = "color:red">[[#{login.loginError}]]</span>
+						<span style = "color:red" th:if="${#session!= null and #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
+							[[#{login.loginError}]]
+						</span>
+					</div>
+            
+        </form>
+    </div>
+    <!-- end login form -->
+    
+
 </body>
 
 </html>

@@ -31,39 +31,52 @@
 					</div>
 				</div>
 				<div id="nav">
+				  	<div class="col .col-double-third">
 					<!-- begin menu navigation -->
 					<ul id="menu-nav">
-						<!-- <li><a href="#" id="menu-trangchu2"> <i
-								class="fa-solid fa-dagger"></i> Quản lý VK-VLN-CCHT
-						</a></li>
-						<li><a href="#" id="menu-trangchu3"> <i
-								class="fa-solid fa-file-certificate"></i> Quản lý Giấy phép
-						</a></li>
-						<li><a href="#" id="menu-trangchu4"> <i
-								class="fa-solid fa-folder-open"></i> Quản lý Hồ sơ
-						</a></li>
-						<li><a href="#tab-TL"> <i
-								class="fa-solid fa-arrow-right-arrow-left"></i> Quản lý Mượn/Trả
-								<i class="fa-solid fa-caret-down"></i>
-						</a>
-							<ul id="sub-menu-nav">
-								<li><a href="#">Xử lý yêu cầu mượn</a></li>
-								<li><a href="#">Xử lý yêu cầu trả</a></li>
-							</ul></li>
-						<li><a href="#tab-TL"> <i
-								class="fa-solid fa-file-chart-column"></i> Báo cáo - Thống kê <i
-								class="fa-solid fa-caret-down"></i>
-						</a>
-							<ul id="sub-menu-nav">
-								<li><a href="#">VK-VLN-CCHT</a></li>
-								<li><a href="#">Giấy phép</a></li>
-								<li><a href="#">Lượt Mượn/Trả</a></li>
-								<li><a href="#">Hồ sơ</a></li>
-							</ul></li> -->
+						<li><a href="#" id="menu-trangchu">
+                            <i class="fa-solid fa-house"></i>
+                            Trang chủ
+                        </a></li>
+
+<!--                         <li><a id="menu-gioithieu">
+                            <i class="fa-solid fa-book-section"></i>
+                            Văn bản QPPL
+                        </a></li> -->
+
+                        <li><a id="menu-lienhe" href="#content">
+                            <i class="fa-solid fa-address-book"></i>
+                            Liên hệ
+                        </a></li>
+
+                        <li><a id="js-dangnhap" ><!--  onclick="showModal(document.getElementById('js-modal-login'))" -->
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            Đăng nhập
+                        </a></li>
+                        <li><a id="js-dangky" >  <!-- onclick="showModal(document.getElementById('js-modal-register'))" -->
+                            <i class="fa-solid fa-user-plus"></i>
+                            Đăng ký
+                        </a></li>
+
+                        <li>             
+                            <a href="#tab-TL">
+                                <i class="fa-solid fa-swords"></i>
+                                Khám phá
+                                <i class="fa-solid fa-caret-down"></i>
+                            </a>
+                            <ul id="sub-menu-nav">
+                                <li><a href="#tab-VK">Vũ khí</a></li>
+                                <li><a href="#tab-VLN">Vật liệu nổ</a></li>
+                                <li><a href="#tab-CCHT">Công cụ hỗ trợ</a></li>
+                            </ul>
+
+                        </li>
+                        
 						<li><a th:href="@{/logout}" id="menu-trangchu3"> <i
 								class="fa-solid fa-address-book"></i> Đăng xuất
 						</a></li>
 					</ul>
+					</div>
 				</div>
 			</div>
 			<div class="row user-link">
